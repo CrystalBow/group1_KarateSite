@@ -1,0 +1,116 @@
+:root{
+    color: #ffffff;
+    background-color: #ffffff;
+}
+
+.navbar-nav .nav-item {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.navbar-nav .nav-link {
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 1.2rem;
+  color: #000;
+}
+
+.navbar {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.custom-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;   
+  background-color: #ffffff;
+  padding: 0 32px;
+  height: 100px;
+
+  box-sizing: border-box;
+  position: relative;   
+  left: 0;
+  top: 0;
+}
+
+.header-logo {
+  height: 80px;
+  
+}
+
+.header-nav {
+  list-style: none;
+  display: flex;
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+}
+
+.header-nav li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.header-nav li a:hover {
+  background: #ffffff;
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 0 2vw;
+  background-color: #ffffff;
+}
+
+.custom-card {
+  background-color: #f7dec4;
+  
+  width: 1400px;
+  padding: 1rem 3rem;
+  border-radius: 32px;
+  box-sizing: border-box;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.custom-card .card-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.custom-card .card-text {
+  font-size: 1.3rem;
+  margin: 1.5rem 0;
+}
+
+.custom-card .btn {
+  padding: 0.75rem 1.5rem;
+  
+  
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 12px;
+  background-color: #ccc;
+  color: black;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+.custom-card .btn:hover {
+  background-color: #aaa;
+  color: white;
+}
