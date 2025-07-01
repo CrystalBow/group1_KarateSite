@@ -5,7 +5,7 @@ const LoginPage = () =>
     return (
     <>
       <div>
-        <Header />
+        <Header action="SIGN UP"/>
       </div>
       <div>
         <div className="page-container">

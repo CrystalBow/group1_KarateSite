@@ -5,7 +5,7 @@ const HomePage = () => {
   return (
     <>
       <div>
-        <Header />
+        <Header action="LOG IN" />
       </div>
       <div>
         <div className="page-container">

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-const Header = () => {
+function Header(props) {
   return (
     <div>
       <header className="custom-header">
@@ -15,7 +15,7 @@ const Header = () => {
             <li><a href="#">WHAT IS KARATE TRAINER?</a></li>
             <li><a href="#">FEATURES</a></li>
             <li>
-                <Link to = "/login">LOG IN</Link></li>
+                <Link to = "/login">{props.action}</Link></li>
           </ul>
         </nav>
       </header>
