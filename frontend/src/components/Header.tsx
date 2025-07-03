@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Header(props) {
+function Header(props: { onAction: () => void; action: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; }) {
   return (
     <div id  ="NavContainer">
       <header className="custom-header">
