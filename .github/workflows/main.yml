@@ -1,0 +1,60 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
+      - name: Deploy to DigitalOcean droplet
+        env:
+          SSH_HOST:      ${{ secrets.SSH_HOST }}
+          SSH_USERNAME:  ${{ secrets.SSH_USERNAME }}
+          SSH_KEY:       ${{ secrets.SSH_KEY }}
+        run: |
+          sshpass -p "${SSH_KEY}" ssh -o StrictHostKeyChecking=no ${SSH_USERNAME}@${SSH_HOST} << 'EOF'
+
+          set -e
+          # 1. Backend update
+          cd /var/karateServer
+          git pull origin main
+          npm ci
+          pm2 restart express-server || pm2 start server.js --name express-server
+          pm2 save
+
+          # 2. Frontend rebuild
+          cd /var/karateServer/frontend   # adjust if your React src lives elsewhere
+          npm ci
+          npm run build
+
+          # 3. Overwrite live static files
+          sudo rm -rf /var/www/html/*
+          sudo cp -r dist/* /var/www/html
+
+          EOF
+
