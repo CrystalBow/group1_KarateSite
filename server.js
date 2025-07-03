@@ -159,8 +159,7 @@ app.post('/api/register', async (req, res, next) =>
   res.status(200).json(ret);
 });
 
-// TEMPORARY DEBUG ROUTE - View unhashed + hashed password
-/*
+// TEMPORARY DEBUG ROUTE - View unhashed + hashed password*
 app.post('/api/debug/getPasswordInfo', async (req, res) => {
   const { user, password } = req.body;
 
@@ -185,8 +184,6 @@ app.post('/api/debug/getPasswordInfo', async (req, res) => {
     res.status(500).json({ error: err.toString() });
   }
 });
-*/
-
 
 app.listen(5000); // start Node + Express server on port 5001
 
