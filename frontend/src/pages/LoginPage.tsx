@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 
@@ -39,7 +39,7 @@ const LoginPage = () => {
                     placeholder="Enter password"
                   />
                 </div>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary" >
                   Login
                 </button>
               </form>

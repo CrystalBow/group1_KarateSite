@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function Login() {
   const [message, setMessage] = useState("");
@@ -43,9 +43,10 @@ function Login() {
 
   return (
     <div>
-      <input type="text" placeholder="Username" className="form-control" />
-      <input type="password" placeholder="Password" className="form-control" />
-      <button className="btn btn-primary">Login</button>
+      <span id="loginResult">{message}</span>
+      <input type="text" placeholder="Username" className="form-control" onChange={handleSetLoginName}/>
+      <input type="password" placeholder="Password" className="form-control" onChange={handleSetPassword} />
+      <button className="btn btn-primary" onClick={doLogin}>Login</button>
     </div>
   );
 }
