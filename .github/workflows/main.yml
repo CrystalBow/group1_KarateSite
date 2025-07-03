@@ -7,6 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
+# ───────────────────────── Build ─────────────────────────
   build:
     runs-on: ubuntu-latest
     steps:
@@ -18,43 +19,54 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: npm install
+      # ---------- Backend ----------
+      - name: Install backend dependencies
+        run: npm ci          # repo-root holds backend package.json
 
+      # ---------- Frontend ----------
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Build React app
+        working-directory: frontend
+        run: npm run build   # creates frontend/dist/
+
+# ──────────────────────── Deploy ────────────────────────
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      # You only need this checkout if you reference repo files later.
+      - uses: actions/checkout@v3
 
       - name: Install sshpass
-        run: sudo apt-get update && sudo apt-get install -y sshpass
+        run: sudo apt-get update -y && sudo apt-get install -y sshpass
 
-      - name: Deploy to DigitalOcean droplet
+      - name: Deploy to droplet
         env:
-          SSH_HOST:      ${{ secrets.SSH_HOST }}
-          SSH_USERNAME:  ${{ secrets.SSH_USERNAME }}
-          SSH_KEY:       ${{ secrets.SSH_KEY }}
+          SSH_HOST:      ${{ secrets.SSH_HOST }}      # e.g. 143.198.xxx.xxx
+          SSH_USERNAME:  ${{ secrets.SSH_USERNAME }}  # root  (or a deploy user)
+          SSH_KEY:       ${{ secrets.SSH_KEY }}       # droplet password *or* private-key text
         run: |
-          sshpass -p "${SSH_KEY}" ssh -o StrictHostKeyChecking=no ${SSH_USERNAME}@${SSH_HOST} << 'EOF'
-
+          sshpass -p "$SSH_KEY" ssh -o StrictHostKeyChecking=no \
+            ${SSH_USERNAME}@${SSH_HOST} << 'EOF'
           set -e
-          # 1. Backend update
-          cd /var/karateServer
+
+          # 1. Backend update on droplet
+          cd /var/karateServer          # path where you cloned the repo on the VM
           git pull origin main
           npm ci
           pm2 restart express-server || pm2 start server.js --name express-server
           pm2 save
 
-          # 2. Frontend rebuild
-          cd /var/karateServer/frontend   # adjust if your React src lives elsewhere
+          # 2. Frontend rebuild on droplet
+          cd /var/karateServer/frontend
           npm ci
           npm run build
 
-          # 3. Overwrite live static files
+          # 3. Deploy static bundle for Nginx
           sudo rm -rf /var/www/html/*
           sudo cp -r dist/* /var/www/html
-
           EOF
-
+        
