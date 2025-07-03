@@ -70,7 +70,7 @@ app.post('/api/login', async (req, res, next) =>
     if (!match) 
     {
       // Passwords don't match
-      error = 'Invalid username or password (2)';
+      error = 'Invalid username or password';
     }
     else
     {
@@ -107,7 +107,7 @@ app.post('/api/login', async (req, res, next) =>
   }
   else 
   {
-    error = 'Invalid username or password (1)';
+    error = 'Invalid username or password';
   }
 
   var ret = { name: name, email: email, id:id , error: error};
