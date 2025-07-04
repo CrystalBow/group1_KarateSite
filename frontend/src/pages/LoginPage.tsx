@@ -18,7 +18,7 @@ const LoginPage = () => {
       <div>
         <div className="page-container">
           <div className="custom-card">
-            <h1 className="card-title">ENTER KARATE TRAINER</h1>
+            <h1 className="card-title">ENTER KARATE TRAR</h1>
             <div id="redDiv">
               <form className="card-form">
                 <div className="form-group">

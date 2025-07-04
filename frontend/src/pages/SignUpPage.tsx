@@ -1,42 +1,85 @@
-// import React from "react";
+import { useState } from "react";
 import Header from "../components/Header";
 import { useNavigate } from 'react-router-dom';
 
-
 const SignUpPage = () => {
-    const navigate = useNavigate(); // Add this line
+  const navigate = useNavigate();
 
-    // Handler for sign up action
-    const handleLogIn = () => {
-        navigate("/login"); // Navigate to the sign-up page
-    };
-  
-    return (
-    
+  // Form state
+  const [user, setUsername] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  // Handler for sign up action
+  const handleLogIn = () => {
+    navigate("/login");
+  };
+
+  const app_name = "karatemanager.xyz";
+  function buildPath(route: string): string {
+    if (process.env.NODE_ENV != "development") {
+      return "http://" + app_name + ":5000/" + route;
+    } else {
+      return "http://localhost:5000/" + route;
+    }
+  }
+
+  // Handle form submit
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    var obj = { user, name, email, password };
+    var js = JSON.stringify(obj);
+    try {
+      const response = await fetch(buildPath("api/register"), {
+        method: "POST",
+        body: js,
+        headers: { "Content-Type": "application/json" },
+      });
+      //var res= JSON.parse(await response.text());
+      var res = await response.json();
+      if (res.success) {
+        setMessage("Sign up successful! Redirecting to login...");
+        setTimeout(() => navigate("/login"), 1500);
+      } else {
+        setMessage(res.error || "Sign up failed.");
+      }
+    } catch (err) {
+      setMessage("Error connecting to server.");
+    }
+  };
+
+  return (
     <div>
       <Header action="LOG IN" onAction={handleLogIn}/>
       <div className="page-container">
         <div className="custom-card">
           <h1 className="card-title">Please sign up below</h1>
           <div id="redDiv">
-            <form className="card-form">
+            <form className="card-form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="username">Username</label>
-                <input type="text" className="form-control" id="username" placeholder="Enter username" />
+                <input type="text" className="form-control" id="username" placeholder="Enter username"
+                  value={user} onChange={e => setUsername(e.target.value)} />
               </div>
               <div className="form-group">
                 <label htmlFor="name">Name</label>
-                <input type="Name" className="form-control" id="Name" placeholder="Enter your Name" />
+                <input type="text" className="form-control" id="name" placeholder="Enter your Name"
+                  value={name} onChange={e => setName(e.target.value)} />
               </div>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
-                <input type="email" className="form-control" id="email" placeholder="Enter email" />
+                <input type="email" className="form-control" id="email" placeholder="Enter email"
+                  value={email} onChange={e => setEmail(e.target.value)} />
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input type="password" className="form-control" id="password" placeholder="Enter password" />
+                <input type="password" className="form-control" id="password" placeholder="Enter password"
+                  value={password} onChange={e => setPassword(e.target.value)} />
               </div>
               <button type="submit" className="btn btn-primary">Sign Up</button>
+              {message && <div style={{marginTop: "1em"}}>{message}</div>}
             </form>
           </div>
         </div>
