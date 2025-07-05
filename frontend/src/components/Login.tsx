@@ -53,6 +53,7 @@
 // export default Login;
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [message, setMessage] = useState("");
@@ -62,9 +63,9 @@ function Login() {
   const navigate = useNavigate();
 
   // Handler for sign up action
-  const handleSignUp = () => {
+  /* const handleSignUp = () => {
     navigate("/signup");
-  };
+  }; */
 
 
   function handleSetLoginName(e: any): void {
