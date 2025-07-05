@@ -30,14 +30,16 @@ jobs:
 
       - name: Build React app
         working-directory: frontend
-        run: npm run build   # creates frontend/dist/
+        env:
+          CI: false
+        run: npm run build
 
 # ──────────────────────── Deploy ────────────────────────
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      # You only need this checkout if you reference repo files later.
+      # need checkout to reference repo files later
       - uses: actions/checkout@v3
 
       - name: Install sshpass
@@ -45,15 +47,15 @@ jobs:
 
       - name: Deploy to droplet
         env:
-          SSH_HOST:      ${{ secrets.SSH_HOST }}      # e.g. 143.198.xxx.xxx
-          SSH_USERNAME:  ${{ secrets.SSH_USERNAME }}  # root  (or a deploy user)
-          SSH_KEY:       ${{ secrets.SSH_KEY }}       # droplet password *or* private-key text
+          SSH_HOST:      ${{ secrets.SSH_HOST }}      # droplet IP
+          SSH_USERNAME:  ${{ secrets.SSH_USERNAME }}  # root
+          SSH_KEY:       ${{ secrets.SSH_KEY }}       # droplet password
         run: |
           sshpass -p "$SSH_KEY" ssh -o StrictHostKeyChecking=no \
             ${SSH_USERNAME}@${SSH_HOST} << 'EOF'
           set -e
 
-          # 1. Backend update on droplet
+          # v1. Backend update on droplet
           cd /var/karateServer          # path where you cloned the repo on the VM
           git pull origin main
           npm ci
