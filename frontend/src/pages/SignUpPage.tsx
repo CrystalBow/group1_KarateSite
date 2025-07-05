@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
+  const [action, setAction] = useState("Next");
 
   // Form state
   const [user, setUsername] = useState("");
@@ -55,9 +56,34 @@ const SignUpPage = () => {
       <Header action="LOG IN" onAction={handleLogIn}/>
       <div className="page-container">
         <div className="custom-card">
-          <h1 className="card-title">Please sign up below</h1>
+          <h1 className="card-title">BEGIN YOUR TRAINING</h1>
           <div id="redDiv">
-            <form className="card-form" onSubmit={handleSubmit}>
+            {action === "Back"?<div></div>:<form className="card-form" /*onSubmit={handleSubmit}*/>
+              <div className="form-group">
+                <label htmlFor="username">Username</label>
+                <input type="text" className="form-control" id="username" placeholder="Enter username"
+                  value={user} onChange={e => setUsername(e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="name">Name</label>
+                <input type="text" className="form-control" id="name" placeholder="Enter your Name"
+                  value={name} onChange={e => setName(e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input type="email" className="form-control" id="email" placeholder="Enter email"
+                  value={email} onChange={e => setEmail(e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input type="password" className="form-control" id="password" placeholder="Enter password"
+                  value={password} onChange={e => setPassword(e.target.value)} />
+              </div>
+              <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Back")}}> Next </button>
+              {/* <button type="submit" className="btn btn-primary">Sign Up</button> */}
+              {/* {message && <div style={{marginTop: "1em"}}>{message}</div>} */}
+            </form>}
+            {/* <form className="card-form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="username">Username</label>
                 <input type="text" className="form-control" id="username" placeholder="Enter username"
@@ -80,7 +106,13 @@ const SignUpPage = () => {
               </div>
               <button type="submit" className="btn btn-primary">Sign Up</button>
               {message && <div style={{marginTop: "1em"}}>{message}</div>}
-            </form>
+            </form> */}
+            {action === "Next"?<div></div>: <form onSubmit={handleSubmit}>
+              <input placeholder="This is a test"/>
+              <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Next")}}> Back </button>
+              <button type="submit" className="btn btn-primary">Sign Up</button>
+              {message && <div style={{marginTop: "1em"}}>{message}</div>}
+            </form>}
           </div>
         </div>
       </div>
