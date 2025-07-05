@@ -58,7 +58,7 @@ const SignUpPage = () => {
         <div className="custom-card">
           <h1 className="card-title">BEGIN YOUR TRAINING</h1>
           <div id="redDiv">
-            {action === "Back"?<div></div>:<form className="card-form" /*onSubmit={handleSubmit}*/>
+            {action === "Back"?<div></div>:<form className="card-form">
               <div className="form-group">
                 <label htmlFor="username">Username</label>
                 <input type="text" className="form-control" id="username" placeholder="Enter username"
@@ -80,11 +80,18 @@ const SignUpPage = () => {
                   value={password} onChange={e => setPassword(e.target.value)} />
               </div>
               <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Back")}}> Next </button>
-              {/* <button type="submit" className="btn btn-primary">Sign Up</button> */}
-              {/* {message && <div style={{marginTop: "1em"}}>{message}</div>} */}
             </form>}
-            {action === "Next"?<div></div>:<form onSubmit={handleSubmit}>
-              <input placeholder="This is a test"/>
+            {action === "Next"?<div></div>:<form className="card-form" onSubmit={handleSubmit}>
+              <div className="form-group">
+                <input type="radio" className="select-box" id="whiteBelt" name="belts" value="White Belt" />
+                <label htmlFor="whiteBelt">White Belt</label>
+              </div>
+              <div className="form-group">
+                <input type="radio" className="form-control" id="yellowBelt" name="belts" value="Yellow Belt" />
+              </div>
+              <div className="form-group">
+                <input type="radio" className="form-control" id="orangeBelt" placeholder="Orange Belt" />
+              </div>
               <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Next")}}> Back </button>
               <button type="submit" className="btn btn-primary">Sign Up</button>
               {message && <div style={{marginTop: "1em"}}>{message}</div>}

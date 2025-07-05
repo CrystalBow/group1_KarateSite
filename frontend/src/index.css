@@ -317,6 +317,7 @@ body {
   width: 50vw;
 }
 
+
 .card-form .btn btn-primary {
   width: 50vw;  
 }
@@ -355,3 +356,30 @@ body {
     border-radius: 0;
   }
 } */
+
+input::placeholder {
+  text-align: center;
+}
+
+.select-box
+{
+  display: flex;
+  width: 400px;
+}
+.select-box .options-container
+{
+  background: black;
+  
+}
+
+.select-box:hover
+{
+  background-color: #f7dec4;
+  color: #000;
+  cursor: pointer;
+}
+
+.select-box .option .radio
+{
+  display: none;
+}
