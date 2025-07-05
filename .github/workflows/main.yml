@@ -56,7 +56,7 @@ jobs:
           set -e
 
           # v1. Backend update on droplet
-          cd /var/karawhyteServer          # path where you cloned the repo on the VM
+          cd /var/karateServer          # path where you cloned the repo on the VM
           git pull origin main
           npm ci
           pm2 restart express-server || pm2 start server.js --name express-server
