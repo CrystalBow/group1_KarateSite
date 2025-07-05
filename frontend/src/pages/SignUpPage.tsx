@@ -43,8 +43,8 @@ const SignUpPage = () => {
         setMessage("Sign up successful! Redirecting to login...");
         setTimeout(() => navigate("/login"), 1500);
       } else {
-        // setMessage(res.error || "Sign up failed.");
-        setMessage(res);
+        setMessage(res.error || "Sign up failed.");
+        // setMessage(res);
       }
     } catch (err) {
       setMessage("Error connecting to server.");
