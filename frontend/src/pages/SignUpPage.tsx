@@ -39,12 +39,11 @@ const SignUpPage = () => {
       });
       //var res= JSON.parse(await response.text());
       var res = await response.json();
-      if (res.success) {
+      if (res.error == '') {
         setMessage("Sign up successful! Redirecting to login...");
         setTimeout(() => navigate("/login"), 1500);
       } else {
-        setMessage(res.error || "Sign up failed.");
-        // setMessage(res);
+        setMessage(res.error || "Sign up failed.")
       }
     } catch (err) {
       setMessage("Error connecting to server.");
