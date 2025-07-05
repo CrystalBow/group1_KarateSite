@@ -1,9 +1,18 @@
+
 import { useState } from "react";
 import Header from "../components/Header";
 import { useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
-    const navigate = useNavigate(); // Add this line
+  const navigate = useNavigate();
+  const [action, setAction] = useState("Next");
+
+  // Form state
+  const [user, setUsername] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   // Handler for sign up action
   const handleLogIn = () => {
@@ -50,7 +59,7 @@ const SignUpPage = () => {
         <div className="custom-card">
           <h1 className="card-title">BEGIN YOUR TRAINING</h1>
           <div id="redDiv">
-            <form className="card-form">
+            {action === "Back"?<div></div>:<form className="card-form">
               <div className="form-group">
                 <label htmlFor="username">Username</label>
                 <input type="text" className="form-control" id="username" placeholder="Enter username"
@@ -68,11 +77,26 @@ const SignUpPage = () => {
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input type="password" className="form-control" id="password" placeholder="Enter password" />
+                <input type="password" className="form-control" id="password" placeholder="Enter password"
+                  value={password} onChange={e => setPassword(e.target.value)} />
+              </div>
+              <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Back")}}> Next </button>
+            </form>}
+            {action === "Next"?<div></div>:<form className="card-form" onSubmit={handleSubmit}>
+              <div className="form-group">
+                <input type="radio" className="select-box" id="whiteBelt" name="belts" value="White Belt" />
+                <label htmlFor="whiteBelt">White Belt</label>
+              </div>
+              <div className="form-group">
+                <input type="radio" className="form-control" id="yellowBelt" name="belts" value="Yellow Belt" />
+              </div>
+              <div className="form-group">
+                <input type="radio" className="form-control" id="orangeBelt" placeholder="Orange Belt" />
               </div>
               <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Next")}}> Back </button>
               <button type="submit" className="btn btn-primary">Sign Up</button>
-            </form>
+              {message && <div style={{marginTop: "1em"}}>{message}</div>}
+            </form>}
           </div>
         </div>
       </div>
