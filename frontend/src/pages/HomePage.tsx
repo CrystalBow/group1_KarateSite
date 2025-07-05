@@ -10,22 +10,19 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    if (window.location.hash === "#features") {
-      const el = document.getElementById("features");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  }, []);
+    const hash = location.hash;
 
-  useEffect(() => {
-    if (window.location.hash === "#about") {
-      const el = document.getElementById("about");
+    if (hash) {
+      const id = hash.replace("#", "");
+      const el = document.getElementById(id);
       if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
+        // Small delay to ensure element is rendered before scrolling
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+        }, 50);
       }
     }
-  }, []);
+  }, [location]);
 
   return (
     <div>
