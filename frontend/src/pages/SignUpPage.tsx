@@ -88,10 +88,12 @@ const SignUpPage = () => {
                 <label htmlFor="whiteBelt">White Belt</label>
               </div>
               <div className="form-group">
-                <input type="radio" className="form-control" id="yellowBelt" name="belts" value="Yellow Belt" />
+                <input type="radio" className="select-box" id="yellowBelt" name="belts" value="Yellow Belt" />
+                <label htmlFor="yellowBelt">Yellow Belt</label>
               </div>
               <div className="form-group">
-                <input type="radio" className="form-control" id="orangeBelt" placeholder="Orange Belt" />
+                <input type="radio" className="select-box" id="orangeBelt" name="belts" value="Orange Belt" />
+                <label htmlFor="orangeBelt">Orange Belt</label>
               </div>
               <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Next")}}> Back </button>
               <button type="submit" className="btn btn-primary">Sign Up</button>
