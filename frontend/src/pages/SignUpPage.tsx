@@ -1,7 +1,6 @@
-
 import { useState } from "react";
 import Header from "../components/Header";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -41,11 +40,11 @@ const SignUpPage = () => {
       });
       //var res= JSON.parse(await response.text());
       var res = await response.json();
-      if (res.error == '') {
+      if (res.error == "") {
         setMessage("Sign up successful! Redirecting to login...");
         setTimeout(() => navigate("/login"), 1500);
       } else {
-        setMessage(res.error || "Sign up failed.")
+        setMessage(res.error || "Sign up failed.");
       }
     } catch (err) {
       setMessage("Error connecting to server.");
@@ -54,51 +53,123 @@ const SignUpPage = () => {
 
   return (
     <div>
-      <Header action="LOG IN" onAction={handleLogIn}/>
+      <Header action="LOG IN" onAction={handleLogIn} />
       <div className="page-container">
         <div className="custom-card">
-          <h1 className="card-title">BEGIN YOUR TRAINING</h1>
-          <div id="redDiv">
-            {action === "Back"?<div></div>:<form className="card-form">
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
-                <input type="text" className="form-control" id="username" placeholder="Enter username"
-                  value={user} onChange={e => setUsername(e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <input type="text" className="form-control" id="name" placeholder="Enter your Name"
-                  value={name} onChange={e => setName(e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input type="email" className="form-control" id="email" placeholder="Enter email"
-                  value={email} onChange={e => setEmail(e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input type="password" className="form-control" id="password" placeholder="Enter password"
-                  value={password} onChange={e => setPassword(e.target.value)} />
-              </div>
-              <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Back")}}> Next </button>
-            </form>}
-            {action === "Next"?<div></div>:<form className="card-form" onSubmit={handleSubmit}>
-              <div className="form-group">
-                <input type="radio" className="select-box" id="whiteBelt" name="belts" value="White Belt" />
-                <label htmlFor="whiteBelt">White Belt</label>
-              </div>
-              <div className="form-group">
-                <input type="radio" className="select-box" id="yellowBelt" name="belts" value="Yellow Belt" />
-                <label htmlFor="yellowBelt">Yellow Belt</label>
-              </div>
-              <div className="form-group">
-                <input type="radio" className="select-box" id="orangeBelt" name="belts" value="Orange Belt" />
-                <label htmlFor="orangeBelt">Orange Belt</label>
-              </div>
-              <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Next")}}> Back </button>
-              <button type="submit" className="btn btn-primary">Sign Up</button>
-              {message && <div style={{marginTop: "1em"}}>{message}</div>}
-            </form>}
+          <div className="paint-overlay">
+            <h1 className="card-title">BEGIN YOUR TRAINING</h1>
+            <img src="RearRedPaint.png" className="rear-img-signup" alt="About Us" />
+
+            {action === "Back" ? (
+              <div></div>
+            ) : (
+              <form className="card-form">
+                <div className="form-group">
+                  <label htmlFor="username" style={{ fontFamily: 'Bebas Neue' }} >Username</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="username"
+                    placeholder="Enter username"
+                    value={user}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="name" style={{ fontFamily: 'Bebas Neue' }}>Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    placeholder="Enter your Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email" style={{ fontFamily: 'Bebas Neue' }}>Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password" style={{ fontFamily: 'Bebas Neue' }}>Password</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    placeholder="Enter password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    setAction("Back");
+                  }}
+                >
+                  {" "}
+                  Next{" "}
+                </button>
+              </form>
+            )}
+            {action === "Next" ? (
+              <div></div>
+            ) : (
+              <form className="card-form" onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <input
+                    type="radio"
+                    className="select-box"
+                    id="whiteBelt"
+                    name="belts"
+                    value="White Belt"
+                  />
+                  <label htmlFor="whiteBelt">White Belt</label>
+                </div>
+                <div className="form-group">
+                  <input
+                    type="radio"
+                    className="select-box"
+                    id="yellowBelt"
+                    name="belts"
+                    value="Yellow Belt"
+                  />
+                  <label htmlFor="yellowBelt">Yellow Belt</label>
+                </div>
+                <div className="form-group">
+                  <input
+                    type="radio"
+                    className="select-box"
+                    id="orangeBelt"
+                    name="belts"
+                    value="Orange Belt"
+                  />
+                  <label htmlFor="orangeBelt">Orange Belt</label>
+                </div>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    setAction("Next");
+                  }}
+                >
+                  {" "}
+                  Back{" "}
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Sign Up
+                </button>
+                {message && <div style={{ marginTop: "1em" }}>{message}</div>}
+              </form>
+            )}
           </div>
         </div>
       </div>

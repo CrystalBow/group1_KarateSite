@@ -124,73 +124,6 @@ body {
   background-color: #ffffff;
 }
 
-/* .custom-card {
-  position: fixed;
-  top: 100px;              
-  left: 0;
-  width: 100vw;
-  height: calc(100vh - 100px);
-  background-color: #f7dec4;
-  border-radius: 0;
-  margin: 0;
-  box-sizing: border-box;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;        
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-} */
-
-
-/* the habibi one*/
-/* .custom-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-top: 0%;
-  position: fixed;           
-  height: auto;
-  max-height: 75vh;
-  width: 90vw;                  
-  /*max-width: 900px;             
-  height: 45vw;                 
-  /* margin: auto auto;             
-  background-color: #f7dec4;
-  border-radius: 24px;
-  box-sizing: border-box;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-} */
-
-
-/* .custom-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding:1rem 3rem;
-  position: fixed;           
-  height: 83vh;
-  max-height: 75vh;
-  width: 100%;                  
-  height: 45vw;                 
-  background-color: #f7dec4;
-  border-radius: 32px;
-  box-sizing: border-box;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-} */
-
 
 .custom-card {
   /* display: flex; */
@@ -209,12 +142,12 @@ body {
   overflow-y: auto;
   padding: 2rem 1rem;
   height: 100%;
-  scrollbar-width: none;        /* Firefox */
-  -ms-overflow-style: none;     /* IE and Edge */
+  scrollbar-width: none;        
+  -ms-overflow-style: none;     
   scroll-behavior: smooth;
 }
 
-/* Chrome, Safari, Opera */
+
 .card-scroll-content::-webkit-scrollbar {
   display: none;
 }
@@ -226,14 +159,77 @@ body {
   justify-content: center;
   align-items: center;
   width: 35vw;
-  padding: 2rem; /* Optional: add padding for spacing */
+  padding: 2rem; 
   margin: 0 auto;
 }
+
+.paint-overlay {
+  position: relative;
+  width: 100%;
+  max-width: 70vw;
+  margin: 3rem auto 0 auto; 
+  text-align: center;
+}
+
+/* paint overlay image for homepage */
+.rear-img {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  display: block;
+}
+
+/* paint overlay image for login and signup */
+.rear-img-login, .rear-img-signup {
+  width: 50%;            
+  height: auto;
+  border-radius: 1rem;
+  display: block;
+  margin: 1rem auto;      
+}
+
+/*styling and format for text for what is karate trainer and features on homepage*/
+.about, .features{
+  position: absolute;
+  width: 100%;
+  max-width: 1400px; 
+  margin: 2rem auto 0 auto;
+  box-sizing: border-box;
+  text-align: center; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 1rem 2rem;
+  border-radius: 12px; 
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2vw;
+}
+
+.about h2, .features h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2vw;
+}
+
+/* .about-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5); 
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  max-width: 90%;
+} */
 
 .custom-card .card-title {
   font-size: 2.5rem;
   font-weight: 500;
   margin-bottom: 1rem;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .custom-card .card-text {
@@ -258,7 +254,7 @@ body {
   color: white;
 }
 
-.about, .features {
+/* .about, .features {
   width: 100%;
   max-width: 1400px; 
   margin: 2rem auto 0 auto;
@@ -267,7 +263,9 @@ body {
   background: #f7dec4; 
   border-radius: 32px; 
   padding: 2rem 3rem;  
-}
+} */
+
+/*list for features and "what is karate trainer"*/
 
 .features ul, .about ul {
   display: inline-block;
@@ -283,80 +281,41 @@ body {
   margin: 0.1rem 0;
 }
 
-.form-group{
-  width: 30vw;
-  padding: 0.5rem;
+/* forms for login and signup */
+.card-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 1000px;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-sizing: border-box;
 }
 
-/* .card-form {
+.form-group {
+  position: relative;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  padding: 0.5rem;
+  margin: 0 auto; 
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  width: 100%;
+  align-items: stretch;
+  box-sizing: border-box;
 }
 
+
 .card-img-top{
-  width: 100%;      
-  max-width: 1000px;
+  width: 100%;
+  max-width: 45vw;
   height: auto;
   margin: 0 auto;
   display: block;
 }
 
-.card-form .form-group {
-  width: 30vw;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-.card-form .form-control {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 50vw;
-}
-
-
-.card-form .btn btn-primary {
-  width: 50vw;  
-}
-
-.form-group
-{
-  width: 30vw;
-} */
-
-
-
-
-
- /* i literally have no idea what this does */
-/* @media (max-width: 900px) {
-  .custom-header {
-    flex-direction: column;
-    height: auto;
-    padding: 1rem 2vw;
-  }
-  .header-nav {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-  }
-  .header-logo {
-    margin-bottom: 1rem;
-    height: 48px;
-  }
-} */
-/* 
-@media (max-width: 600px) {
-  .custom-card {
-    width: 99vw;
-    padding: 1rem 0.5rem;
-    border-radius: 0;
-  }
-} */
 
 input::placeholder {
   text-align: center;
@@ -383,4 +342,39 @@ input::placeholder {
 .select-box .option .radio
 {
   display: none;
+}
+
+
+
+
+/* .card-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;               
+  max-width: 400px;         
+  padding: 2rem;
+  text-align: center;
+} */
+
+/* for login button login stuffs */
+.login-fail-message {
+  color: rgb(0, 0, 0);
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+.form-group-cluster {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* for input fields on login*/
+
+.input-invalid {
+  border: 2px solid rgb(4, 0, 255) !important;
+  background-color: #ffe5e5;
 }

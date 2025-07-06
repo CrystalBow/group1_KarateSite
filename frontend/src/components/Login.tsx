@@ -2,12 +2,12 @@ import { useState } from "react";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 
-
-
 function Login() {
   const [message, setMessage] = useState("");
   const [loginName, setLoginName] = useState("");
   const [loginPassword, setPassword] = useState("");
+  const [usernameInvalid, setUsernameInvalid] = useState(false);
+  const [passwordInvalid, setPasswordInvalid] = useState(false);
 
   const navigate = useNavigate();
 
@@ -15,7 +15,6 @@ function Login() {
   const handleSignUp = () => {
     navigate("/signup");
   };
-
 
   function handleSetLoginName(e: any): void {
     setLoginName(e.target.value);
@@ -31,17 +30,34 @@ function Login() {
       return "http://localhost:5000/" + route;
     }
   }
+
   async function doLogin(event: any): Promise<void> {
     event.preventDefault();
+
+    const usernameEmpty = !loginName.trim();
+    const passwordEmpty = !loginPassword.trim();
+
+    // Set red highlight flags
+    setUsernameInvalid(usernameEmpty);
+    setPasswordInvalid(passwordEmpty);
+
+    if (usernameEmpty || passwordEmpty) {
+      setMessage("Please fill out all forms");
+      return;
+    }
+
     var obj = { user: loginName, password: loginPassword };
     var js = JSON.stringify(obj);
+
     try {
       const response = await fetch(buildPath("api/login"), {
         method: "POST",
         body: js,
         headers: { "Content-Type": "application/json" },
       });
+
       var res = JSON.parse(await response.text());
+
       if (res.id <= 0) {
         setMessage("User/Password combination incorrect");
       } else {
@@ -66,37 +82,67 @@ function Login() {
         <Header action="SIGN UP" onAction={handleSignUp} />
       </div>
       <div>
-        <span id ="loginResult">{message}</span>
+        {/*<span id ="loginResult">{message}</span>*/}
         <div className="page-container">
           <div className="custom-card">
-            <h1 className="card-title">ENTER KARATE TRAINER</h1>
-            <div id="redDiv">
+            <div className="paint-overlay">
+              <h1 className="card-title">ENTER KARATE TRAINER</h1>
+              <img
+                src="RearRedPaint.png"
+                className="rear-img-login"
+                alt="Login"
+              />
+
               <form className="card-form" onSubmit={doLogin}>
                 <div className="form-group">
-                  <label htmlFor="username">Username</label>
+                  <label
+                    htmlFor="username"
+                    style={{ fontFamily: "Bebas Neue" }}
+                  >
+                    Username
+                  </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className={`form-control ${
+                      usernameInvalid ? "input-invalid" : ""
+                    }`}
                     id="username"
                     placeholder="Enter username"
                     value={loginName}
-                    onChange={handleSetLoginName}
+                    onChange={(e) => {
+                      setLoginName(e.target.value);
+                      setUsernameInvalid(false); // remove red on typing
+                    }}
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
+                  <label
+                    htmlFor="password"
+                    style={{ fontFamily: "Bebas Neue" }}
+                  >
+                    Password
+                  </label>
                   <input
                     type="password"
-                    className="form-control"
+                    className={`form-control ${
+                      passwordInvalid ? "input-invalid" : ""
+                    }`}
                     id="password"
                     placeholder="Enter password"
                     value={loginPassword}
-                    onChange={handleSetPassword}
+                    onChange={(e) => {
+                      setLoginName(e.target.value);
+                      setUsernameInvalid(false); // remove red on typing
+                    }}
                   />
                 </div>
-                <button type="submit" className="btn btn-primary">
-                  Login
-                </button>
+
+                <div className="form-group-cluster">
+                  <button type="submit" className="btn btn-primary">
+                    Login
+                  </button>
+                  <span className="login-fail-message">{message}</span>
+                </div>
               </form>
             </div>
           </div>
