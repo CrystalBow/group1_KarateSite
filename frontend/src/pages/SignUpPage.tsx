@@ -57,7 +57,7 @@ const SignUpPage = () => {
       <Header action="LOG IN" onAction={handleLogIn}/>
       <div className="page-container">
         <div className="custom-card">
-          <h1 className="card-title">BEGIN YOUR TRAINING</h1>
+          <h1 className="card-title bebasFont">BEGIN YOUR TRAINING</h1>
           <div id="redDiv">
             {action === "Back"?<div></div>:<form className="card-form">
               <div className="form-group">
@@ -82,9 +82,9 @@ const SignUpPage = () => {
               </div>
               <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Back")}}> Next </button>
             </form>}
-            {action === "Next"?<div></div>:<form className="card-form" onSubmit={handleSubmit}>
+            {action === "Next"?<div></div>:<form className="card-form bebasFont" onSubmit={handleSubmit}>
               <div className="options-container">
-                <div className="option">
+                <div className="option ">
                   <input type="radio" className="radio" id="whiteBelt" name="belts" value="White Belt" />
                   <label htmlFor="whiteBelt">White Belt</label>
                 </div>

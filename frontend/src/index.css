@@ -7,6 +7,10 @@
     display: flex;
 }
 
+.bebasFont
+{
+  font-family: 'Bebas Neue', sans-serif;
+}
 
 .navbar-nav .nav-item {
   margin-left: 20px;
@@ -385,6 +389,7 @@ input::placeholder {
 .option label
 {
   cursor: pointer;
+  width: 100%;
 }
 
 .option:hover
