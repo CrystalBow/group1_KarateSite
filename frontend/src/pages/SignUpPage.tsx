@@ -83,18 +83,27 @@ const SignUpPage = () => {
               <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Back")}}> Next </button>
             </form>}
             {action === "Next"?<div></div>:<form className="card-form" onSubmit={handleSubmit}>
-              <div className="form-group">
-                <input type="radio" className="select-box" id="whiteBelt" name="belts" value="White Belt" />
-                <label htmlFor="whiteBelt">White Belt</label>
+              <div className="options-container">
+                <div className="option">
+                  <input type="radio" className="radio" id="whiteBelt" name="belts" value="White Belt" />
+                  <label htmlFor="whiteBelt">White Belt</label>
+                </div>
               </div>
-              <div className="form-group">
-                <input type="radio" className="select-box" id="yellowBelt" name="belts" value="Yellow Belt" />
-                <label htmlFor="yellowBelt">Yellow Belt</label>
+              <br />
+              <div className="options-container">
+                <div className="option">
+                  <input type="radio" className="radio" id="yellowBelt" name="belts" value="Yellow Belt" />
+                  <label htmlFor="yellowBelt">Yellow Belt</label>
+                </div>
               </div>
-              <div className="form-group">
-                <input type="radio" className="select-box" id="orangeBelt" name="belts" value="Orange Belt" />
-                <label htmlFor="orangeBelt">Orange Belt</label>
+              <br />
+              <div className="options-container">
+                <div className="option">
+                  <input type="radio" className="radio" id="orangeBelt" name="belts" value="Orange Belt" />
+                  <label htmlFor="orangeBelt">Orange Belt</label>
+                </div>
               </div>
+              <br />
               <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Next")}}> Back </button>
               <button type="submit" className="btn btn-primary">Sign Up</button>
               {message && <div style={{marginTop: "1em"}}>{message}</div>}
