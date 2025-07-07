@@ -129,9 +129,9 @@ const SignUpPage = () => {
             <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Back")}}> Next </button>
           </div>}
 
-          {action === "Next"?<div></div>:<div className="registerBtn" onClick={handleSubmit}>
+          {action === "Next"?<div></div>:<div className="registerBtn">
             <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Next")}}> Back </button>
-            <button type="submit" className="btn btn-primary">Sign Up</button>
+            <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Sign Up</button>
           </div>}
         </div>
       </div>
