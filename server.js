@@ -1,9 +1,12 @@
 require('dotenv').config();
-const {MongoClient} = require('mongodb');
+const { MongoClient } = require('mongodb');
 const bcrypt = require('bcrypt');  // Added bcrypt for password hashing
-const url = process.env.MONGODB_URI;
+const url = process.env.MONGODB_URI; 
 const client = new MongoClient(url);
 let db = null;
+const mail = require('@sendgrid/mail'); // email verification
+mail.setApiKey(process.env.SENDGRID_API_KEY);
+const crypto = require('crypto'); // email token
 async function connectToMongo() {
   try 
   {
@@ -66,7 +69,7 @@ app.post('/api/login', async (req, res, next) =>
 
     // Compare hashed password using bcrypt
     const match = await bcrypt.compare(password, userRecord.password);
-
+    
     if (!match) 
     {
       // Passwords don't match
@@ -74,6 +77,16 @@ app.post('/api/login', async (req, res, next) =>
     }
     else
     {
+      // Return error if no verified email
+      if (userRecord.isVerified == false)
+      {
+        return res.status(200).json({
+        id: -1,
+        name: '',
+        email: '',
+        error: "You must verify your email before logging in. Check your email to verify your account."
+      });
+      }
       // Passwords match - proceed
       id = userRecord.id;
       name = userRecord.name;
@@ -133,8 +146,13 @@ app.post('/api/register', async (req, res, next) =>
     id: serverNum + (new Date()).getTime(),
     rank: 0, 
     streak: 0, 
-    lastlogin: -1
+    lastlogin: -1,
+    isVerified: false
   };
+
+  // Create Email Verification Token for new user
+  const verificationToken = crypto.randomBytes(32).toString('hex');
+  newUser.verificationToken = verificationToken;
 
   serverNum++;
   var error = '';
@@ -149,6 +167,23 @@ app.post('/api/register', async (req, res, next) =>
     }
 
     const result = db.collection('Users').insertOne(newUser);
+
+    // Send verification email
+    const verifyEmailLink = `http://143.198.160.127:5000/api/verifyEmail?token=${verificationToken}`;
+
+    // Email template
+    const msg =
+    {
+      to: email,
+      from: 'karatetracker@gmail.com',
+      subject: 'Verify your KarateTracker email',
+      html: `Click <a href="${verifyEmailLink}">here</a> to verify your email.`, // Verification link
+    }
+    try {
+      await mail.send(msg);
+    } catch (emailError) {
+      console.error('Error sending email:', emailError);
+    }
   }
   catch(e) // Add type annotation for 'e'
   {
@@ -185,5 +220,28 @@ app.post('/api/debug/getPasswordInfo', async (req, res) => {
   }
 });
 
+// Email verification api
+app.get('/api/verifyEmail', async (req, res) => {
+  
+  const token = req.query.token; // read token
+
+  try {
+    const user = await db.collection('Users').findOne({ verificationToken: token }); // check for matching token
+
+    if (!user) {
+      return res.status(400).send('Invalid verification token');
+    }
+    // Update user to verified
+    await db.collection('Users').updateOne(
+      { _id: user._id },
+      { $set: { isVerified: true }, $unset: { verificationToken: '' } } // Remove verification token once verified
+    );
+
+    res.send('Your email has been verified successfully! You can now log in.');
+  } catch (err) {
+    console.error(err);
+    res.status(500).json('');
+  }
+});
 app.listen(5000); // start Node + Express server on port 5001
 
