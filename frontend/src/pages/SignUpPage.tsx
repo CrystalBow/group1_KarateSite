@@ -89,28 +89,34 @@ const SignUpPage = () => {
               </div>
             </form>}
             {action === "Next"?<div></div>:<div className="card-form bebasFont">
-              <div id="whitebeltdiv">
+              <div className="beltdiv">
                 <div className="options-container">
                   <div className="option ">
                     <input type="radio" className="radio" id="whiteBelt" name="belts" value="White Belt" />
                     <label htmlFor="whiteBelt">White Belt</label>
                   </div>
                 </div>
-                <img src="/assets/WhiteBelt.png" alt="White Belt" id="whiteBeltImg"/>
+                <img src="/assets/WhiteBelt.png" alt="White Belt" className="beltPosition"/>
               </div>
               <br />
-              <div className="options-container">
-                <div className="option">
-                  <input type="radio" className="radio" id="yellowBelt" name="belts" value="Yellow Belt" />
-                  <label htmlFor="yellowBelt">Yellow Belt</label>
+              <div className="beltdiv">
+                <div className="options-container">
+                  <div className="option">
+                    <input type="radio" className="radio" id="yellowBelt" name="belts" value="Yellow Belt" />
+                    <label htmlFor="yellowBelt">Yellow Belt</label>
+                  </div>
                 </div>
+                <img src="/assets/YellowBelt.png" alt="Yellow Belt" className="beltPosition"/>
               </div>
               <br />
-              <div className="options-container">
-                <div className="option">
-                  <input type="radio" className="radio" id="orangeBelt" name="belts" value="Orange Belt" />
-                  <label htmlFor="orangeBelt">Orange Belt</label>
+              <div className="beltdiv">
+                <div className="options-container">
+                  <div className="option">
+                    <input type="radio" className="radio" id="orangeBelt" name="belts" value="Orange Belt" />
+                    <label htmlFor="orangeBelt">Orange Belt</label>
+                  </div>
                 </div>
+                <img src="/assets/OrangeBelt.png" alt="Orange Belt" className="beltPosition"/>
               </div>
               <br />
               {message && <div style={{marginTop: "1em"}}>{message}</div>}
@@ -123,7 +129,7 @@ const SignUpPage = () => {
             <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Back")}}> Next </button>
           </div>}
 
-          {action === "Next"?<div></div>:<div className="regBtn" onClick={handleSubmit}>
+          {action === "Next"?<div></div>:<div className="registerBtn" onClick={handleSubmit}>
             <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Next")}}> Back </button>
             <button type="submit" className="btn btn-primary">Sign Up</button>
           </div>}
