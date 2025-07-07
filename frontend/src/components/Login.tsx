@@ -104,7 +104,7 @@ function Login() {
                     value={loginName}
                     onChange={(e) => {
                       setLoginName(e.target.value);
-                      setUsernameInvalid(false); // remove red on typing
+                      setUsernameInvalid(false); 
                     }}
                   />
                 </div>

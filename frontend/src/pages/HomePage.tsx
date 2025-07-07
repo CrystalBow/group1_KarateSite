@@ -31,7 +31,7 @@ const HomePage = () => {
         <div className="custom-card">
           <div className="card-scroll-content">
             <h1 className="card-title">WELCOME TO KARATE TRAINER</h1>
-            <img src="/assets/LogoMain2.png" className="card-img-top" alt="..." />
+            <img src="LogoMain2.png" className="card-img-top" alt="..." />
             <div className="card-body">
               <p className="card-text">Get started.</p>
               <a href="/signup" className="btn btn-primary">

@@ -177,6 +177,49 @@ body {
   margin-bottom: 7%;
 }
 
+
+/* homepage paint overlay */
+.paint-overlay {
+  position: relative;
+  width: 100%;
+  max-width: 70vw;
+  margin: 3rem auto 0 auto; 
+  text-align: center;
+}
+
+.rear-img {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  display: block;
+}
+
+/* homepage about and features section */
+.about, .features{
+  position: absolute;
+  width: 100%;
+  max-width: 1400px; 
+  margin: 2rem auto 0 auto;
+  box-sizing: border-box;
+  text-align: center; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 1rem 2rem;
+  border-radius: 12px; 
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2vw;
+}
+
+.about h2, .features h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2vw;
+}
+
+
+
 .custom-card .card-title {
   font-size: 2.5rem;
   font-weight: 500;
@@ -245,7 +288,7 @@ body {
   width: 70%;
 } 
 
-/*
+
 
 
 .card-img-top{
@@ -275,7 +318,7 @@ input::placeholder {
   width: 100%;
   border-radius: 8px;
   transition: all 0.4s;
-}
+} 
 
 .options-container:has(input[type="radio"]:checked) {
   border: 2px solid black;
@@ -343,5 +386,8 @@ input::placeholder {
   text-align: center;
 }
 
-
+.input-invalid{
+  border: 2px solid rgb(0, 89, 255) !important;
+  background-color: #ffe5e5;
+}
 
