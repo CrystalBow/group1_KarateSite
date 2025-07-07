@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const [message, setMessage] = useState("");
   const [loginName, setLoginName] = useState("");
-  const [loginPassword, setPassword] = useState("");
+  const [loginPassword] = useState("");
   const [usernameInvalid, setUsernameInvalid] = useState(false);
   const [passwordInvalid, setPasswordInvalid] = useState(false);
 
@@ -16,12 +16,6 @@ function Login() {
     navigate("/signup");
   };
 
-  function handleSetLoginName(e: any): void {
-    setLoginName(e.target.value);
-  }
-  function handleSetPassword(e: any): void {
-    setPassword(e.target.value);
-  }
   const app_name = "karatemanager.xyz";
   function buildPath(route: string): string {
     if (process.env.NODE_ENV != "development") {
