@@ -7,7 +7,7 @@ function Header(props: { onAction: () => void; action: string | number | bigint 
       <header className="custom-header">
         <a href="/">
           <img
-            src="SmallLogo.png"
+            src="/SmallLogo.png"
             alt="Logo"
             className="header-logo"
           />
