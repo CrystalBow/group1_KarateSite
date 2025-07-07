@@ -96,7 +96,7 @@ const SignUpPage = () => {
                     <label htmlFor="whiteBelt">White Belt</label>
                   </div>
                 </div>
-                <img src="WhiteBelt.png" alt="White Belt" id="whiteBeltImg"/>
+                <img src="/assets/WhiteBelt.png" alt="White Belt" id="whiteBeltImg"/>
               </div>
               <br />
               <div className="options-container">
