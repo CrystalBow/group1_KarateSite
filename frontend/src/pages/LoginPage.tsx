@@ -1,6 +1,7 @@
 // import React from "react";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
+import Login from "../components/Login";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const LoginPage = () => {
         <Header action="SIGN UP" onAction={handleSignUp} />
       </div>
       <div>
-        <div className="page-container">
+        {/* <div className="page-container">
           <div className="custom-card">
             <h1 className="card-title">ENTER KARATE TRAR</h1>
             <div id="redDiv">
@@ -45,7 +46,8 @@ const LoginPage = () => {
               </form>
             </div>
           </div>
-        </div>
+        </div> */}
+        < Login />
       </div>
     </>
   );

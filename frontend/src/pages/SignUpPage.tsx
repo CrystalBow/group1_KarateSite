@@ -55,122 +55,83 @@ const SignUpPage = () => {
     <div>
       <Header action="LOG IN" onAction={handleLogIn} />
       <div className="page-container">
-        <div className="custom-card">
-          <div className="paint-overlay">
-            <h1 className="card-title">BEGIN YOUR TRAINING</h1>
-            <img src="RearRedPaint.png" className="rear-img-signup" alt="About Us" />
-
-            {action === "Back" ? (
-              <div></div>
-            ) : (
-              <form className="card-form">
-                <div className="form-group">
-                  <label htmlFor="username" style={{ fontFamily: 'Bebas Neue' }} >Username</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    placeholder="Enter username"
-                    value={user}
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
+        <div className="custom-card custom-card-items-centered">
+          {action === "Back"?<div></div>:<div>
+            <h1 className="card-title bebasFont">BEGIN YOUR TRAINING</h1>
+          </div>}
+          {action === "Next"?<div></div>:<div>
+            <h1 className="card-title bebasFont">WHat Is Your Belt Level</h1>
+            <p className="bebasFont"> Completely new to Karate? Choose white belt </p>
+          </div>}
+          
+          <div id="redDiv">
+            {action === "Back"?<div></div>:<form className="card-form bebasFont">
+              <div className="form-group">
+                <label htmlFor="username">Username</label>
+                <input type="text" className="form-control" id="username" placeholder="Enter username"
+                  value={user} onChange={e => setUsername(e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="name">Name</label>
+                <input type="text" className="form-control" id="name" placeholder="Enter your Name"
+                  value={name} onChange={e => setName(e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input type="email" className="form-control" id="email" placeholder="Enter email"
+                  value={email} onChange={e => setEmail(e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input type="password" className="form-control" id="password" placeholder="Enter password"
+                  value={password} onChange={e => setPassword(e.target.value)} />
+              </div>
+            </form>}
+            {action === "Next"?<div></div>:<div className="card-form bebasFont">
+              <div className="beltdiv">
+                <div className="options-container">
+                  <div className="option ">
+                    <input type="radio" className="radio" id="whiteBelt" name="belts" value="White Belt" />
+                    <label htmlFor="whiteBelt">White Belt</label>
+                  </div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="name" style={{ fontFamily: 'Bebas Neue' }}>Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="name"
-                    placeholder="Enter your Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
+                <img src="/assets/WhiteBelt.png" alt="White Belt" className="beltPosition"/>
+              </div>
+              <br />
+              <div className="beltdiv">
+                <div className="options-container">
+                  <div className="option">
+                    <input type="radio" className="radio" id="yellowBelt" name="belts" value="Yellow Belt" />
+                    <label htmlFor="yellowBelt">Yellow Belt</label>
+                  </div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="email" style={{ fontFamily: 'Bebas Neue' }}>Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    placeholder="Enter email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
+                <img src="/assets/YellowBelt.png" alt="Yellow Belt" className="beltPosition"/>
+              </div>
+              <br />
+              <div className="beltdiv">
+                <div className="options-container">
+                  <div className="option">
+                    <input type="radio" className="radio" id="orangeBelt" name="belts" value="Orange Belt" />
+                    <label htmlFor="orangeBelt">Orange Belt</label>
+                  </div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="password" style={{ fontFamily: 'Bebas Neue' }}>Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    placeholder="Enter password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  onClick={() => {
-                    setAction("Back");
-                  }}
-                >
-                  {" "}
-                  Next{" "}
-                </button>
-              </form>
-            )}
-            {action === "Next" ? (
-              <div></div>
-            ) : (
-              <form className="card-form" onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <input
-                    type="radio"
-                    className="select-box"
-                    id="whiteBelt"
-                    name="belts"
-                    value="White Belt"
-                  />
-                  <label htmlFor="whiteBelt">White Belt</label>
-                </div>
-                <div className="form-group">
-                  <input
-                    type="radio"
-                    className="select-box"
-                    id="yellowBelt"
-                    name="belts"
-                    value="Yellow Belt"
-                  />
-                  <label htmlFor="yellowBelt">Yellow Belt</label>
-                </div>
-                <div className="form-group">
-                  <input
-                    type="radio"
-                    className="select-box"
-                    id="orangeBelt"
-                    name="belts"
-                    value="Orange Belt"
-                  />
-                  <label htmlFor="orangeBelt">Orange Belt</label>
-                </div>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  onClick={() => {
-                    setAction("Next");
-                  }}
-                >
-                  {" "}
-                  Back{" "}
-                </button>
-                <button type="submit" className="btn btn-primary">
-                  Sign Up
-                </button>
-                {message && <div style={{ marginTop: "1em" }}>{message}</div>}
-              </form>
-            )}
+                <img src="/assets/OrangeBelt.png" alt="Orange Belt" className="beltPosition"/>
+              </div>
+              <br />
+              {message && <div style={{marginTop: "1em"}}>{message}</div>}
+            </div>}
           </div>
+
+          <br />
+
+          {action === "Back"?<div></div>:<div>
+            <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Back")}}> Next </button>
+          </div>}
+
+          {action === "Next"?<div></div>:<div className="registerBtn">
+            <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Next")}}> Back </button>
+            <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Sign Up</button>
+          </div>}
         </div>
       </div>
     </div>

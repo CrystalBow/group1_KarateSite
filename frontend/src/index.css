@@ -7,6 +7,10 @@
     display: flex;
 }
 
+.bebasFont
+{
+  font-family: 'Bebas Neue', sans-serif;
+}
 
 .navbar-nav .nav-item {
   margin-left: 20px;
@@ -127,7 +131,7 @@ body {
 
 .custom-card {
   /* display: flex; */
-  padding:1rem 3rem;
+  /* padding:1rem 3rem; */
   height: 83vh;
   width: 100%;                  
   background-color: #f7dec4;
@@ -135,6 +139,7 @@ body {
   box-sizing: border-box;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
 }
 
 .card-scroll-content {
@@ -163,67 +168,14 @@ body {
   margin: 0 auto;
 }
 
-.paint-overlay {
-  position: relative;
-  width: 100%;
-  max-width: 70vw;
-  margin: 3rem auto 0 auto; 
-  text-align: center;
+.redDivLogin
+{
+  height: 350px;
 }
 
-/* paint overlay image for homepage */
-.rear-img {
-  width: 100%;
-  height: auto;
-  border-radius: 1rem;
-  display: block;
+#redDiv.redDivLogin .form-group {
+  margin-bottom: 7%;
 }
-
-/* paint overlay image for login and signup */
-.rear-img-login, .rear-img-signup {
-  width: 50%;            
-  height: auto;
-  border-radius: 1rem;
-  display: block;
-  margin: 1rem auto;      
-}
-
-/*styling and format for text for what is karate trainer and features on homepage*/
-.about, .features{
-  position: absolute;
-  width: 100%;
-  max-width: 1400px; 
-  margin: 2rem auto 0 auto;
-  box-sizing: border-box;
-  text-align: center; 
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: rgb(0, 0, 0);
-  text-align: center;
-  padding: 1rem 2rem;
-  border-radius: 12px; 
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2vw;
-}
-
-.about h2, .features h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2vw;
-}
-
-/* .about-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.5); 
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  max-width: 90%;
-} */
 
 .custom-card .card-title {
   font-size: 2.5rem;
@@ -281,31 +233,19 @@ body {
   margin: 0.1rem 0;
 }
 
-/* forms for login and signup */
-.card-form {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 1000px;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-sizing: border-box;
+.form-group{
+  /* width: 30vw; */
+  padding: 0.5rem;
 }
 
-.form-group {
-  position: relative;
-  align-items: center;
-  width: 100%;
-  max-width: 400px;
-  padding: 0.5rem;
-  margin: 0 auto; 
+.card-form {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  box-sizing: border-box;
-}
+  /* gap: 1rem; */
+  width: 70%;
+} 
+
+/*
 
 
 .card-img-top{
@@ -317,64 +257,91 @@ body {
 }
 
 
+input
+{
+  text-align: center;
+}
+
 input::placeholder {
   text-align: center;
 }
 
-.select-box
+.options-container
 {
-  display: flex;
-  width: 400px;
-}
-.select-box .options-container
-{
-  background: black;
-  
+  background-color: white;
+  color: black;
+  height: 35px;
+  /* height: 50px; */
+  width: 100%;
+  border-radius: 8px;
+  transition: all 0.4s;
 }
 
-.select-box:hover
+.options-container:has(input[type="radio"]:checked) {
+  border: 2px solid black;
+}
+
+.option
 {
-  background-color: #f7dec4;
-  color: #000;
   cursor: pointer;
 }
 
-.select-box .option .radio
+.option label
+{
+  cursor: pointer;
+  width: 100%;
+  height: 35px;
+}
+
+.option:hover
+{
+  background-color: #a8b8bd;
+  color: #000;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.option .radio
 {
   display: none;
 }
 
-
-
-
-/* .card-form {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;               
-  max-width: 400px;         
-  padding: 2rem;
-  text-align: center;
-} */
-
-/* for login button login stuffs */
-.login-fail-message {
-  color: rgb(0, 0, 0);
-  font-size: 1.2rem;
-  margin-top: 1rem;
+.registerBtn
+{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.form-group-cluster {
+.beltdiv {
+  /* border-color: #000;
+  border-style: solid; */
   position: relative;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  padding: 1vw 0 1vw 0;
+}
+
+.beltPosition
+{
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  z-index: 2;
+}
+
+/* Center everything horizontally in .custom-card for Login only */
+.custom-card-items-centered
+{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-/* for input fields on login*/
 
-.input-invalid {
-  border: 2px solid rgb(4, 0, 255) !important;
-  background-color: #ffe5e5;
-}
+

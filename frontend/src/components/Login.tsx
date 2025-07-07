@@ -82,18 +82,11 @@ function Login() {
         <Header action="SIGN UP" onAction={handleSignUp} />
       </div>
       <div>
-        {/*<span id ="loginResult">{message}</span>*/}
         <div className="page-container">
-          <div className="custom-card">
-            <div className="paint-overlay">
-              <h1 className="card-title">ENTER KARATE TRAINER</h1>
-              <img
-                src="RearRedPaint.png"
-                className="rear-img-login"
-                alt="Login"
-              />
-
-              <form className="card-form" onSubmit={doLogin}>
+          <div className="custom-card custom-card-items-centered">
+            <h1 className="card-title bebasFont">ENTER KARATE TRAINER</h1>
+            <div id="redDiv" className="redDivLogin">
+              <form className="card-form bebasFont">
                 <div className="form-group">
                   <label
                     htmlFor="username"
@@ -136,15 +129,13 @@ function Login() {
                     }}
                   />
                 </div>
-
-                <div className="form-group-cluster">
-                  <button type="submit" className="btn btn-primary">
-                    Login
-                  </button>
-                  <span className="login-fail-message">{message}</span>
-                </div>
               </form>
             </div>
+            <span id ="loginResult">{message}</span>
+            <br />
+            <button type="submit" className="btn btn-primary" onClick={doLogin}>
+              Login
+            </button>
           </div>
         </div>
       </div>
