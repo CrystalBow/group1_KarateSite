@@ -57,7 +57,14 @@ const SignUpPage = () => {
       <Header action="LOG IN" onAction={handleLogIn}/>
       <div className="page-container">
         <div className="custom-card">
-          <h1 className="card-title bebasFont">BEGIN YOUR TRAINING</h1>
+          {action === "Back"?<div></div>:<div>
+            <h1 className="card-title bebasFont">BEGIN YOUR TRAINING</h1>
+          </div>}
+          {action === "Next"?<div></div>:<div>
+            <h1 className="card-title bebasFont">WHat Is Your Belt Level</h1>
+            <p className="bebasFont"> Completely new to Karate? Choose white belt </p>
+          </div>}
+          
           <div id="redDiv">
             {action === "Back"?<div></div>:<form className="card-form">
               <div className="form-group">
@@ -80,14 +87,16 @@ const SignUpPage = () => {
                 <input type="password" className="form-control" id="password" placeholder="Enter password"
                   value={password} onChange={e => setPassword(e.target.value)} />
               </div>
-              <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Back")}}> Next </button>
             </form>}
             {action === "Next"?<div></div>:<form className="card-form bebasFont" onSubmit={handleSubmit}>
-              <div className="options-container">
-                <div className="option ">
-                  <input type="radio" className="radio" id="whiteBelt" name="belts" value="White Belt" />
-                  <label htmlFor="whiteBelt">White Belt</label>
+              <div id="whitebeltdiv">
+                <div className="options-container">
+                  <div className="option ">
+                    <input type="radio" className="radio" id="whiteBelt" name="belts" value="White Belt" />
+                    <label htmlFor="whiteBelt">White Belt</label>
+                  </div>
                 </div>
+                <img src="WhiteBelt.png" alt="White Belt" id="whiteBeltImg"/>
               </div>
               <br />
               <div className="options-container">
@@ -104,11 +113,20 @@ const SignUpPage = () => {
                 </div>
               </div>
               <br />
-              <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Next")}}> Back </button>
-              <button type="submit" className="btn btn-primary">Sign Up</button>
               {message && <div style={{marginTop: "1em"}}>{message}</div>}
             </form>}
           </div>
+
+          <br />
+
+          {action === "Back"?<div></div>:<div>
+            <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Back")}}> Next </button>
+          </div>}
+
+          {action === "Next"?<div></div>:<div className="regBtn">
+            <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Next")}}> Back </button>
+            <button type="submit" className="btn btn-primary">Sign Up</button>
+          </div>}
         </div>
       </div>
     </div>

@@ -66,10 +66,9 @@ function Login() {
         <Header action="SIGN UP" onAction={handleSignUp} />
       </div>
       <div>
-        <span id ="loginResult">{message}</span>
         <div className="page-container">
           <div className="custom-card">
-            <h1 className="card-title">ENTER KARATE TRAINER</h1>
+            <h1 className="card-title bebasFont">ENTER KARATE TRAINER</h1>
             <div id="redDiv">
               <form className="card-form" onSubmit={doLogin}>
                 <div className="form-group">
@@ -94,11 +93,13 @@ function Login() {
                     onChange={handleSetPassword}
                   />
                 </div>
-                <button type="submit" className="btn btn-primary">
-                  Login
-                </button>
               </form>
             </div>
+            <span id ="loginResult">{message}</span>
+            <br />
+            <button type="submit" className="btn btn-primary">
+              Login
+            </button>
           </div>
         </div>
       </div>

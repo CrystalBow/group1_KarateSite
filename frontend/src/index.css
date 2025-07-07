@@ -288,16 +288,18 @@ body {
 }
 
 .form-group{
-  width: 30vw;
+  /* width: 30vw; */
   padding: 0.5rem;
 }
 
-/* .card-form {
+.card-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  /* gap: 1rem; */
   width: 100%;
-}
+} 
+
+/*
 
 .card-img-top{
   width: 100%;      
@@ -405,10 +407,31 @@ input::placeholder {
   display: none;
 }
 
-/* input[type="radio"]:checked + label {
-  border-color: #a8b8bd;
-  border-style: solid;
-  width: 100%;
-  color: #000;
-  border-radius: 8px;
-} */
+.regBtn
+{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#whitebeltdiv {
+  /* border-color: #000;
+  border-style: solid; */
+  position: relative;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  padding: 2vw 0 2vw 0;
+}
+
+#whiteBeltImg {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7vw;
+  z-index: 2;
+}
+
+
+
