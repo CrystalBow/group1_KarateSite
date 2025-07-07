@@ -39,7 +39,7 @@ const HomePage = () => {
               </a>
             </div>
             <div className = "paint-overlay">
-              <img src="RearRedPaint.png" className="rear-img" alt="About Us" />
+              <img src="assets/RearRedPaint.png" className="rear-img" alt="About Us" />
               <div className="about" id="about">
                 <h2>
                   <u>WHAT IS KARATE TRAINER?</u>
@@ -57,7 +57,7 @@ const HomePage = () => {
               </div>
             </div>
             <div className="paint-overlay">
-              <img src="RearRedPaint.png" className="rear-img" alt="About Us" />
+              <img src="assets/RearRedPaint.png" className="rear-img" alt="About Us" />
               <div className="features" id="features">
                 <h2>
                   <u>Features of Karate Trainer</u>
