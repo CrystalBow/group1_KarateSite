@@ -70,7 +70,7 @@ function Login() {
           <div className="custom-card">
             <h1 className="card-title bebasFont">ENTER KARATE TRAINER</h1>
             <div id="redDiv">
-              <form className="card-form" onSubmit={doLogin}>
+              <form className="card-form">
                 <div className="form-group">
                   <label htmlFor="username">Username</label>
                   <input
@@ -97,7 +97,7 @@ function Login() {
             </div>
             <span id ="loginResult">{message}</span>
             <br />
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" onClick={doLogin}>
               Login
             </button>
           </div>

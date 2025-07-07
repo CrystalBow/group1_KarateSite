@@ -88,7 +88,7 @@ const SignUpPage = () => {
                   value={password} onChange={e => setPassword(e.target.value)} />
               </div>
             </form>}
-            {action === "Next"?<div></div>:<form className="card-form bebasFont" onSubmit={handleSubmit}>
+            {action === "Next"?<div></div>:<div className="card-form bebasFont">
               <div id="whitebeltdiv">
                 <div className="options-container">
                   <div className="option ">
@@ -114,7 +114,7 @@ const SignUpPage = () => {
               </div>
               <br />
               {message && <div style={{marginTop: "1em"}}>{message}</div>}
-            </form>}
+            </div>}
           </div>
 
           <br />
@@ -123,7 +123,7 @@ const SignUpPage = () => {
             <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Back")}}> Next </button>
           </div>}
 
-          {action === "Next"?<div></div>:<div className="regBtn">
+          {action === "Next"?<div></div>:<div className="regBtn" onClick={handleSubmit}>
             <button type="submit" className="btn btn-primary" onClick={()=>{setAction("Next")}}> Back </button>
             <button type="submit" className="btn btn-primary">Sign Up</button>
           </div>}
