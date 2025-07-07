@@ -67,10 +67,10 @@ function Login() {
       </div>
       <div>
         <div className="page-container">
-          <div className="custom-card">
+          <div className="custom-card custom-card-items-centered">
             <h1 className="card-title bebasFont">ENTER KARATE TRAINER</h1>
-            <div id="redDiv">
-              <form className="card-form">
+            <div id="redDiv" className="redDivLogin">
+              <form className="card-form bebasFont">
                 <div className="form-group">
                   <label htmlFor="username">Username</label>
                   <input

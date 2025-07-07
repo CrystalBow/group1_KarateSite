@@ -56,7 +56,7 @@ const SignUpPage = () => {
     <div>
       <Header action="LOG IN" onAction={handleLogIn}/>
       <div className="page-container">
-        <div className="custom-card">
+        <div className="custom-card custom-card-items-centered">
           {action === "Back"?<div></div>:<div>
             <h1 className="card-title bebasFont">BEGIN YOUR TRAINING</h1>
           </div>}
@@ -66,7 +66,7 @@ const SignUpPage = () => {
           </div>}
           
           <div id="redDiv">
-            {action === "Back"?<div></div>:<form className="card-form">
+            {action === "Back"?<div></div>:<form className="card-form bebasFont">
               <div className="form-group">
                 <label htmlFor="username">Username</label>
                 <input type="text" className="form-control" id="username" placeholder="Enter username"
