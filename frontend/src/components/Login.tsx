@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const [message, setMessage] = useState("");
   const [loginName, setLoginName] = useState("");
-  const [loginPassword] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
   const [usernameInvalid, setUsernameInvalid] = useState(false);
   const [passwordInvalid, setPasswordInvalid] = useState(false);
 
@@ -86,7 +86,7 @@ function Login() {
                     htmlFor="username"
                     style={{ fontFamily: "Bebas Neue" }}
                   >
-                    Username
+                    Username{usernameInvalid && <span style={{ color: "black" }}> *</span>}
                   </label>
                   <input
                     type="text"
@@ -107,7 +107,7 @@ function Login() {
                     htmlFor="password"
                     style={{ fontFamily: "Bebas Neue" }}
                   >
-                    Password
+                    Password{passwordInvalid && <span style={{ color: "black" }}> *</span>}
                   </label>
                   <input
                     type="password"
@@ -118,14 +118,14 @@ function Login() {
                     placeholder="Enter password"
                     value={loginPassword}
                     onChange={(e) => {
-                      setLoginName(e.target.value);
-                      setUsernameInvalid(false); // remove red on typing
+                      setLoginPassword(e.target.value);
+                      setPasswordInvalid(false); 
                     }}
                   />
                 </div>
               </form>
             </div>
-            <span id ="loginResult">{message}</span>
+            <span id="loginResult" className={message ? "error-message" : ""}>{message}</span>
             <br />
             <button type="submit" className="btn btn-primary" onClick={doLogin}>
               Login

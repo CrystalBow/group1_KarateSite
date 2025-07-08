@@ -11,12 +11,18 @@ const SignUpPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [emailFormatError, setEmailFormatError] = useState(false);
 
   const [invalidFields, setInvalidFields] = useState<string[]>([]);
 
   const handleLogIn = () => {
     navigate("/login");
   };
+
+  function isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
 
   const app_name = "karatemanager.xyz";
   function buildPath(route: string): string {
@@ -25,25 +31,64 @@ const SignUpPage = () => {
       : "http://localhost:5000/" + route;
   }
 
+  const validateFields = () => {
+    const invalids: string[] = [];
+
+    if (!user.trim()) invalids.push("username");
+    if (!name.trim()) invalids.push("name");
+
+    if (!email.trim()) {
+      invalids.push("email");
+      setEmailFormatError(false);
+    } else if (!isValidEmail(email)) {
+      invalids.push("email");
+      setEmailFormatError(true);
+    } else {
+      setEmailFormatError(false);
+    }
+
+    if (!password.trim()) invalids.push("password");
+
+    setInvalidFields(invalids);
+    return invalids;
+  };
+
+  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Collect fields that are empty
-    const invalids: string[] = [];
-    if (!user.trim()) invalids.push("username");
-    if (!name.trim()) invalids.push("name");
-    if (!email.trim()) invalids.push("email");
-    if (!password.trim()) invalids.push("password");
-    setInvalidFields(invalids);
+    // const invalids: string[] = [];
 
-    // Don't submit if there are invalid fields
+    // if (!user.trim()) invalids.push("username");
+    // if (!name.trim()) invalids.push("name");
+    // if (!email.trim()) {
+    //   invalids.push("email");
+    //   setEmailFormatError(false);
+    // } else if (!isValidEmail(email)) {
+    //   invalids.push("email");
+    //   setEmailFormatError(true);
+    // } else {
+    //   setEmailFormatError(false);
+    // }
+    // if (!password.trim()) invalids.push("password");
+
+    // setInvalidFields(invalids);
+
+    // if (invalids.length > 0) {
+    //   setMessage("Please fill out all required fields correctly.");
+    //   return;
+    // }
+
+    const invalids = validateFields();
     if (invalids.length > 0) {
-      setMessage("Please fill out all required fields.");
+      setMessage("Please fill out all required fields correctly");
       return;
     }
 
-    var obj = { user, name, email, password };
-    var js = JSON.stringify(obj);
+
+    const obj = { user, name, email, password };
+    const js = JSON.stringify(obj);
 
     try {
       const response = await fetch(buildPath("api/register"), {
@@ -51,7 +96,9 @@ const SignUpPage = () => {
         body: js,
         headers: { "Content-Type": "application/json" },
       });
-      var res = await response.json();
+
+      const res = await response.json();
+
       if (res.error === "") {
         setMessage("Sign up successful! Redirecting to login...");
         setTimeout(() => navigate("/login"), 1500);
@@ -86,7 +133,12 @@ const SignUpPage = () => {
             {action === "Back" ? null : (
               <form className="card-form bebasFont">
                 <div className="form-group">
-                  <label htmlFor="username">Username</label>
+                  <label htmlFor="username">
+                    Username
+                    {invalidFields.includes("username") && (
+                      <span style={{ color: "black" }}> *</span>
+                    )}
+                  </label>
                   <input
                     type="text"
                     className={`form-control ${
@@ -98,8 +150,14 @@ const SignUpPage = () => {
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
+
                 <div className="form-group">
-                  <label htmlFor="name">Name</label>
+                  <label htmlFor="name">
+                    Name
+                    {invalidFields.includes("name") && (
+                      <span style={{ color: "black" }}> *</span>
+                    )}
+                  </label>
                   <input
                     type="text"
                     className={`form-control ${
@@ -111,8 +169,14 @@ const SignUpPage = () => {
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
+
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">
+                    Email
+                    {invalidFields.includes("email") && (
+                      <span style={{ color: "black" }}> *</span>
+                    )}
+                  </label>
                   <input
                     type="email"
                     className={`form-control ${
@@ -123,9 +187,20 @@ const SignUpPage = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
+                  {emailFormatError && (
+                    <small style={{ color: "black" }}>
+                      Invalid email format (e.g. user@example.com)
+                    </small>
+                  )}
                 </div>
+
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
+                  <label htmlFor="password">
+                    Password
+                    {invalidFields.includes("password") && (
+                      <span style={{ color: "black" }}> *</span>
+                    )}
+                  </label>
                   <input
                     type="password"
                     className={`form-control ${
@@ -206,7 +281,9 @@ const SignUpPage = () => {
               </div>
             )}
           </div>
-
+          <span id="signInResult" className={message ? "error-message" : ""}>
+            {message}
+          </span>
           <br />
 
           {action === "Back" ? null : (
@@ -216,22 +293,11 @@ const SignUpPage = () => {
                 className="btn btn-primary"
                 onClick={(e) => {
                   e.preventDefault();
-
-                  const invalids: string[] = [];
-                  if (!user.trim()) invalids.push("username");
-                  if (!name.trim()) invalids.push("name");
-                  if (!email.trim()) invalids.push("email");
-                  if (!password.trim()) invalids.push("password");
-
-                  setInvalidFields(invalids);
-
+                  const invalids = validateFields();
                   if (invalids.length > 0) {
-                    setMessage("Please fill out all required fields.");
+                    setMessage("Please fill out all required fields correctly.");
                     return;
                   }
-
-                  setMessage("");
-                  setAction("Back");
                 }}
               >
                 Next

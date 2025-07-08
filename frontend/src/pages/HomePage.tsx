@@ -16,7 +16,6 @@ const HomePage = () => {
       const id = hash.replace("#", "");
       const el = document.getElementById(id);
       if (el) {
-        // Small delay to ensure element is rendered before scrolling
         setTimeout(() => {
           el.scrollIntoView({ behavior: "smooth" });
         }, 50);
@@ -30,17 +29,19 @@ const HomePage = () => {
       <div className="page-container">
         <div className="custom-card">
           <div className="card-scroll-content">
-            <h1 className="card-title">WELCOME TO KARATE TRAINER</h1>
-            <img src="/assets/LogoMain2.png" className="card-img-top" alt="..." />
-            <div className="card-body">
-              <p className="card-text">Get started.</p>
-              <a href="/signup" className="btn btn-primary">
-                Sign Up
-              </a>
+            <div className="hero-section">
+              <h1 className="card-title">WELCOME TO KARATE TRAINER</h1>
+              <img src="/assets/LogoMain2.png" className="card-img-top" alt="..." />
+              <div className="card-body">
+                <p className="card-text">Get started.</p>
+                <a href="/signup" className="btn btn-primary">
+                  Sign Up
+                </a>
+              </div>
             </div>
             <div className = "paint-overlay">
-              <img src="/assets/RearRedPaint.png" className="rear-img" alt="About Us" />
-              <div className="about" id="about">
+              <img id="about" src="/assets/RearRedPaint.png" className="rear-img" alt="About Us" />
+              <div className="about">
                 <h2>
                   <u>WHAT IS KARATE TRAINER?</u>
                 </h2>
@@ -57,8 +58,8 @@ const HomePage = () => {
               </div>
             </div>
             <div className="paint-overlay">
-              <img src="/assets/RearRedPaint.png" className="rear-img" alt="About Us" />
-              <div className="features" id="features">
+              <img id="features" src="/assets/RearRedPaint.png" className="rear-img" alt="About Us" />
+              <div className="features">
                 <h2>
                   <u>Features of Karate Trainer</u>
                 </h2>
