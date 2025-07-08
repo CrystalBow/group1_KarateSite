@@ -408,3 +408,9 @@ input::placeholder {
   min-height: 60vh; 
   padding: 2rem;
 }
+
+/* apply bebas nueueueueu to placeholder text only*/
+input::placeholder,
+textarea::placeholder {
+  font-family: 'Bebas Neue', cursive;
+}

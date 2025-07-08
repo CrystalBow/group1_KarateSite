@@ -13,8 +13,8 @@ const SignUpPage = () => {
   const [message, setMessage] = useState("");
   const [emailFormatError, setEmailFormatError] = useState(false);
   const [passwordError, setPasswordError] = useState("");
-
   const [invalidFields, setInvalidFields] = useState<string[]>([]);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogIn = () => {
     navigate("/login");
@@ -152,9 +152,9 @@ const SignUpPage = () => {
 
           <div id="redDiv">
             {action === "Back" ? null : (
-              <form className="card-form bebasFont">
+              <form className="card-form">
                 <div className="form-group">
-                  <label htmlFor="username">
+                  <label htmlFor="username" className="bebasFont">
                     Username
                     {invalidFields.includes("username") && (
                       <span style={{ color: "black" }}> *</span>
@@ -166,14 +166,14 @@ const SignUpPage = () => {
                       invalidFields.includes("username") ? "input-invalid" : ""
                     }`}
                     id="username"
-                    placeholder="Enter username"
+                    placeholder="Enter username" 
                     value={user}
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="name">
+                  <label htmlFor="name" className="bebasFont">
                     Name
                     {invalidFields.includes("name") && (
                       <span style={{ color: "black" }}> *</span>
@@ -192,7 +192,7 @@ const SignUpPage = () => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="email">
+                  <label htmlFor="email" className="bebasFont">
                     Email
                     {invalidFields.includes("email") && (
                       <span style={{ color: "black" }}> *</span>
@@ -209,21 +209,21 @@ const SignUpPage = () => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                   {emailFormatError && (
-                    <small style={{ color: "black" }}>
+                    <small className="bebasFont" style={{ color: "black" }}>
                       Invalid email format (e.g. user@example.com)
                     </small>
                   )}
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="password">
+                  <label htmlFor="password" className="bebasFont">
                     Password
                     {invalidFields.includes("password") && (
                       <span style={{ color: "black" }}> *</span>
                     )}
                   </label>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     className={`form-control ${
                       invalidFields.includes("password") ? "input-invalid" : ""
                     }`}
@@ -244,8 +244,23 @@ const SignUpPage = () => {
                     }}
                   />
                   {passwordError && (
-                    <small style={{ color: "black" }}>{passwordError}</small>
+                    <small className="bebasFont" style={{ color: "black" }}>{passwordError}</small>
                   )}
+                  <div className="form-check mt-2">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="showPasswordCheck"
+                      checked={showPassword}
+                      onChange={() => setShowPassword((prev) => !prev)}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="showPasswordCheck"
+                    >
+                      Show Password
+                    </label>
+                  </div>
                 </div>
               </form>
             )}
