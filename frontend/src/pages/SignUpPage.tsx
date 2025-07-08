@@ -298,8 +298,8 @@ const SignUpPage = () => {
                     setMessage("Please fill out all required fields correctly.");
                     return;
                   }
-                  setMessage(""); // Clear message if successful
-                  setAction("Back"); // ✅ THIS makes the belt step show up
+                  setMessage(""); 
+                  setAction("Back"); 
                 }}
               >
                 Next
