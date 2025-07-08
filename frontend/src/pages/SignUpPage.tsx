@@ -12,6 +12,7 @@ const SignUpPage = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [emailFormatError, setEmailFormatError] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
 
   const [invalidFields, setInvalidFields] = useState<string[]>([]);
 
@@ -22,6 +23,17 @@ const SignUpPage = () => {
   function isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  }
+
+  function isValidPassword(password: string): boolean {
+    const minLength = password.length >= 8;
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]/.test(
+      password
+    );
+    const containsForbidden = /[<>"'\\`]/.test(password);
+
+    return minLength && hasUppercase && hasSpecialChar && !containsForbidden;
   }
 
   const app_name = "karatemanager.xyz";
@@ -47,13 +59,23 @@ const SignUpPage = () => {
       setEmailFormatError(false);
     }
 
+    if (!password.trim()) {
+      invalids.push("password");
+      setPasswordError("Password is required.");
+    } else if (!isValidPassword(password)) {
+      invalids.push("password");
+      setPasswordError(
+        "Password must be at least 8 characters, include one uppercase letter, one special character, and no forbidden symbols."
+      );
+    } else {
+      setPasswordError("");
+    }
+
     if (!password.trim()) invalids.push("password");
 
     setInvalidFields(invalids);
     return invalids;
   };
-
-  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,7 +107,6 @@ const SignUpPage = () => {
       setMessage("Please fill out all required fields correctly");
       return;
     }
-
 
     const obj = { user, name, email, password };
     const js = JSON.stringify(obj);
@@ -209,8 +230,22 @@ const SignUpPage = () => {
                     id="password"
                     placeholder="Enter password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setPassword(value);
+
+                      if (!isValidPassword(value)) {
+                        setPasswordError(
+                          "Password must be at least 8 characters, include one uppercase letter, one special character, and no forbidden symbols."
+                        );
+                      } else {
+                        setPasswordError("");
+                      }
+                    }}
                   />
+                  {passwordError && (
+                    <small style={{ color: "black" }}>{passwordError}</small>
+                  )}
                 </div>
               </form>
             )}
@@ -295,11 +330,13 @@ const SignUpPage = () => {
                   e.preventDefault();
                   const invalids = validateFields();
                   if (invalids.length > 0) {
-                    setMessage("Please fill out all required fields correctly.");
+                    setMessage(
+                      "Please fill out all required fields correctly."
+                    );
                     return;
                   }
-                  setMessage(""); 
-                  setAction("Back"); 
+                  setMessage("");
+                  setAction("Back");
                 }}
               >
                 Next
