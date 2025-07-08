@@ -236,7 +236,7 @@ const SignUpPage = () => {
 
                       if (!isValidPassword(value)) {
                         setPasswordError(
-                          "Password must be at least 8 characters, include one uppercase letter, one special character, and no forbidden symbols."
+                          "Password must be at least 8 characters, include one uppercase letter, one special character, and no forbidden symbols (<, >, `, \", ', \\)"
                         );
                       } else {
                         setPasswordError("");
