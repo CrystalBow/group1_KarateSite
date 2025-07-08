@@ -1,7 +1,6 @@
-// import React from "react";
+//import React from "react";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
-import Login from "../components/Login";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -17,9 +16,9 @@ const LoginPage = () => {
         <Header action="SIGN UP" onAction={handleSignUp} />
       </div>
       <div>
-        {/* <div className="page-container">
+        <div className="page-container">
           <div className="custom-card">
-            <h1 className="card-title">ENTER KARATE TRAR</h1>
+            <h1 className="card-title">ENTER KARATE TRAINER</h1>
             <div id="redDiv">
               <form className="card-form">
                 <div className="form-group">
@@ -40,14 +39,13 @@ const LoginPage = () => {
                     placeholder="Enter password"
                   />
                 </div>
-                <button type="submit" className="btn btn-primary" >
+                <button type="submit" className="btn btn-primary">
                   Login
                 </button>
               </form>
             </div>
           </div>
-        </div> */}
-        < Login />
+        </div>
       </div>
     </>
   );
