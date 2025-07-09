@@ -51,6 +51,7 @@ function Login() {
       });
 
       var res = JSON.parse(await response.text());
+      console.log("Login Response:", res); //debuggin 
 
       if (res.id <= 0) {
         setMessage("User/Password combination incorrect");
