@@ -62,6 +62,10 @@ app.post('/api/login', async (req, res, next) =>
   var name = '';
   var email = '';
   var previousLogin = 0;
+  var rank = 0;
+  var progressW = 0;
+  var progressY = 0;
+  var progressO = 0;
 
   if(results.length > 0)
   {
@@ -92,6 +96,10 @@ app.post('/api/login', async (req, res, next) =>
       name = userRecord.name;
       email = userRecord.email;
       previousLogin = userRecord.lastlogin;
+      rank = userRecord.rank;
+      progressW = userRecord.progressW;
+      progressY = userRecord.progressY;
+      progressO = userRecord.progressO;
 
       try 
       {
@@ -123,7 +131,7 @@ app.post('/api/login', async (req, res, next) =>
     error = 'Invalid username or password';
   }
 
-  var ret = { name: name, email: email, id:id , error: error};
+  var ret = { name: name, email: email, id:id ,rank: rank, progressW: progressW, progressO: progressO, progressY: progressY, error: error};
   res.status(200).json(ret);
 });
 
@@ -132,7 +140,7 @@ app.post('/api/register', async (req, res, next) =>
   // incoming: login, password, firstName, lastName
   // outgoing: error
 
-  const { user, password, name, email} = req.body;
+  const { user, password, name, email, rank} = req.body;
 
   // Hash the password before saving
   const saltRounds = 10;
@@ -144,10 +152,13 @@ app.post('/api/register', async (req, res, next) =>
     name: name, 
     email: email,
     id: serverNum + (new Date()).getTime(),
-    rank: 0, 
+    rank: rank,
     streak: 0, 
     lastlogin: -1,
-    isVerified: false
+    isVerified: false,
+    progressW: 0,
+    progressY: 0,
+    progressO: 0
   };
 
   // Create Email Verification Token for new user
@@ -160,10 +171,15 @@ app.post('/api/register', async (req, res, next) =>
   try
   {
     const results = await db.collection('Users').find({"user":user}).toArray();
-
     if (results.length > 0) 
     {
       throw new Error("User already exists");
+    }
+    if (newUser.rank >= 1) {
+      newUser.progressW = 5;
+    }
+    if (newUser.rank >= 2) {
+      newUser.progressY = 3;
     }
 
     const result = db.collection('Users').insertOne(newUser);
