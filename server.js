@@ -191,9 +191,13 @@ app.post('/api/register', async (req, res, next) =>
     const msg =
     {
       to: email,
-      from: 'karatetracker@gmail.com',
-      subject: 'Verify your KarateTracker email',
-      html: `Click <a href="${verifyEmailLink}">here</a> to verify your email.`, // Verification link
+      from:
+      {
+        email: 'karatetracker@gmail.com',
+        name: 'Karate Trainer'
+      }, 
+      subject: 'Verify your Karate Trainer email',
+      html: `Hello ${newUser.name}, click <a href="${verifyEmailLink}">here</a> to verify your email. Once verified, you will be redirected to the login page.`, // Verification link
     }
     try {
       await mail.send(msg);
@@ -250,10 +254,10 @@ app.get('/api/verifyEmail', async (req, res) => {
     // Update user to verified
     await db.collection('Users').updateOne(
       { _id: user._id },
-      { $set: { isVerified: true }, $unset: { verificationToken: '' } } // Remove verification token once verified
+      { $set: { isVerified: true }, $unset: { verificationToken: '' } } 
     );
+    res.redirect('http://143.198.160.127/login'); // Redirect user to login page
 
-    res.send('Your email has been verified successfully! You can now log in.');
   } catch (err) {
     console.error(err);
     res.status(500).json('');

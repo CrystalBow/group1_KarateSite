@@ -121,13 +121,13 @@ const SignUpPage = () => {
       const res = await response.json();
 
       if (res.error === "") {
-        setMessage("Registration successful! Please verify your email before logging in. We've sent a verification link to your email. If you don't see it, please check your spam folder.");
-        setTimeout(() => navigate("/login"), 1500);
+        setMessage("Sign up successful! Please verify your email before logging in. We've sent a verification link to your email. If you don't see it, please check your spam folder.");
+        //setTimeout(() => navigate("/login"), 1500);
       } else {
         setMessage(res.error || "Sign up failed.");
       }
     } catch (err) {
-      setMessage("Error connecting to server.");
+      setMessage("Error connqecting to server.");
     }
   };
 
@@ -255,7 +255,7 @@ const SignUpPage = () => {
                       onChange={() => setShowPassword((prev) => !prev)}
                     />
                     <label
-                      className="form-check-label bebasFont"
+                      className="form-check-label"
                       htmlFor="showPasswordCheck"
                     >
                       Show Password
@@ -327,7 +327,7 @@ const SignUpPage = () => {
                   />
                 </div>
                 <br />
-                {message && <div style={{ marginTop: "1em" }}>{message}</div>}
+                {/*message && <div style={{ marginTop: "1em" }}>{message}</div>*/}
               </div>
             )}
           </div>
