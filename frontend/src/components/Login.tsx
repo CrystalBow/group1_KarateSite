@@ -8,7 +8,7 @@ function Login() {
   const [loginPassword, setLoginPassword] = useState("");
   const [usernameInvalid, setUsernameInvalid] = useState(false);
   const [passwordInvalid, setPasswordInvalid] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   // Handler for sign up action
@@ -81,10 +81,10 @@ function Login() {
           <div className="custom-card custom-card-items-centered">
             <h1 className="card-title bebasFont">ENTER KARATE TRAINER</h1>
             <div id="redDiv" className="redDivLogin">
-              <form className="card-form bebasFont">
+              <form className="card-form">
                 <div className="form-group">
                   <label
-                    htmlFor="username"
+                    htmlFor="username" className="bebasFont"
                     style={{ fontFamily: "Bebas Neue" }}
                   >
                     Username{usernameInvalid && <span style={{ color: "black" }}> *</span>}
@@ -105,13 +105,13 @@ function Login() {
                 </div>
                 <div className="form-group">
                   <label
-                    htmlFor="password"
+                    htmlFor="password" className="bebasFont"
                     style={{ fontFamily: "Bebas Neue" }}
                   >
                     Password{passwordInvalid && <span style={{ color: "black" }}> *</span>}
                   </label>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     className={`form-control ${
                       passwordInvalid ? "input-invalid" : ""
                     }`}
@@ -123,6 +123,21 @@ function Login() {
                       setPasswordInvalid(false); 
                     }}
                   />
+                  <div className="form-check mt-2">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="showPasswordCheck"
+                      checked={showPassword}
+                      onChange={() => setShowPassword((prev) => !prev)}
+                    />
+                    <label
+                      className="form-check-label bebasFont"
+                      htmlFor="showPasswordCheck"
+                    >
+                      Show Password
+                    </label>
+                  </div>
                 </div>
               </form>
             </div>
