@@ -156,9 +156,9 @@ app.post('/api/register', async (req, res, next) =>
     streak: 0, 
     lastlogin: -1,
     isVerified: false,
-    progressW: 0,
-    progressY: 0,
-    progressO: 0
+    progressW: 0, // White belt progress
+    progressY: 0, // Yellow belt progress
+    progressO: 0, // Orange belt progress
   };
 
   // Create Email Verification Token for new user

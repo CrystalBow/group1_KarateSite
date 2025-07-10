@@ -10,6 +10,7 @@ const SignUpPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rank, setRank] = useState("");
   const [message, setMessage] = useState("");
   const [emailFormatError, setEmailFormatError] = useState(false);
   const [passwordError, setPasswordError] = useState("");
@@ -108,7 +109,7 @@ const SignUpPage = () => {
       return;
     }
 
-    const obj = { user, name, email, password };
+    const obj = { user, name, email, password, rank };
     const js = JSON.stringify(obj);
 
     try {
@@ -275,7 +276,8 @@ const SignUpPage = () => {
                         className="radio"
                         id="whiteBelt"
                         name="belts"
-                        value="White Belt"
+                        value="0"
+                        onChange={(e) => setRank(e.target.value)}
                       />
                       <label htmlFor="whiteBelt">White Belt</label>
                     </div>
@@ -295,7 +297,8 @@ const SignUpPage = () => {
                         className="radio"
                         id="yellowBelt"
                         name="belts"
-                        value="Yellow Belt"
+                        value="1"
+                        onChange={(e) => setRank(e.target.value)}
                       />
                       <label htmlFor="yellowBelt">Yellow Belt</label>
                     </div>
@@ -315,7 +318,8 @@ const SignUpPage = () => {
                         className="radio"
                         id="orangeBelt"
                         name="belts"
-                        value="Orange Belt"
+                        value="2"
+                        onChange={(e) => setRank(e.target.value)}
                       />
                       <label htmlFor="orangeBelt">Orange Belt</label>
                     </div>
@@ -327,7 +331,8 @@ const SignUpPage = () => {
                   />
                 </div>
                 <br />
-                {message && <div style={{ marginTop: "1em" }}>{message}</div>}
+                {/* was message  */}
+                {message && <div style={{ marginTop: "1em" }}>{message}</div>} 
               </div>
             )}
           </div>
