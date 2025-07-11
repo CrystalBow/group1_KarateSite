@@ -10,7 +10,8 @@ const SignUpPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rank, setRank] = useState("");
+  const [rank, setRank] = useState(-1);
+  const [selectedBelt, setSelectedBelt] = useState(""); 
   const [message, setMessage] = useState("");
   const [emailFormatError, setEmailFormatError] = useState(false);
   const [passwordError, setPasswordError] = useState("");
@@ -277,7 +278,12 @@ const SignUpPage = () => {
                         id="whiteBelt"
                         name="belts"
                         value="0"
-                        onChange={(e) => setRank(e.target.value)}
+                        checked={selectedBelt === "0"}
+                        onChange={(e) => {
+                          setRank(Number(e.target.value));
+                          setSelectedBelt(e.target.value);
+                          if (message === "Please select a belt.") setMessage("");
+                        }}
                       />
                       <label htmlFor="whiteBelt">White Belt</label>
                     </div>
@@ -298,7 +304,12 @@ const SignUpPage = () => {
                         id="yellowBelt"
                         name="belts"
                         value="1"
-                        onChange={(e) => setRank(e.target.value)}
+                        checked={selectedBelt === "1"}
+                        onChange={(e) => {
+                          setRank(Number(e.target.value));
+                          setSelectedBelt(e.target.value);
+                          if (message === "Please select a belt.") setMessage("");
+                        }}
                       />
                       <label htmlFor="yellowBelt">Yellow Belt</label>
                     </div>
@@ -319,7 +330,12 @@ const SignUpPage = () => {
                         id="orangeBelt"
                         name="belts"
                         value="2"
-                        onChange={(e) => setRank(e.target.value)}
+                        checked={selectedBelt === "2"}
+                        onChange={(e) => {
+                          setRank(Number(e.target.value));
+                          setSelectedBelt(e.target.value);
+                          if (message === "Please select a belt.") setMessage("");
+                        }}
                       />
                       <label htmlFor="orangeBelt">Orange Belt</label>
                     </div>
@@ -332,6 +348,7 @@ const SignUpPage = () => {
                 </div>
                 <br />
                 {message && <div style={{ marginTop: "1em" }}>{message}</div>} 
+                {rank && <div style={{ marginTop: "1em" }}>{rank}</div>} 
               </div>
             )}
           </div>
@@ -377,7 +394,17 @@ const SignUpPage = () => {
               <button
                 type="submit"
                 className="btn btn-primary"
-                onClick={handleSubmit}
+                onClick={(e) =>{ 
+                  e.preventDefault();
+                  if (rank == -1) {
+                    setMessage(
+                      "Please select a belt."
+                    );
+                    return;
+                  }
+
+                  handleSubmit(e);
+                }}
               >
                 Sign Up
               </button>
