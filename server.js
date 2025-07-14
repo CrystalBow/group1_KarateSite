@@ -156,9 +156,9 @@ app.post('/api/register', async (req, res, next) =>
     streak: 0, 
     lastlogin: -1,
     isVerified: false,
-    progressW: 0,
-    progressY: 0,
-    progressO: 0
+    progressW: 0, // White belt progress
+    progressY: 0, // Yellow belt progress
+    progressO: 0, // Orange belt progress
   };
 
   // Create Email Verification Token for new user
@@ -191,9 +191,13 @@ app.post('/api/register', async (req, res, next) =>
     const msg =
     {
       to: email,
-      from: 'karatetracker@gmail.com',
-      subject: 'Verify your KarateTracker email',
-      html: `Click <a href="${verifyEmailLink}">here</a> to verify your email.`, // Verification link
+      from:
+      {
+        email: 'karatetracker@gmail.com',
+        name: 'Karate Trainer'
+      }, 
+      subject: 'Verify your Karate Trainer email',
+      html: `Hello ${newUser.name}, click <a href="${verifyEmailLink}">here</a> to verify your email. Once verified, you will be redirected to the login page.`, // Verification link
     }
     try {
       await mail.send(msg);
@@ -250,14 +254,34 @@ app.get('/api/verifyEmail', async (req, res) => {
     // Update user to verified
     await db.collection('Users').updateOne(
       { _id: user._id },
-      { $set: { isVerified: true }, $unset: { verificationToken: '' } } // Remove verification token once verified
+      { $set: { isVerified: true }, $unset: { verificationToken: '' } } 
     );
+    res.redirect('http://143.198.160.127/login'); // Redirect user to login page
 
-    res.send('Your email has been verified successfully! You can now log in.');
   } catch (err) {
     console.error(err);
     res.status(500).json('');
   }
 });
+
+app.post('/api/updateProgress', async (req, res) => {
+  const { id, progressW, progressY, progressO } = req.body;
+  let rank = 0;
+  if (progressW >= 5) {
+    rank = 1;
+    if (progressY >= 3) {
+      rank = 2;
+    }
+  }
+  let error = '';
+  try {
+    await db.collection('Users').updateOne({id: id}, {$set: {rank:rank, progressW: progressW, progressY: progressY, progressO: progressO }});
+  } catch (err) {
+    error = err.toString();
+  }
+  var ret = { rank:rank, progressW: progressW, progressY: progressY, progressO: progressO, error: error};
+  res.status(200).json(ret);
+});
+
 app.listen(5000); // start Node + Express server on port 5001
 

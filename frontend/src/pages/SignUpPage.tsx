@@ -10,6 +10,8 @@ const SignUpPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rank, setRank] = useState(-1);
+  const [selectedBelt, setSelectedBelt] = useState(""); 
   const [message, setMessage] = useState("");
   const [emailFormatError, setEmailFormatError] = useState(false);
   const [passwordError, setPasswordError] = useState("");
@@ -108,7 +110,7 @@ const SignUpPage = () => {
       return;
     }
 
-    const obj = { user, name, email, password };
+    const obj = { user, name, email, password, rank };
     const js = JSON.stringify(obj);
 
     try {
@@ -121,13 +123,13 @@ const SignUpPage = () => {
       const res = await response.json();
 
       if (res.error === "") {
-        setMessage("Registration successful! Please verify your email before logging in. We've sent a verification link to your email. If you don't see it, please check your spam folder.");
-        setTimeout(() => navigate("/login"), 1500);
+        setMessage("Sign up successful! Please verify your email before logging in. We've sent a verification link to your email. If you don't see it, please check your spam folder.");
+        //setTimeout(() => navigate("/login"), 1500);
       } else {
         setMessage(res.error || "Sign up failed.");
       }
     } catch (err) {
-      setMessage("Error connecting to server.");
+      setMessage("Error connqecting to server.");
     }
   };
 
@@ -255,7 +257,7 @@ const SignUpPage = () => {
                       onChange={() => setShowPassword((prev) => !prev)}
                     />
                     <label
-                      className="form-check-label bebasFont"
+                      className="form-check-label"
                       htmlFor="showPasswordCheck"
                     >
                       Show Password
@@ -275,7 +277,13 @@ const SignUpPage = () => {
                         className="radio"
                         id="whiteBelt"
                         name="belts"
-                        value="White Belt"
+                        value="0"
+                        checked={selectedBelt === "0"}
+                        onChange={(e) => {
+                          setRank(Number(e.target.value));
+                          setSelectedBelt(e.target.value);
+                          if (message === "Please select a belt.") setMessage("");
+                        }}
                       />
                       <label htmlFor="whiteBelt">White Belt</label>
                     </div>
@@ -295,7 +303,13 @@ const SignUpPage = () => {
                         className="radio"
                         id="yellowBelt"
                         name="belts"
-                        value="Yellow Belt"
+                        value="1"
+                        checked={selectedBelt === "1"}
+                        onChange={(e) => {
+                          setRank(Number(e.target.value));
+                          setSelectedBelt(e.target.value);
+                          if (message === "Please select a belt.") setMessage("");
+                        }}
                       />
                       <label htmlFor="yellowBelt">Yellow Belt</label>
                     </div>
@@ -315,7 +329,13 @@ const SignUpPage = () => {
                         className="radio"
                         id="orangeBelt"
                         name="belts"
-                        value="Orange Belt"
+                        value="2"
+                        checked={selectedBelt === "2"}
+                        onChange={(e) => {
+                          setRank(Number(e.target.value));
+                          setSelectedBelt(e.target.value);
+                          if (message === "Please select a belt.") setMessage("");
+                        }}
                       />
                       <label htmlFor="orangeBelt">Orange Belt</label>
                     </div>
@@ -327,7 +347,8 @@ const SignUpPage = () => {
                   />
                 </div>
                 <br />
-                {message && <div style={{ marginTop: "1em" }}>{message}</div>}
+                {message && <div style={{ marginTop: "1em" }}>{message}</div>} 
+                {rank && <div style={{ marginTop: "1em" }}>{rank}</div>} 
               </div>
             )}
           </div>
@@ -373,7 +394,17 @@ const SignUpPage = () => {
               <button
                 type="submit"
                 className="btn btn-primary"
-                onClick={handleSubmit}
+                onClick={(e) =>{ 
+                  e.preventDefault();
+                  if (rank == -1) {
+                    setMessage(
+                      "Please select a belt."
+                    );
+                    return;
+                  }
+
+                  handleSubmit(e);
+                }}
               >
                 Sign Up
               </button>
