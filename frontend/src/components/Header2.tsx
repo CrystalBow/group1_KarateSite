@@ -12,9 +12,10 @@ function Header2(){
           />
         </a>
         <nav>
-          <ul className="header-nav">
-            <li className = "navbar" id="AboutUsButton"><a href="#">CURRENT LESSON</a></li>
-            <li className = "navbar" id= "WhatIsKarateTrainerButton"><a href="/#about">BACK</a></li>
+          <ul className="header2-nav">
+            <li className = "navbar" id="HistoryButton"><a href="#">HISTORY</a></li>
+            <li className = "navbar" id="CurriculumButton"><a href="#">CURRICULUM</a></li>
+            <li className = "navbar" id="HomeButton"><a href="/">HOME</a></li>
           </ul>
         </nav>
       </header>

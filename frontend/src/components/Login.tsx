@@ -63,7 +63,7 @@ function Login() {
         };
         localStorage.setItem("user_data", JSON.stringify(user));
         setMessage("");
-        navigate("/");
+        navigate("/curriculum");
       }
     } catch (error: any) {
       alert(error.toString());

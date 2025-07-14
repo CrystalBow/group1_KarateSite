@@ -9,6 +9,8 @@ import "./App.css";
 import Login from "./components/Login";
 import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignUpPage";
+import Curriculum from "./pages/Curriculum";
+import WhiteBeltLessons from "./pages/WhiteBeltLessons";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<Navigate to="/" replace />} />
         <Route path ="/signup" element={<SignUpPage />} />
+        <Route path="/curriculum" element={<Curriculum />} />
+        <Route path="/whitebeltlesson" element={<WhiteBeltLessons/>}/>
       </Routes>
     </Router>
   );
