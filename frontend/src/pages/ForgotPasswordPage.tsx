@@ -78,10 +78,11 @@ function ForgotPassword() {
                     value = {email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
-                  <span className="error-message">{message}</span>
+                  
                 </div>
                 </form>
             </div>
+            <span className="error-message">{message}</span>
             <button type="submit" className="btn btn-primary" onClick={sendEmail}>
               Send Email
             </button>
