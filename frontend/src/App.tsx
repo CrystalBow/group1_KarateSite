@@ -13,6 +13,7 @@ import Curriculum from "./pages/Curriculum";
 import WhiteBeltLessons from "./pages/WhiteBeltLessons";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import About from "./pages/About";
+
 function App() {
   return (
     <Router>
