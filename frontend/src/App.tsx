@@ -12,7 +12,7 @@ import SignUpPage from "./pages/SignUpPage";
 import Curriculum from "./pages/Curriculum";
 import WhiteBeltLessons from "./pages/WhiteBeltLessons";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
-
+import About from "./pages/About";
 function App() {
   return (
     <Router>
@@ -24,6 +24,7 @@ function App() {
         <Route path="/curriculum" element={<Curriculum />} />
         <Route path="/whitebeltlesson" element={<WhiteBeltLessons/>}/>
         <Route path="/forgotpasswordpage" element={<ForgotPasswordPage/>}/>
+        <Route path="/about-us" element={<About/>}/>
       </Routes>
     </Router>
   );
