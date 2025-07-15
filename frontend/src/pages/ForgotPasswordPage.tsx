@@ -15,7 +15,7 @@ function ForgotPassword() {
     navigate("/signup");
   };
 
-  const app_name = "karatetrainer.xyz";
+  const app_name = "karatemanager.xyz";
   function buildPath(route: string): string {
     return process.env.NODE_ENV !== "development"
       ? "http://" + app_name + ":5000/" + route
@@ -41,11 +41,12 @@ function ForgotPassword() {
         });
 
         const res = await response.json();
+        console.log(res);
 
         if (res.success) {
-        setMessage("Reset email sent. Check your inbox or spam folder.");
+          setMessage("Reset email sent. Check your inbox or spam folder.");
         } else {
-        setMessage(res.error || "Failed to send reset email.");
+          setMessage(res.error || "Failed to send reset email.");
         }
         } catch (err) {
             setMessage("Error connecting to server.");
