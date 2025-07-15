@@ -42,15 +42,30 @@ function ForgotPassword() {
 
         const res = await response.json();
         console.log(res);
-
+        if (res.message) 
+        {
+          setMessage(res.message);
+        } 
+        else if (res.error) 
+        {
+          setMessage(res.error);
+        } 
+        else 
+        {
+           setMessage("Failed to send reset email.");
+        }
+        /*
         if (res.success) {
           setMessage("Reset email sent. Check your inbox or spam folder.");
         } else {
           setMessage(res.error || "Failed to send reset email.");
         }
-        } catch (err) {
+        */
+        } 
+        catch (err) 
+        {
             setMessage("Error connecting to server.");
-        }
+        }     
     }
 
   return (

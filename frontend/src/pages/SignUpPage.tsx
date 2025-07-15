@@ -352,9 +352,7 @@ const SignUpPage = () => {
               </div>
             )}
           </div>
-          <span id="signInResult" className={message ? "error-message" : ""}>
-            {message}
-          </span>
+
           <br />
 
           {action === "Back" ? null : (
