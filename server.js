@@ -156,7 +156,6 @@ app.post('/api/register', async (req, res, next) =>
     streak: 0, 
     lastlogin: -1,
     isVerified: false,
-    verificationToken: verificationToken,
     progressW: 0, // White belt progress
     progressY: 0, // Yellow belt progress
     progressO: 0, // Orange belt progress
@@ -292,7 +291,7 @@ app.post('/api/requestPasswordReset', async (req, res) =>
       }
     );
     // Recovery email
-    const passwordRecoveryLink = `http://143.198.160.127/api/verifyEmail?token=${passwordResetToken}`; //******* Link this to some front end thing not to recovery verifyEmail
+    const passwordRecoveryLink = `http://143.198.160.127:5000/api/verifyEmail?token=${passwordResetToken}`; //******* Link this to some front end thing not to recovery verifyEmail
     const passwordRecoveryMsg =
     {
     to: email,
@@ -305,6 +304,7 @@ app.post('/api/requestPasswordReset', async (req, res) =>
     html: `Hello, ${user.name}, click <a href="${passwordRecoveryLink}">here</a> to reset your password.`, 
     }
     await mail.send(passwordRecoveryMsg);
+
     return res.status(200).json({ message: "Password reset link sent to email." });
   }
   catch (emailError) 
@@ -326,7 +326,7 @@ app.post('/api/resetPassword', async (req, res) => {
       return res.status(400).json({ error: 'Invalid password reset token' });
     }
     // Check if token is expired
-    if (Date.now() > user.passwordResetExpiresInOneHour) {
+    if (Date.now() > user.passwordRecoveryExpiresInOneHour) {
       return res.status(400).json({ error: 'Password reset token has expired' });
     }
     // Hash new password
