@@ -156,6 +156,7 @@ app.post('/api/register', async (req, res, next) =>
     streak: 0, 
     lastlogin: -1,
     isVerified: false,
+    verificationToken: verificationToken,
     progressW: 0, // White belt progress
     progressY: 0, // Yellow belt progress
     progressO: 0, // Orange belt progress
@@ -261,6 +262,90 @@ app.get('/api/verifyEmail', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json('');
+  }
+});
+
+// Reset password email api
+app.post('/api/requestPasswordReset', async (req, res) =>
+{
+  // Email password recovery link
+  const { email } = req.body;
+  try
+  {
+    // Search for user in database
+    const user = await db.collection('Users').findOne({ email });
+    if(!user)
+    {
+      return res.status(200).json({ message: "We've sent a password reset link to the registered email of this account. Please check your spam folder if you do not see the link in your inbox."});
+    }
+
+    // Generate password reset token
+    const passwordResetToken = crypto.randomBytes(32).toString('hex');
+    const passwordRecoveryExpiresInOneHour = Date.now() + 3600000;
+    await db.collection('Users').updateOne(
+      {_id: user._id},
+      {
+        $set: {
+          passwordResetToken,
+          passwordRecoveryExpiresInOneHour
+        }
+      }
+    );
+    // Recovery email
+    const passwordRecoveryLink = `http://143.198.160.127/api/verifyEmail?token=${passwordResetToken}`; //******* Link this to some front end thing not to recovery verifyEmail
+    const passwordRecoveryMsg =
+    {
+    to: email,
+    from: 
+    {
+      email:'karatetracker@gmail.com',
+      name: 'Karate Trainer'
+    },
+    subject: 'Reset your Karate Trainer password',
+    html: `Hello, ${user.name}, click <a href="${passwordRecoveryLink}">here</a> to reset your password.`, 
+    }
+    await mail.send(passwordRecoveryMsg);
+    return res.status(200).json({ message: "Password reset link sent to email." });
+  }
+  catch (emailError) 
+  {
+    return res.status(500).json({ error: "Could not send email"})
+  }
+});
+
+app.post('/api/resetPassword', async (req, res) => {
+  const { token, newPassword } = req.body;
+  // Check if password has required stuff Password must be at least 8 characters, include one uppercase letter, one special character, and no forbidden symbols (<, >, `, ", ', \)
+  if (newPassword.length < 8) {
+    return res.status(400).json({ error: 'Password must be more complex' });
+  }
+
+  try {
+    const user = await db.collection('Users').findOne({ passwordResetToken: token });
+    if (!user) {
+      return res.status(400).json({ error: 'Invalid password reset token' });
+    }
+    // Check if token is expired
+    if (Date.now() > user.passwordResetExpiresInOneHour) {
+      return res.status(400).json({ error: 'Password reset token has expired' });
+    }
+    // Hash new password
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+
+    // Update password
+    await db.collection('Users').updateOne(
+      { _id: user._id },
+      {
+        $set: { password: hashedPassword },
+        $unset: { passwordResetToken: "", passwordResetExpires: "" }
+      }
+    );
+
+    return res.status(200).json({ message: 'Password has been reset successfully.' });
+
+  } catch (error) {
+    return res.status(500).json({ error: 'Could not reset password' });
   }
 });
 
