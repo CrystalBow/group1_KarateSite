@@ -16,6 +16,10 @@ function Login() {
     navigate("/signup");
   };
 
+  const handleForgotPassword = () => {
+    navigate("/forgotpasswordpage");
+  };
+
   const app_name = "karatemanager.xyz";
   function buildPath(route: string): string {
     if (process.env.NODE_ENV != "development") {
@@ -145,6 +149,9 @@ function Login() {
             <br />
             <button type="submit" className="btn btn-primary" onClick={doLogin}>
               Login
+            </button>
+            <button type="button" className="btn btn-link" onClick={handleForgotPassword}>
+              Forgot Password?
             </button>
           </div>
         </div>
