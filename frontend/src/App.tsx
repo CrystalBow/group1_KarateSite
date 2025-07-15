@@ -24,7 +24,7 @@ function App() {
         <Route path="/curriculum" element={<Curriculum />} />
         <Route path="/whitebeltlesson" element={<WhiteBeltLessons/>}/>
         <Route path="/forgotpasswordpage" element={<ForgotPasswordPage/>}/>
-        <Route path="/about-us" element={<About/>}/>
+        <Route path="/about" element={<About/>}/>
       </Routes>
     </Router>
   );
