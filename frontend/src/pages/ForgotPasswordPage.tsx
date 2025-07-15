@@ -15,7 +15,7 @@ function ForgotPassword() {
     navigate("/signup");
   };
 
-  const app_name = "karatemanager.xyz";
+  const app_name = "karatetrainer.xyz";
   function buildPath(route: string): string {
     return process.env.NODE_ENV !== "development"
       ? "http://" + app_name + ":5000/" + route
