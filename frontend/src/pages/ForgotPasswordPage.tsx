@@ -103,7 +103,7 @@ function ForgotPassword() {
             </div>
             <span className="error-message">{message}</span>
             <button type="submit" className="btn btn-primary" onClick={sendEmail}>
-              Send Email
+              Send Eee
             </button>
           </div>
         </div>
