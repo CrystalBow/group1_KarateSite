@@ -33,6 +33,9 @@ function ForgotPassword() {
     const obj = { email };
     const js = JSON.stringify(obj);
 
+    console.log("Sending POST to:", buildPath("api/requestPasswordReset"));
+
+
     try {
         const response = await fetch(buildPath("api/requestPasswordReset"), {
         method: "POST",

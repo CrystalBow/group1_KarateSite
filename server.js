@@ -327,7 +327,7 @@ app.post('/api/requestPasswordReset', async (req, res) => {
     );
     
     // Recovery email
-    const passwordRecoveryLink = `http://143.198.160.127:5000/api/verifyEmail?token=${passwordResetToken}`;
+    const passwordRecoveryLink = `http://143.198.160.127:5000/reset-password?token=${passwordResetToken}`;
     const passwordRecoveryMsg = {
       to: email,
       from: {
@@ -348,7 +348,7 @@ app.post('/api/requestPasswordReset', async (req, res) => {
       console.error('Error sending password reset email:', emailError);
     }
 
-    return res.status(200).json({ message: "Password reset link sent to email." });
+    return res.status(200).json({ message: "We've sent a password reset link to the registered email of this account. Please check your spam folder if you do not see the link in your inbox." });
     
   } catch (error) {
     console.error('General error in password reset:', error);
