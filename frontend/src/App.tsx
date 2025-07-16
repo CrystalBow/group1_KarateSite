@@ -13,6 +13,7 @@ import Curriculum from "./pages/Curriculum";
 import WhiteBeltLessons from "./pages/WhiteBeltLessons";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import About from "./pages/About";
+import PasswordReset from "./pages/PasswordResetPage";
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
         <Route path="/whitebeltlesson" element={<WhiteBeltLessons/>}/>
         <Route path="/forgotpasswordpage" element={<ForgotPasswordPage/>}/>
         <Route path="/about" element={<About/>}/>
+        <Route path="/reset-password" element={<PasswordReset />} />
+
       </Routes>
     </Router>
   );
