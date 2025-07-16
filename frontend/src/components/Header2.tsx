@@ -1,9 +1,9 @@
 
 
-function Header2(){
+function Header2({ profileImg, beltText }: { profileImg: string; beltText: string }){
   return (
-    <div id  ="NavContainer">
-      <header className="custom-header">
+    <div className="NavContainer">
+      <header className="custom-header bebasFont">
         <a href="/">
           <img
             src="/assets/SmallLogo.png"
@@ -18,6 +18,14 @@ function Header2(){
             <li className = "navbar" id="HomeButton"><a href="/">HOME</a></li>
           </ul>
         </nav>
+        <div id="profileIconDiv">
+          <img
+            src={profileImg}
+            alt="profile Icon"
+            id="ProfileIcon"
+          />
+          <p>{beltText}</p>
+        </div>
       </header>
     </div>
   );
