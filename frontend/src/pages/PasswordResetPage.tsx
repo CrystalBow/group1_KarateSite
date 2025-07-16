@@ -62,49 +62,63 @@ const PasswordReset = () => {
 
   return (
     <>
-      <Header1 action="SIGN UP" onAction={() => navigate("/signup")} />
-      <div className="page-container">
-        <div className="custom-card custom-card-items-centered">
-          <h1 className="card-title bebasFont">RESET YOUR PASSWORD</h1>
-          <form className="card-form" onSubmit={handleReset}>
-            <div className="form-group">
-              <label className="bebasFont">New Password</label>
-              <input
-                type={showPassword ? "text" : "password"}
-                className="form-control"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+      <div>
+        <Header1 action="SIGN UP" onAction={() => navigate("/signup")} />
+      </div>
 
-              <label className="bebasFont" style={{ marginTop: "1rem" }}>
-                Confirm Password
-              </label>
-              <input
-                type={showPassword ? "text" : "password"}
-                className="form-control"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
+      <div>
+        <div className="page-container">
+          <div className="custom-card custom-card-items-centered">
+            <h1 className="card-title bebasFont">RESET YOUR PASSWORD</h1>
+            <div id="redDiv" className="redDivLogin">
+              <form className="card-form">
+                <div className="form-group">
+                  <label className="bebasFont">New Password</label>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    className="form-control"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
 
-              <div className="form-check mt-2">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="showPasswordCheck"
-                  checked={showPassword}
-                  onChange={() => setShowPassword((prev) => !prev)}
-                />
-                <label className="form-check-label" htmlFor="showPasswordCheck">
-                  Show Password
-                </label>
-              </div>
+                  <label className="bebasFont" style={{ marginTop: "1rem" }}>
+                    Confirm Password
+                  </label>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    className="form-control"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+
+                  <div className="form-check mt-2">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="showPasswordCheck"
+                      checked={showPassword}
+                      onChange={() => setShowPassword((prev) => !prev)}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="showPasswordCheck"
+                    >
+                      Show Password
+                    </label>
+                  </div>
+                </div>
+                
+                <button
+                  type="submit"
+                  className="btn btn-primary mt-3"
+                  onClick={handleReset}
+                >
+                  Reset Password
+                </button>
+              </form>
             </div>
-
-            <button type="submit" className="btn btn-primary mt-3">
-              Reset Password
-            </button>
-          </form>
-          {message && <div className="error-message mt-3">{message}</div>}
+            {message && <div className="error-message mt-3">{message}</div>}
+          </div>
         </div>
       </div>
     </>
