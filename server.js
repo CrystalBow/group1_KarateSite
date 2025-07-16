@@ -375,5 +375,23 @@ app.post('/api/updateProgress', async (req, res) => {
   res.status(200).json(ret);
 });
 
+// Delete user from database
+app.post('/api/deleteUser', async (req, res) =>
+{
+  const {user} = req.body;
+  try
+  {
+    const deleteUser = await db.collection('Users').deleteOne({user});
+    if(!deleteUser)
+    {
+      return res.status(200).json({message: "User not found."});
+    }
+    res.status(200).json({message: "User has been successfully deleted."});
+  }
+  catch (error)
+  {
+    res.status(500).json({error: "Could not delete user"})
+  }
+});
 app.listen(5000); // start Node + Express server on port 5001
 
