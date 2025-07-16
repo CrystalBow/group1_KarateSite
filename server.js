@@ -327,7 +327,7 @@ app.post('/api/requestPasswordReset', async (req, res) => {
     );
     
     // Recovery email
-    const passwordRecoveryLink = `http://143.198.160.127:5000/reset-password?token=${passwordResetToken}`;
+    const passwordRecoveryLink = `https://karatemanager.xyz/reset-password?token=${passwordResetToken}`;
     const passwordRecoveryMsg = {
       to: email,
       from: {
