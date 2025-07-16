@@ -1,9 +1,9 @@
 import Header2 from "../components/Header2.tsx";
 
-const Curriculum = () => {
+const CurriculumPage = () => {
   return (
     <div>
-      <Header2 />
+      <Header2 profileImg="/assets/ProfileWhiteBelt.png" beltText="White Belt"/>
       <div className="page-container">
         <div className="custom-card custom-card-items-centered">
           <div id="redDivCurr" className="redDivLogin">
@@ -36,4 +36,4 @@ const Curriculum = () => {
   );
 };
 
-export default Curriculum;
+export default CurriculumPage;
