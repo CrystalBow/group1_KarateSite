@@ -451,13 +451,13 @@ app.post('/api/editUserInfo', async (req, res) =>
 });
 
 app.post('/api/searchKata', async (req, res) => {
- const { search } = req.body;
- const results = await db.collection('Kata').find({Name:{$regex: search, $options: "i"}}).toArray();
- if (results.length > 0) {
-   return res.status(200).json(results);
- } else {
-   return res.status(200).json({"Not Found": search});
- }
+  const { search } = req.body;
+  const results = await db.collection('Kata').find({
+    Name: { $regex: search, $options: "i" }
+  }).toArray();
+
+  return res.status(200).json(results); // Always return an array
 });
+
 
 app.listen(5000); // start Node
