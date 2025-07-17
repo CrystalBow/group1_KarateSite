@@ -449,5 +449,15 @@ app.post('/api/editUserInfo', async (req, res) =>
     res.status(500).json({ error: "Unable to update user information." });
   }
 });
-app.listen(5000); // start Node + Express server on port 5001
 
+app.post('/api/searchKata', async (req, res) => {
+ const { search } = req.body;
+ const results = await db.collection('Kata').find({Name:{$regex: search, $options: "i"}}).toArray();
+ if (results.length > 0) {
+   return res.status(200).json(results);
+ } else {
+   return res.status(200).json({"Not Found": search});
+ }
+});
+
+app.listen(5000); // start Node
