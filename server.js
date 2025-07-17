@@ -353,6 +353,7 @@ app.post('/api/requestPasswordReset', async (req, res) => {
 });
 
 app.post('/api/updateProgress', async (req, res) => {
+
   const { id, progressW, progressY, progressO } = req.body;
   let rank = 0;
   if (progressW >= 5) {
@@ -371,6 +372,7 @@ app.post('/api/updateProgress', async (req, res) => {
   res.status(200).json(ret);
 });
 
+<<<<<<< Updated upstream
 // Delete user from database
 app.post('/api/deleteUser', async (req, res) =>
 {
@@ -450,4 +452,16 @@ app.post('/api/editUserInfo', async (req, res) =>
   }
 });
 app.listen(5000); // start Node + Express server on port 5001
+=======
+app.post('/api/searchKata', async (req, res) => {
+ const { search } = req.body;
+ const results = await db.collection('Kata').find({Name:search}).toArray();
+ if (results.length > 0) {
+   return res.status(200).json(results);
+ } else {
+   return res.status(200).json({"Not Found": search});
+ }
+});
+>>>>>>> Stashed changes
 
+app.listen(5000); // start Node + Express server on port 5001
