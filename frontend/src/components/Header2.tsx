@@ -2,6 +2,8 @@ import { FaArrowRightFromBracket, FaUser, FaXmark, FaPen, FaCircleArrowLeft   } 
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+// FaCheck
+
 function Header2({ profileImg, beltText }: { profileImg: string; beltText: string }){
   const [action, setAction] = useState("");
   const profileIconRef = useRef<HTMLImageElement>(null);
@@ -49,7 +51,7 @@ function Header2({ profileImg, beltText }: { profileImg: string; beltText: strin
                   e.preventDefault();
                   if (action === "")
                   {
-                    setAction("DisplayProfile");
+                    setAction("DisplayAccount");
                   }
                   else
                   {
@@ -61,18 +63,15 @@ function Header2({ profileImg, beltText }: { profileImg: string; beltText: strin
         </div>
       </header>
 
-      {action === "" ? null: (
+      {action === "DisplayAccount" ? (
         <div className="AccountDiv" ref={AccountDivRef}> 
           <div id="UsernameDiv">
             <p id="UsernameText"> MegavicX </p>
           </div>
-
-          <br/>
-          <br/>
           
           <div id="ProfileOptionsDiv">
             <div className="profileOptions">
-              <p className="iconStyle absolute left-0"> <FaUser /> Profile </p>
+              <p className="iconStyle absolute left-0" onClick={() => {setAction("DisplayProfile")}}> <FaUser /> Profile </p>
             </div>
             <div className="profileOptions">
               <p className="iconStyle absolute left-0" onClick={() => {navigate("/")}}> <FaArrowRightFromBracket /> Log Out </p>
@@ -81,15 +80,15 @@ function Header2({ profileImg, beltText }: { profileImg: string; beltText: strin
               <p className="iconStyle absolute left-0"> <FaXmark /> Delete Account </p>
             </div>
           </div>
-        </div>)}
+        </div>): null
+        }
 
-        {action === "DisplayProfile" ? null: (
+        {action === "DisplayProfile" ? (
           <div id="ProfileDiv" className="AccountDiv" ref={AccountDivRef}> 
             <div id="UsernameDiv">
               <p id="UsernameText"> MegavicX </p>
             </div>
 
-            <br/>
             <br/>
             
             <div id="ProfileEditDiv" className="">
@@ -113,8 +112,8 @@ function Header2({ profileImg, beltText }: { profileImg: string; beltText: strin
                 <p>2</p>
               </div>
             </div>
-            <FaCircleArrowLeft className="text-3xl" onClick={() => {setAction("DisplayProfile")}}/>
-          </div>)}
+            <FaCircleArrowLeft className="text-[4vh] hover:text-red-500" onClick={() => {setAction("DisplayAccount")}}/>
+          </div>): null}
     </div>
   );
 }
