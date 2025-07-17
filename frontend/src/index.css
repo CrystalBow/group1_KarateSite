@@ -358,10 +358,28 @@ body {
 }
 
 #rearImgCurr{
-  width: 90%;
+  width: 80%;
   height: auto;
   border-radius: 1rem;
   display: block;
+}
+
+#welcomeText{
+  position: absolute;
+  width: 100%;
+  max-width: 1400px; 
+  margin: 2rem auto 0 auto;
+  box-sizing: border-box;
+  text-align: center; 
+  top: -5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 1rem 2rem;
+  border-radius: 12px; 
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2vw;
 }
 
 #lessonText{
