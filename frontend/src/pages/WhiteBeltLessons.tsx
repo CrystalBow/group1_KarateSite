@@ -4,17 +4,17 @@ import Header2 from "../components/Header2.tsx";
 const lessons = [
   {
     name: "BLOCKING",
-    videoId: "VIDEO_ID_1",
+    videoId: "FJPltl4Moag",
     description: "Down Block is one of the main five blocks..."
   },
   {
     name: "PUNCHES",
-    videoId: "VIDEO_ID_2",
+    videoId: "2xN9JKTOWQQ",
     description: "Punches are essential techniques in Karate..."
   },
   {
     name: "KICKS",
-    videoId: "VIDEO_ID_3",
+    videoId: "8sKklkweXdU",
     description: "Kicks involve powerful leg movements..."
   },
   {
@@ -24,13 +24,18 @@ const lessons = [
   },
   {
     name: "SHIFTING",
-    videoId: "VIDEO_ID_5",
+    videoId: "8vfnP-52X5A",
     description: "Shifting helps maintain balance during movement..."
   },
   {
-    name: "KATA",
-    videoId: "VIDEO_ID_6",
-    description: "Kata is a set sequence of movements and techniques..."
+    name: "EMPI ROPPO",
+    videoId: "W5DE-2QsgpI",
+    description: "Empi Roppo is a part of a set sequence of movements and techniques..."
+  },
+  {
+    name: "TEN NO KATA",
+    videoId: "fxx9OWrROr8",
+    description: "Ten No Kata is a part of a set sequence of movements and techniques..."
   },
 ];
 
@@ -85,7 +90,7 @@ const WhiteBeltLessons = () => {
             </div>
             <div className="lesson-description-box">
               <div className="scrollable-text">
-                {Array(5).fill(lessons[currentLessonIndex].description).map((line, idx) => (
+                {Array(6).fill(lessons[currentLessonIndex].description).map((line, idx) => (
                   <p key={idx}>{line}</p>
                 ))}
               </div>

@@ -14,18 +14,22 @@ const CurriculumPage = () => {
             
             <nav className="lesson-nav" >
               <button className="lesson-btn">
-                <a href = "/whitebeltlesson">
+                <a href = "/whitebeltlesson" style={{textDecoration: "none"}}>
                 <img src="/assets/WhiteLesson.png" alt="Lesson 1" />
-                <span>Lesson 1</span>
+                <span style={{color: "white"}}>ENTER WHITE BELT</span>
                 </a>
               </button>
               <button className="lesson-btn">
+                <a href = "/yellowbeltlesson" style={{textDecoration: "none"}}> 
                 <img src="/assets/YellowLesson.png" alt="Lesson 2" />
-                <span>Lesson 2</span>
+                <span style={{color: "white"}}>ENTER YELLOW BELT</span>
+                </a>
               </button>
               <button className="lesson-btn">
+                <a href = "/orangebeltlesson" style={{textDecoration: "none"}}>
                 <img src="/assets/OrangeLesson.png" alt="Lesson 3" />
-                <span>Lesson 3</span>
+                <span style={{color: "white"}}>ENTER ORANGE BELT</span>
+                </a>
               </button>
             </nav>
 

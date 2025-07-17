@@ -723,7 +723,7 @@ textarea::placeholder {
 }
 
 .lesson-section.locked::before {
-  content: "🔒";
+  
   margin-right: 0.5rem;
 }
 

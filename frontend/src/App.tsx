@@ -11,9 +11,13 @@ import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignUpPage";
 import CurriculumPage from "./pages/CurriculumPage";
 import WhiteBeltLessons from "./pages/WhiteBeltLessons";
+import YellowBeltLessons from "./pages/YellowBeltLessons";
+import OrangeBeltLessons from "./pages/OrangeBeltLessons"
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import About from "./pages/About";
 import PasswordReset from "./pages/PasswordResetPage";
+import KatasPage from "./pages/KatasPage";
+
 
 function App() {
   return (
@@ -25,10 +29,12 @@ function App() {
         <Route path ="/signup" element={<SignUpPage />} />
         <Route path="/curriculum" element={<CurriculumPage />} />
         <Route path="/whitebeltlesson" element={<WhiteBeltLessons/>}/>
+        <Route path="/yellowbeltlesson" element={<YellowBeltLessons/>}/>
+        <Route path="/orangebeltlesson" element={<OrangeBeltLessons/>}/>
         <Route path="/forgotpasswordpage" element={<ForgotPasswordPage/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/reset-password" element={<PasswordReset />} />
-
+        <Route path="/kataspage" element={<KatasPage />} />
       </Routes>
     </Router>
   );
