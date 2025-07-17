@@ -197,7 +197,7 @@ body {
   color: #e8e8e8;
   z-index: 3;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   background-color: #223140;
@@ -209,12 +209,18 @@ body {
 #ProfileDiv
 {
   height: 60vh;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 #UsernameDiv
 {
-  position:absolute;
-  top: 8%;
+  /* position:absolute;
+  top: 8%; */
+  margin-top: 10%;
   display: flex;
   justify-content: center;
   justify-items: center;
@@ -229,8 +235,9 @@ body {
 }
 #UsernameText
 {
-  position: absolute;
-  top: 15%;
+  /* position: absolute;
+  top: 10%; */
+  margin: 7%;
 }
 
 .iconStyle
@@ -243,6 +250,7 @@ body {
 #ProfileOptionsDiv
 {
   position: relative;
+  margin: 5%;
   width: 70%;
   height: 50%;
   display: grid;

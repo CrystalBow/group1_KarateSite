@@ -348,7 +348,7 @@ const SignUpPage = () => {
                 </div>
                 <br />
                 {message && <div style={{ marginTop: "1em" }}>{message}</div>} 
-                {rank && <div style={{ marginTop: "1em" }}>{rank}</div>} 
+                {/* {rank && <div style={{ marginTop: "1em" }}>{rank}</div>}  */}
               </div>
             )}
           </div>
