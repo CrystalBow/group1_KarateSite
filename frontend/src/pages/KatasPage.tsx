@@ -24,7 +24,9 @@ const KatasPage = () => {
       <div className="page-container">
         <div className="custom-card">
           <div className="card-scroll-content">
+            
             <KataMenu/>
+           
           </div>
         </div>
       </div>
