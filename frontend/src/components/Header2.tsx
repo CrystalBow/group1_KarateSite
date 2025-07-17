@@ -1,4 +1,4 @@
-import { FaArrowRightFromBracket, FaUser, FaXmark, FaPen, FaCheck, FaCircleArrowLeft   } from "react-icons/fa6";
+import { FaArrowRightFromBracket, FaUser, FaXmark, FaPen, FaCircleArrowLeft   } from "react-icons/fa6";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
