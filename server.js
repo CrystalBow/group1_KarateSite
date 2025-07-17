@@ -378,9 +378,9 @@ app.post('/api/deleteUser', async (req, res) =>
   try
   {
     const deleteUser = await db.collection('Users').deleteOne({user});
-    if(!deleteUser)
+    if (deleteUser.deletedCount === 0)
     {
-      return res.status(200).json({message: "User not found."});
+      return res.status(404).json({ message: "User not found." });
     }
     res.status(200).json({message: "User has been successfully deleted."});
   }
