@@ -181,26 +181,94 @@ body {
   justify-content: center;
   text-align: center;
   /* outline: 2px solid black; */
-
 }
 
 #ProfileIcon
 {
   height: 10vh; 
+  cursor: pointer;
 }
 
-#ProfileText
+.AccountDiv
 {
   position: absolute;
-  right: -0.4%;
-  top: calc(100% + 2px); /* 2px below the icon, adjust as needed */
-  width: 100px; /* match or slightly exceed icon width */
-  text-align: center;
-  font-size: 1.1rem;
-  margin: 0;
-  pointer-events: none;
+  right: 0;
+  top: 120%;
+  color: #e8e8e8;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #223140;
+  border-radius: 10%;
+  height: 28vh;
+
+  width: 35vh;
+}
+#ProfileDiv
+{
+  height: 60vh;
 }
 
+#UsernameDiv
+{
+  position:absolute;
+  top: 8%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
+  color: #e8e8e8;
+  font-size: 2.5vh;
+  background-color: #636363;
+  border-radius: 25px;
+  /* height: 19%; */
+  height: 50px;
+  width: 70%;
+}
+#UsernameText
+{
+  position: absolute;
+  top: 15%;
+}
+
+.iconStyle
+{
+  display: inline-flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+#ProfileOptionsDiv
+{
+  position: relative;
+  width: 70%;
+  height: 50%;
+  display: grid;
+  grid-template-rows: 35%;
+  font-size: 2vh;
+
+}
+
+.profileOptions:has(p):hover
+{
+  width: 100%;
+  color: red;
+  cursor: pointer;
+}
+
+#ProfileEditDiv 
+{
+  position: relative;
+  width: 80%;
+  font-size: 2vh;
+}
+
+.headerFont
+{
+  font-size: 2.3vh;
+}
 
 /*____________________________________________________________*/
 
