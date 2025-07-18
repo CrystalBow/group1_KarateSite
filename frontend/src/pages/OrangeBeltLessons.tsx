@@ -5,22 +5,22 @@ const lessons = [
   {
     name: "TENCHI HAPPO 7-8 TRADITIONAL",
     videoId: "fTqnJaLS_RY?si=v5_OwAPvI-EwEmAd&t=399",
-    description: "Tenchi happos oat..."
+    description: "Tenchi happos oat...",
   },
   {
     name: "CAT STANCE",
     videoId: "kHIUkFahyKA",
-    description: "cooler meow..."
+    description: "cooler meow...",
   },
   {
     name: "PINAN SHODAN",
     videoId: "qNP1pbzXXJs",
-    description: "Pinan Shodan cool..."
+    description: "Pinan Shodan cool...",
   },
   {
     name: "ROPPO HO",
     videoId: "MiYJWNg6DSs",
-    description: "Roppo Ho..."
+    description: "Roppo Ho...",
   },
 ];
 
@@ -28,16 +28,61 @@ const OrangeBeltLessons = () => {
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
   const [unlockedCount, setUnlockedCount] = useState(1);
 
-  const handleNext = () => {
+  const updateUserProgress = async (newProgressW: number) => {
+    const jwtToken = localStorage.getItem("token");
+    const id = localStorage.getItem("user_id");
+
+    if (!jwtToken || !id) {
+      console.warn("Missing token or user ID");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/updateProgress", {
+        //i decided to just  hardcode path instead of using buildpath lol
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id,
+          progressW: newProgressW,
+          progressY: 0,
+          progressO: 0,
+          jwtToken,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.error) {
+        console.error("Error updating progress:", data.error);
+      } else {
+        if (data.jwtToken) {
+          localStorage.setItem("token", data.jwtToken);
+        }
+      }
+    } catch (err) {
+      console.error("Progress update failed:", err);
+    }
+  };
+
+  const handleNext = async () => {
     if (currentLessonIndex < lessons.length - 1) {
-      setCurrentLessonIndex(currentLessonIndex + 1);
-      setUnlockedCount(prev => Math.max(prev, currentLessonIndex + 2));
+      const newLessonIndex = currentLessonIndex + 1;
+      const newUnlockedCount = Math.max(unlockedCount, newLessonIndex + 1);
+
+      setCurrentLessonIndex(newLessonIndex);
+      setUnlockedCount(newUnlockedCount);
+
+      await updateUserProgress(newUnlockedCount);
     }
   };
 
   return (
     <div>
-      <Header2 profileImg="/assets/ProfileWhiteBelt.png" beltText="White Belt"/>
+      <Header2
+        profileImg="/assets/ProfileWhiteBelt.png"
+        beltText="White Belt"
+      />
       <div className="page-container">
         <div className="custom-card whitebelt-container">
           {/* LEFT SIDEBAR */}
@@ -46,7 +91,9 @@ const OrangeBeltLessons = () => {
             {lessons.map((lesson, index) => (
               <button
                 key={lesson.name}
-                className={`lesson-section ${index < unlockedCount ? "unlocked" : "locked"}`}
+                className={`lesson-section ${
+                  index < unlockedCount ? "unlocked" : "locked"
+                }`}
                 onClick={() => {
                   if (index < unlockedCount) {
                     setCurrentLessonIndex(index);
@@ -61,7 +108,10 @@ const OrangeBeltLessons = () => {
           {/* RIGHT PANEL */}
           <div className="whitebelt-lesson-area">
             <h3 className="lesson-title">
-              CURRENT LESSON: <span className="highlight">{lessons[currentLessonIndex].name}</span>
+              CURRENT LESSON:{" "}
+              <span className="highlight">
+                {lessons[currentLessonIndex].name}
+              </span>
             </h3>
             <div className="video-container">
               <iframe
@@ -75,14 +125,23 @@ const OrangeBeltLessons = () => {
             </div>
             <div className="lesson-description-box">
               <div className="scrollable-text">
-                {Array(6).fill(lessons[currentLessonIndex].description).map((line, idx) => (
-                  <p key={idx}>{line}</p>
-                ))}
+                {Array(6)
+                  .fill(lessons[currentLessonIndex].description)
+                  .map((line, idx) => (
+                    <p key={idx}>{line}</p>
+                  ))}
               </div>
               {currentLessonIndex < lessons.length - 1 ? (
-                <button className="next-btn" onClick={handleNext}>Next</button>
+                <button className="next-btn" onClick={handleNext}>
+                  Next
+                </button>
               ) : (
-                <p className="next-btn" style={{ opacity: 0.5, cursor: "not-allowed" }}>All lessons complete</p>
+                <p
+                  className="next-btn"
+                  style={{ opacity: 0.5, cursor: "not-allowed" }}
+                >
+                  All lessons complete
+                </p>
               )}
             </div>
           </div>
