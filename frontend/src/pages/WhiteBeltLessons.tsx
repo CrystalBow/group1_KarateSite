@@ -53,7 +53,7 @@ const WhiteBeltLessons = () => {
 
 
       console.log(localStorage.getItem("token"));
-      console.log(localStorage.getItem("user_data"));
+      console.log(id);
 
       if (!jwtToken || !id) {
         console.warn("Missing token or user ID");
@@ -93,8 +93,9 @@ const WhiteBeltLessons = () => {
 
   const updateUserProgress = async (newProgressW: number) => {
     const jwtToken = localStorage.getItem("token");
-    const id = localStorage.getItem("user_id");
-
+    const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
+    const id = userData.id;
+    
     if (!jwtToken || !id) {
       console.warn("Missing token or user ID");
       return;
