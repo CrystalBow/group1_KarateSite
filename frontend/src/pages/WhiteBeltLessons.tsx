@@ -62,7 +62,7 @@ const WhiteBeltLessons = () => {
 
       try {
         const response = await fetch(
-          "http://localhost:5000/api/getUserProgress",
+          "http:///143.198.160.127:5000/api/getUserProgress",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -105,7 +105,7 @@ const WhiteBeltLessons = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/updateProgress", {
+      const response = await fetch("http:///143.198.160.127:5000/api/updateProgress", {
         //i decided to just  hardcode path instead of using buildpath lol
         method: "POST",
         headers: { "Content-Type": "application/json" },
