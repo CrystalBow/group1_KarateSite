@@ -56,7 +56,7 @@ const WhiteBeltLessons = () => {
       }
 
       try {
-        const response = await fetch("http://localhost:5000/api/getProgress", {
+        const response = await fetch("http://localhost:5000/api/getUserProgress", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ id, jwtToken }),

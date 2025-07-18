@@ -55,5 +55,43 @@ module.exports = function(db) {
     res.status(200).json(ret);
   });
 
+  router.post('/getUserProgress', async (req, res) => {
+    const { id, jwtToken } = req.body;
+
+    try {
+      if (token.isExpired(jwtToken)) {
+        return res.status(200).json({ error: 'The JWT is no longer valid', jwtToken: '' });
+      }
+    } catch (e) {
+      return res.status(200).json({ error: e.message, jwtToken: '' });
+    }
+
+    try {
+      const user = await db.collection('Users').findOne({ id });
+
+      if (!user) {
+        return res.status(404).json({ error: 'User not found', jwtToken: '' });
+      }
+
+      let refreshedToken = null;
+      try {
+        refreshedToken = token.refresh(jwtToken);
+      } catch (e) {
+        console.log(e.message);
+      }
+
+      return res.status(200).json({
+        progressW: user.progressW || 1,
+        progressY: user.progressY || 1,
+        progressO: user.progressO || 1,
+        jwtToken: refreshedToken,
+        error: '',
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal server error', jwtToken: '' });
+    }
+  });
+
   return router;
 };
