@@ -123,7 +123,7 @@ const SignUpPage = () => {
       const res = await response.json();
 
       if (res.error === "") {
-        localStorage.setItem("userId", res.user.id); //remove this if its garbage
+        
         setMessage("Sign up successful! Please verify your email before logging in. We've sent a verification link to your email. If you don't see it, please check your spam folder.");
         //setTimeout(() => navigate("/login"), 1500);
       } else {
