@@ -25,7 +25,21 @@ const HistoryPage = () =>
                                 </div>
                                 <div id="historyTextBox" className="">
                                     <br/>
-                                    <p className=""> Shito-Ryu, like other karate styles, is thought to have originated on Okinawa, one of Japan's largest islands. In 1929, master Kenwa Mabuni established a shito-Ryu school in Osaka, Japan, after settling permanently there. However, schools were required to declare the teaching style they used due to government policies at the time. As a result of the blending techniques, Kenwa Mabuni named it Shito-Ryu after his master's initials. </p>
+                                    <p> 
+                                        &emsp; Due to the lack of a written record, not much can be said about the true origins of Karate, 
+                                        but one of the first known styles was Okinawan karate. It originated from Okinawa Island during the 
+                                        mid-1800s when the ruling samurai clan forbade anyone on the island from owning weaponry. 
+                                        To defend themselves, the people of Okinawa started training in martial arts and thus began 
+                                        the tradition of Okinawan karate. Over time, other styles emerged, and now we can tell the tale 
+                                        of Shito-Ryu Karate.
+                                    </p>
+                                    <p>
+                                        &emsp; The story begins with the founder of Shito-Ryu Karte: Kenwa Mabuni. He was born in 1893 in Shuri, 
+                                        Okinawa. He learned from many teachers, but the two who had the biggest influence on him were 
+                                        Ankoh Yasutsune Itosu and Sensei Kanryo Higashionna. Mabuni combined the styles of those two teachers
+                                        into Shito-Ryu. He began instructing in 1920, and by 1929, he had moved to the mainland and had well 
+                                        established his dojo and style.
+                                    </p>
                                 </div>   
                             </div>
                         </div>                        
