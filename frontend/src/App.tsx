@@ -17,6 +17,7 @@ import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import About from "./pages/About";
 import PasswordReset from "./pages/PasswordResetPage";
 import KatasPage from "./pages/KatasPage";
+import HistoryPage from "./pages/HistoryPage";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/about" element={<About/>}/>
         <Route path="/reset-password" element={<PasswordReset />} />
         <Route path="/kataspage" element={<KatasPage />} />
+        <Route path="/history" element={<HistoryPage />} />
       </Routes>
     </Router>
   );
