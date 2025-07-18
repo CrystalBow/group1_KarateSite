@@ -65,7 +65,14 @@ module.exports = function(db) {
         console.error('Error sending email:', emailError);
       }
 
-      return res.status(200).json({ error: '' });
+      return res.status(200).json({ 
+        error: '',
+        user: {
+          id: newUser.id,
+          name: newUser.name,
+          rank: newUser.rank
+        } 
+      });
 
     } catch (error) {
       return res.status(500).json({ error: error.toString() });
