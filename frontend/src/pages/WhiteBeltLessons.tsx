@@ -48,10 +48,10 @@ const WhiteBeltLessons = () => {
   useEffect(() => {
     const fetchUserProgress = async () => {
       const jwtToken = localStorage.getItem("token");
-      const id = localStorage.getItem("user_id");
+      const id = localStorage.getItem("user");
 
       console.log(localStorage.getItem("token"));
-      console.log(localStorage.getItem("user_id"));
+      console.log(localStorage.getItem("user"));
 
       if (!jwtToken || !id) {
         console.warn("Missing token or user ID");
