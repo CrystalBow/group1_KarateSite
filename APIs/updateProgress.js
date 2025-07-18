@@ -25,9 +25,9 @@ module.exports = function(db) {
     }
 
     let rank = 0;
-    if (progressW >= 5) {
+    if (progressW >= 6) {
       rank = 1;
-      if (progressY >= 3) {
+      if (progressY >= 4) {
         rank = 2;
       }
     }
