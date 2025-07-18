@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header2 from "../components/Header2.tsx";
 
 const lessons = [
@@ -45,8 +45,46 @@ const WhiteBeltLessons = () => {
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
   const [unlockedCount, setUnlockedCount] = useState(1);
 
-  
+  useEffect(() => {
+    const fetchUserProgress = async () => {
+      const jwtToken = localStorage.getItem("token");
+      const id = localStorage.getItem("user_id");
 
+      if (!jwtToken || !id) {
+        console.warn("Missing token or user ID");
+        return;
+      }
+
+      try {
+        const response = await fetch("http://localhost:5000/api/getProgress", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id, jwtToken }),
+        });
+
+        const data = await response.json();
+
+        if (data.error === "The JWT is no longer valid") {
+          localStorage.removeItem("token");
+          
+          console.warn("Session expired. Please log in again.");
+          return;
+        }
+
+        if (data.progressW !== undefined) {
+          setUnlockedCount(data.progressW);
+        }
+
+        if (data.jwtToken) {
+          localStorage.setItem("token", data.jwtToken);
+        }
+      } catch (err) {
+        console.error("Failed to fetch progress:", err);
+      }
+    };
+
+    fetchUserProgress();
+  }, []);
 
   const updateUserProgress = async (newProgressW: number) => {
     const jwtToken = localStorage.getItem("token");
@@ -58,14 +96,15 @@ const WhiteBeltLessons = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/updateProgress", { //i decided to just  hardcode path instead of using buildpath lol
+      const response = await fetch("http://localhost:5000/api/updateProgress", {
+        //i decided to just  hardcode path instead of using buildpath lol
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id,
           progressW: newProgressW,
-          progressY: 0, 
-          progressO: 0, 
+          progressY: 0,
+          progressO: 0,
           jwtToken,
         }),
       });
