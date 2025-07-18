@@ -36,7 +36,7 @@ function Header2({ profileImg, beltText }: { profileImg: string; beltText: strin
         </a>
         <nav>
           <ul className="header2-nav">
-            <li className = "navbar" id="HistoryButton"><a href="#">HISTORY</a></li>
+            <li className = "navbar" id="HistoryButton"><a href="/history">HISTORY</a></li>
             <li className = "navbar" id="CurriculumButton"><a href="/curriculum">CURRICULUM</a></li>
             <li className = "navbar" id="HomeButton"><a href="/kataspage">KATA</a></li>
           </ul>
