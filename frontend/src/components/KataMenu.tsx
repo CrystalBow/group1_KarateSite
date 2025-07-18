@@ -16,9 +16,19 @@ const KataMenu = () => {
   // Fetch data from server
   const handleSearch = async () => {
   const token = localStorage.getItem("token"); 
+  
+
+  const app_name = "karatemanager.xyz";
+  function buildPath(route: string): string {
+    if (process.env.NODE_ENV != "development") {
+      return "http://" + app_name + ":5000/" + route;
+    } else {
+      return "http://localhost:5000/" + route;
+    }
+  }
 
   try {
-    const res = await fetch("/api/searchKata", {
+    const res = await fetch(buildPath("api/searchKata"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
