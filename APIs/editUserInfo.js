@@ -1,13 +1,31 @@
 const express = require('express');
 const crypto = require('crypto');
 const mail = require('@sendgrid/mail');
+const token = require('../createJWT.js');
 
 const router = express.Router();
 
 module.exports = function(db) {
-  router.post('/editUserInfo', async (req, res) => {
-    const { user, name, email, rank } = req.body;
-
+  router.post('/editUserInfo', async (req, res) => 
+  {
+      const { user, name, email, rank, jwtToken } = req.body;
+    // Test validity of token
+    try
+    {
+      if (token.isExpired(jwtToken))
+      {
+        var r = {error:'The JWT is no longer valid', jwtToken:''}
+        res.status(200).json(r);
+        return;
+      }
+    }
+    catch(e)
+    {
+      console.log(e.message);
+      var r = {error:e.message,jwtToken:''};
+      res.status(200).json(r);
+      return;
+    }
     try {
       const userBeingEdited = await db.collection('Users').findOne({ user });
 
@@ -54,12 +72,26 @@ module.exports = function(db) {
 
       await db.collection('Users').updateOne({ user }, { $set: editInfo });
 
-      res.status(200).json({ message: "User information updated successfully." });
+      // Refresh and return the token
+      var refreshedToken = null;
+      try
+      {
+        refreshedToken = token.refresh(jwtToken);
+      }
+      catch(e)
+      {
+        console.log(e.message);
+      }
+      return res.status(200).json({
+        message: "User information updated successfully.",
+        jwtToken: refreshedToken || '',
+        error: ''
+      });
 
     } catch (error) {
       res.status(500).json({ error: "Unable to update user information." });
-    }
+    }      
   });
-
   return router;
 };
+
