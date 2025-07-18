@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const token = require('../createJWT.js');
 
 module.exports = function(db) {
   router.post('/login', async (req, res) => {
@@ -46,7 +47,7 @@ module.exports = function(db) {
 
       try {
         // Update last login timestamp
-        await db.collection('Users').updateOne({ id: id }, { $set: { lastlogin: Date.now() } });
+        await db.collection('Users').updateOne({ id: id }, { $set: { lastlogin: Date.now() } });  
 
         // Update streak logic
         if (previousLogin > 0) {
@@ -62,19 +63,24 @@ module.exports = function(db) {
       } catch (updateError) {
         error = updateError.toString();
       }
+      // Generate token
+      try 
+      {
+        const result = token.createToken(id, name, email, rank, progressW, progressY, progressO);
 
-      return res.status(200).json({
-        id,
-        name,
-        email,
-        rank,
-        progressW,
-        progressY,
-        progressO,
-        error
-      });
+        if (result.error) 
+          {
+          return res.status(500).json({ error: 'Failed to generate token: ' + result.error });
+        }
 
+        return res.status(200).json(result);
+      } 
+      catch (tokenErr) 
+      {
+        return res.status(500).json({ error: 'Failed to generate token: ' + tokenErr.message });
+      }
     } catch (err) {
+      console.error("Login error:", err);
       return res.status(500).json({ error: 'Server error' });
     }
   });
