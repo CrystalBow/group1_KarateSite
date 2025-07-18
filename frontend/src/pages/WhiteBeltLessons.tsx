@@ -83,9 +83,9 @@ const WhiteBeltLessons = () => {
           setUnlockedCount(data.progressW);
         }
 
-        if (data.jwtToken && data.jwtToken.trim() !== "") {
-          localStorage.setItem("token", data.jwtToken);
-        }
+        //if (data.jwtToken && data.jwtToken.trim() !== "") {
+          //localStorage.setItem("token", data.jwtToken);
+        //}
       } catch (err) {
         console.error("Failed to fetch progress:", err);
       }
