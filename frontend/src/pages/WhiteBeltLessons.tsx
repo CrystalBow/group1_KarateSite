@@ -48,9 +48,9 @@ const WhiteBeltLessons = () => {
   useEffect(() => {
     const fetchUserProgress = async () => {
       const jwtToken = localStorage.getItem("token");
+
       const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
       const id = userData.id;
-
 
       console.log(localStorage.getItem("token"));
       console.log(id);
@@ -61,17 +61,20 @@ const WhiteBeltLessons = () => {
       }
 
       try {
-        const response = await fetch("http://localhost:5000/api/getUserProgress", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id, jwtToken }),
-        });
+        const response = await fetch(
+          "http://localhost:5000/api/getUserProgress",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id, jwtToken }),
+          }
+        );
 
         const data = await response.json();
 
         if (data.error === "The JWT is no longer valid") {
           localStorage.removeItem("token");
-          
+
           console.warn("Session expired. Please log in again.");
           return;
         }
@@ -80,7 +83,7 @@ const WhiteBeltLessons = () => {
           setUnlockedCount(data.progressW);
         }
 
-        if (data.jwtToken) {
+        if (data.jwtToken && data.jwtToken.trim() !== "") {
           localStorage.setItem("token", data.jwtToken);
         }
       } catch (err) {
@@ -95,7 +98,7 @@ const WhiteBeltLessons = () => {
     const jwtToken = localStorage.getItem("token");
     const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
     const id = userData.id;
-    
+
     if (!jwtToken || !id) {
       console.warn("Missing token or user ID");
       return;
@@ -120,7 +123,7 @@ const WhiteBeltLessons = () => {
       if (data.error) {
         console.error("Error updating progress:", data.error);
       } else {
-        if (data.jwtToken) {
+        if (data.jwtToken && data.jwtToken.trim() !== "") {
           localStorage.setItem("token", data.jwtToken);
         }
       }
