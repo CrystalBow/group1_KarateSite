@@ -55,7 +55,7 @@ function Header2(){
     window.location.href = "/";
   }
 
-  async function confirmDelete(event: any): void
+  async function confirmDelete(event: any): Promise<void>
   {
     event.preventDefault();
     let okay = confirm("Are you sure you want to delete this Account? \nThis is a permanent action and once the account is deleted it can not be recovered.");
