@@ -1,25 +1,21 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const token = require('../createJWT.js');
+const token = require("../createJWT.js");
 
-module.exports = function(db) {
-  router.post('/updateProgress', async (req, res) => {
+module.exports = function (db) {
+  router.post("/updateProgress", async (req, res) => {
     const { id, progressW, progressY, progressO, jwtToken } = req.body;
 
     // Test validity of token
-    try
-    {
-      if (token.isExpired(jwtToken))
-      {
-        var r = {error:'The JWT is no longer valid', jwtToken:''}
+    try {
+      if (token.isExpired(jwtToken)) {
+        var r = { error: "The JWT is no longer valid", jwtToken: "" };
         res.status(200).json(r);
         return;
       }
-    }
-    catch(e)
-    {
+    } catch (e) {
       console.log(e.message);
-      var r = {error:e.message,jwtToken:''};
+      var r = { error: e.message, jwtToken: "" };
       res.status(200).json(r);
       return;
     }
@@ -32,51 +28,58 @@ module.exports = function(db) {
       }
     }
 
-    let error = '';
+    let error = "";
     try {
       let updateFields = { rank: rank };
 
       if (progressW !== undefined) updateFields.progressW = progressW;
       if (progressY !== undefined) updateFields.progressY = progressY;
       if (progressO !== undefined) updateFields.progressO = progressO;
-      
-      await db.collection('Users').updateOne(
-        { id: id },
-        { $set: { updateFields } }
-      );
+
+      await db
+        .collection("Users")
+        .updateOne({ id: id }, { $set: { updateFields } });
     } catch (err) {
       error = err.toString();
     }
-     // Refresh and return the token
+    // Refresh and return the token
     var refreshedToken = null;
-    try
-    {
+    try {
       refreshedToken = token.refresh(jwtToken);
-    }
-    catch(e)
-    {
+    } catch (e) {
       console.log(e.message);
     }
-    const ret = {rank: rank,progressW: progressW, progressY: progressY, progressO: progressO, jwtToken: refreshedToken, error: error};
+    const user = await db.collection("Users").findOne({ id });
+
+    const ret = {
+      rank,
+      progressW: user.progressW,
+      progressY: user.progressY,
+      progressO: user.progressO,
+      jwtToken: refreshedToken,
+      error,
+    };
     res.status(200).json(ret);
   });
 
-  router.post('/getUserProgress', async (req, res) => {
+  router.post("/getUserProgress", async (req, res) => {
     const { id, jwtToken } = req.body;
 
     try {
       if (token.isExpired(jwtToken)) {
-        return res.status(200).json({ error: 'The JWT is no longer valid', jwtToken: '' });
+        return res
+          .status(200)
+          .json({ error: "The JWT is no longer valid", jwtToken: "" });
       }
     } catch (e) {
-      return res.status(200).json({ error: e.message, jwtToken: '' });
+      return res.status(200).json({ error: e.message, jwtToken: "" });
     }
 
     try {
-      const user = await db.collection('Users').findOne({ id });
+      const user = await db.collection("Users").findOne({ id });
 
       if (!user) {
-        return res.status(404).json({ error: 'User not found', jwtToken: '' });
+        return res.status(404).json({ error: "User not found", jwtToken: "" });
       }
 
       let refreshedToken = null;
@@ -91,11 +94,13 @@ module.exports = function(db) {
         progressY: user.progressY || 1,
         progressO: user.progressO || 1,
         jwtToken: refreshedToken,
-        error: '',
+        error: "",
       });
     } catch (err) {
       console.error(err);
-      return res.status(500).json({ error: 'Internal server error', jwtToken: '' });
+      return res
+        .status(500)
+        .json({ error: "Internal server error", jwtToken: "" });
     }
   });
 
