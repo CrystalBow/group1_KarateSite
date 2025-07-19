@@ -62,13 +62,13 @@ const OrangeBeltLessons = () => {
           return;
         }
 
-        if (data.progressW !== undefined) {
+        if (data.progressO !== undefined) {
           setUnlockedCount(data.progressW);
         }
 
-        //if (data.jwtToken && data.jwtToken.trim() !== "") {
-        //localStorage.setItem("token", data.jwtToken);
-        //}
+        // if (data.jwtToken && data.jwtToken.trim() !== "") {
+        // localStorage.setItem("token", data.jwtToken);
+        // }
       } catch (err) {
         console.error("Failed to fetch progress:", err);
       }
@@ -175,7 +175,7 @@ const OrangeBeltLessons = () => {
             </div>
             <div className="lesson-description-box">
               <div className="scrollable-text">
-                {Array(6)
+                {Array(4)
                   .fill(lessons[currentLessonIndex].description)
                   .map((line, idx) => (
                     <p key={idx}>{line}</p>
