@@ -34,9 +34,15 @@ module.exports = function(db) {
 
     let error = '';
     try {
+      let updateFields = { rank: rank };
+
+      if (progressW !== undefined) updateFields.progressW = progressW;
+      if (progressY !== undefined) updateFields.progressY = progressY;
+      if (progressO !== undefined) updateFields.progressO = progressO;
+      
       await db.collection('Users').updateOne(
         { id: id },
-        { $set: { rank: rank, progressW: progressW, progressY: progressY, progressO: progressO } }
+        { $set: { updateFields } }
       );
     } catch (err) {
       error = err.toString();
