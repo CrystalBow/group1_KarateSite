@@ -10,6 +10,12 @@ function Header2({ profileImg, beltText }: { profileImg: string; beltText: strin
   const AccountDivRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
+  function doLogout(event: any): void {
+    event.preventDefault();
+    localStorage.removeItem("user_data");
+    window.location.href = "/";
+  }
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       const iconClicked = profileIconRef.current && profileIconRef.current.contains(event.target as Node);
@@ -74,7 +80,7 @@ function Header2({ profileImg, beltText }: { profileImg: string; beltText: strin
               <p className="iconStyle absolute left-0" onClick={() => {setAction("DisplayProfile")}}> <FaUser /> Profile </p>
             </div>
             <div className="profileOptions">
-              <p className="iconStyle absolute left-0" onClick={() => {navigate("/")}}> <FaArrowRightFromBracket /> Log Out </p>
+              <p className="iconStyle absolute left-0" onClick={() => {doLogout}}> <FaArrowRightFromBracket /> Log Out </p>
             </div>
             <div className="profileOptions">
               <p className="iconStyle absolute left-0"> <FaXmark /> Delete Account </p>
