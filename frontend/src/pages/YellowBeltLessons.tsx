@@ -109,8 +109,11 @@ const YellowBeltLessons = () => {
       if (data.error) {
         console.error("Error updating progress:", data.error);
       } else {
-        if (data.jwtToken && data.jwtToken.trim() !== "") {
-          localStorage.setItem("token", data.jwtToken);
+        // if (data.jwtToken && data.jwtToken.trim() !== "") {
+        //   localStorage.setItem("token", data.jwtToken);
+        // }
+        if (data.progressY !== undefined) {
+          setUnlockedCount(data.progressY);
         }
       }
     } catch (err) {
