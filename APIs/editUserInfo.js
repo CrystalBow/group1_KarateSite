@@ -85,7 +85,8 @@ module.exports = function(db) {
       return res.status(200).json({
         message: "User information updated successfully.",
         jwtToken: refreshedToken || '',
-        error: ''
+        error: '',
+        updatedFields: editInfo
       });
 
     } catch (error) {
