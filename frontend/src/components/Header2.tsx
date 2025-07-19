@@ -31,7 +31,7 @@ function Header2(){
     } 
     else 
     {
-      setBeltName("ERROR");
+      setBeltName(userData.rank);
     }
   }, [userData.rank]);
   
