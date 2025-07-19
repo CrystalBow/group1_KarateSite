@@ -31,7 +31,7 @@ function Header2(){
     } 
     else 
     {
-      setBeltName(userData.rank);
+      setBeltName("ERROR");
     }
   }, [userData.rank]);
   
@@ -99,7 +99,7 @@ function Header2(){
       {action === "DisplayAccount" ? (
         <div className="AccountDiv" ref={AccountDivRef}> 
           <div id="UsernameDiv">
-            <p id="UsernameText"> {userData.name} </p>
+            <p id="UsernameText"> {userData.user} </p>
           </div>
           
           <div id="ProfileOptionsDiv">
@@ -119,7 +119,7 @@ function Header2(){
         {action === "DisplayProfile" ? (
           <div id="ProfileDiv" className="AccountDiv" ref={AccountDivRef}> 
             <div id="UsernameDiv">
-              <p id="UsernameText"> MegavicX </p>
+              <p id="UsernameText"> {userData.user} </p>
             </div>
 
             <br/>
@@ -127,22 +127,22 @@ function Header2(){
             <div id="ProfileEditDiv" className="">
               <h6 className="headerFont"><u>Name</u></h6>
               <div>
-                <p className="iconStyle"> Victor Acuna <FaPen className="absolute right-0"/></p>
+                <p className="iconStyle"> {userData.name} <FaPen className="absolute right-0"/></p>
               </div>
 
               <h6 className="headerFont"><u>Email</u></h6>
               <div>
-                <p className="iconStyle"> email@gmail.com <FaPen className="absolute right-0"/></p>
+                <p className="iconStyle"> {userData.email} <FaPen className="absolute right-0"/></p>
               </div>
 
               <h6 className="headerFont"><u>Belt Rank</u></h6>
               <div>
-                <p className="iconStyle"> White Belt<FaPen className="absolute right-0"/></p>
+                <p className="iconStyle"> {beltName} <FaPen className="absolute right-0"/></p>
               </div>
 
               <h6 className="headerFont"><u>Streak</u></h6>
               <div>
-                <p>2</p>
+                <p> {userData.streak} </p>
               </div>
             </div>
             <FaCircleArrowLeft className="text-[4vh] hover:text-red-500" onClick={() => {setAction("DisplayAccount")}}/>
