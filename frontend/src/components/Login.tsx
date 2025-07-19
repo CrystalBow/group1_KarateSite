@@ -60,6 +60,7 @@ function Login() {
 
       // JWT stuff
       const { accessToken, error, id } = res;
+      console.log("AccessToken:", accessToken); //debuggin
 
       // Login failure
       if (id === -1 || !accessToken || typeof accessToken !== "string") {
@@ -69,19 +70,19 @@ function Login() {
       try 
       {
         const decoded: any = jwtDecode(accessToken);
-        // const { id, user, name, email, rank, streak, progressW, progressY, progressO } = decoded;
+        const { id, user, name, email, rank, streak, progressW, progressY, progressO } = decoded;
         console.log(decoded);
         const account = 
         {
-          id: decoded.id,
-          user: decoded.user, // or whatever the correct field is
-          name: decoded.name,
-          email: decoded.email,
-          rank: decoded.rank,
-          streak: decoded.streak,
-          progressW: decoded.progressW,
-          progressY: decoded.progressY,
-          progressO: decoded.progressO
+          id,
+          user,
+          name, 
+          email,
+          rank,
+          streak,
+          progressW,
+          progressY,
+          progressO
         };
         localStorage.setItem("token", accessToken);
         localStorage.setItem("user_data", JSON.stringify(account))
