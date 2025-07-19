@@ -29,50 +29,58 @@ const OrangeBeltLessons = () => {
   const [unlockedCount, setUnlockedCount] = useState(1);
 
   useEffect(() => {
-      const fetchUserProgress = async () => {
-        const jwtToken = localStorage.getItem("token");
-        const id = localStorage.getItem("user_id");
-  
-        if (!jwtToken || !id) {
-          console.warn("Missing token or user ID");
-          return;
-        }
-  
-        try {
-          const response = await fetch("http://localhost:5000/api/getProgress", {
+    const fetchUserProgress = async () => {
+      const jwtToken = localStorage.getItem("token");
+
+      const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
+      const id = userData.id;
+
+      console.log(localStorage.getItem("token"));
+      console.log(id);
+
+      if (!jwtToken || !id) {
+        console.warn("Missing token or user ID");
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          "http:///143.198.160.127:5000/api/getUserProgress",
+          {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id, jwtToken }),
-          });
-  
-          const data = await response.json();
-  
-          if (data.error === "The JWT is no longer valid") {
-            localStorage.removeItem("token");
-            
-            console.warn("Session expired. Please log in again.");
-            return;
           }
-  
-          if (data.progressW !== undefined) {
-            setUnlockedCount(data.progressW);
-          }
-  
-          if (data.jwtToken) {
-            localStorage.setItem("token", data.jwtToken);
-          }
-        } catch (err) {
-          console.error("Failed to fetch progress:", err);
-        }
-      };
-  
-      fetchUserProgress();
-    }, []);
-  
+        );
 
-  const updateUserProgress = async (newProgressO: number) => {
+        const data = await response.json();
+
+        if (data.error === "The JWT is no longer valid") {
+          localStorage.removeItem("token");
+
+          console.warn("Session expired. Please log in again.");
+          return;
+        }
+
+        if (data.progressW !== undefined) {
+          setUnlockedCount(data.progressW);
+        }
+
+        //if (data.jwtToken && data.jwtToken.trim() !== "") {
+        //localStorage.setItem("token", data.jwtToken);
+        //}
+      } catch (err) {
+        console.error("Failed to fetch progress:", err);
+      }
+    };
+
+    fetchUserProgress();
+  }, []);
+
+  const updateUserProgress = async (newProgressW: number) => {
     const jwtToken = localStorage.getItem("token");
-    const id = localStorage.getItem("user_id");
+    const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
+    const id = userData.id;
 
     if (!jwtToken || !id) {
       console.warn("Missing token or user ID");
@@ -80,25 +88,28 @@ const OrangeBeltLessons = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/updateProgress", {
-        //i decided to just  hardcode path instead of using buildpath lol
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id,
-          progressW: 0,
-          progressY: 0,
-          progressO: newProgressO,
-          jwtToken,
-        }),
-      });
+      const response = await fetch(
+        "http:///143.198.160.127:5000/api/updateProgress",
+        {
+          //i decided to just  hardcode path instead of using buildpath lol
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            id,
+            progressW: newProgressW,
+            progressY: 0,
+            progressO: 0,
+            jwtToken,
+          }),
+        }
+      );
 
       const data = await response.json();
 
       if (data.error) {
         console.error("Error updating progress:", data.error);
       } else {
-        if (data.jwtToken) {
+        if (data.jwtToken && data.jwtToken.trim() !== "") {
           localStorage.setItem("token", data.jwtToken);
         }
       }
