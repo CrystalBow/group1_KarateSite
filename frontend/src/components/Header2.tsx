@@ -1,5 +1,6 @@
 import { FaArrowRightFromBracket, FaUser, FaXmark, FaPen, FaCircleArrowLeft   } from "react-icons/fa6";
 import { useState, useRef, useEffect } from "react";
+// import { retrieveToken, storeToken } from '../tokenStorage.js';
 // import { useNavigate } from "react-router-dom";
 
 // FaCheck
@@ -11,6 +12,9 @@ function Header2(){
   const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
   const [beltName, setBeltName] = useState("");
   const [profileImg, setProfileImg] = useState("");
+  // var storage = require('../tokenStorage.js);
+  // var obj = (other data, jwtToken:storage.retrieveToken());
+  // var js = JSON.stringify(obj);
   // const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,12 +38,74 @@ function Header2(){
       setBeltName("ERROR");
     }
   }, [userData.rank]);
-  
 
-  function doLogout(event: any): void {
+  const app_name = "karatemanager.xyz";
+  function buildPath(route: string): string {
+    if (process.env.NODE_ENV != "development") {
+      return "http://" + app_name + ":5000/" + route;
+    } else {
+      return "http://localhost:5000/" + route;
+    }
+  }
+
+  function doLogout(event: any): void 
+  {
     event.preventDefault();
     localStorage.removeItem("user_data");
     window.location.href = "/";
+  }
+
+  function confirmDelete(event: any): void
+  {
+    event.preventDefault();
+    let okay = confirm("Are you sure you want to delete this Account? \nThis is a permanent action and once the account is deleted it can not be recovered.");
+    
+    if (okay)
+    {
+      deleteAccount();
+      window.location.href = "/";
+    }
+  }
+
+  const deleteAccount = async () =>
+  {
+    const jwtToken = localStorage.getItem("token");
+
+    const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
+    const id = userData.id;
+
+    console.log(localStorage.getItem("token"));
+    console.log(id);
+
+    if (!jwtToken || !id) {
+      console.warn("Missing token or user ID");
+      return;
+    }
+
+    try {
+      const response = await fetch(buildPath("api/deleteUser"),
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id, jwtToken }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.error === "The JWT is no longer valid") {
+        localStorage.removeItem("token");
+
+        console.warn("Session expired. Please log in again.");
+        return;
+      }
+
+      //if (data.jwtToken && data.jwtToken.trim() !== "") {
+        //localStorage.setItem("token", data.jwtToken);
+      //}
+    } catch (err) {
+      console.error("Failed to fetch progress:", err);
+    }
   }
 
   useEffect(() => {
@@ -110,7 +176,7 @@ function Header2(){
               <p className="iconStyle absolute left-0" onClick={doLogout}> <FaArrowRightFromBracket /> Log Out </p>
             </div>
             <div className="profileOptions">
-              <p className="iconStyle absolute left-0"> <FaXmark /> Delete Account </p>
+              <p className="iconStyle absolute left-0" onClick={confirmDelete}> <FaXmark /> Delete Account </p>
             </div>
           </div>
         </div>): null
