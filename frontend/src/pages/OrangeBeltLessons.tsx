@@ -77,7 +77,7 @@ const OrangeBeltLessons = () => {
     fetchUserProgress();
   }, []);
 
-  const updateUserProgress = async (newProgressW: number) => {
+  const updateUserProgress = async (newProgressO: number) => {
     const jwtToken = localStorage.getItem("token");
     const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
     const id = userData.id;
@@ -96,9 +96,9 @@ const OrangeBeltLessons = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             id,
-            progressW: newProgressW,
+            progressW: 0,
             progressY: 0,
-            progressO: 0,
+            progressO: newProgressO,
             jwtToken,
           }),
         }

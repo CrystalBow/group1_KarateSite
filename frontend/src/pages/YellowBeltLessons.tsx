@@ -77,7 +77,7 @@ const YellowBeltLessons = () => {
     fetchUserProgress();
   }, []);
 
-  const updateUserProgress = async (newProgressW: number) => {
+  const updateUserProgress = async (newProgressY: number) => {
     const jwtToken = localStorage.getItem("token");
     const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
     const id = userData.id;
@@ -96,8 +96,8 @@ const YellowBeltLessons = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             id,
-            progressW: newProgressW,
-            progressY: 0,
+            progressW: 0,
+            progressY: newProgressY,
             progressO: 0,
             jwtToken,
           }),
