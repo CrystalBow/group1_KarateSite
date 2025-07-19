@@ -8,12 +8,12 @@ function Header2(){
   const [action, setAction] = useState("");
   const profileIconRef = useRef<HTMLImageElement>(null);
   const AccountDivRef = useRef<HTMLDivElement>(null);
-  const [beltName, setBeltName] = useState("");
-  const [profileImg] = useState("/assets/ProfileWhiteBelt.png");
   const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
+  const [beltName, setBeltName] = useState(userData.name);
+  const [profileImg] = useState("/assets/ProfileWhiteBelt.png");
   // const navigate = useNavigate();
-
-  setBeltName(userData.name);
+  // setBeltName(userData.name);
+  
 
   function doLogout(event: any): void {
     event.preventDefault();
@@ -34,6 +34,7 @@ function Header2(){
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
 
   return (
     <div className="NavContainer">
