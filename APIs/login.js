@@ -36,12 +36,12 @@ module.exports = function(db) {
 
       // Passwords match and email verified - return user data
       const id = userRecord.id;
-      const user = userRecord.user;
+      // const user = userRecord.user;
       const name = userRecord.name;
       const email = userRecord.email;
       const previousLogin = userRecord.lastlogin || 0;
       const rank = userRecord.rank || 0;
-      const streak = userRecord.streak || 0;
+      // const streak = userRecord.streak || 0;
       const progressW = userRecord.progressW || 0;
       const progressY = userRecord.progressY || 0;
       const progressO = userRecord.progressO || 0;
