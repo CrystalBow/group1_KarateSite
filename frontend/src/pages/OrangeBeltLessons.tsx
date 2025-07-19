@@ -45,7 +45,7 @@ const OrangeBeltLessons = () => {
 
       try {
         const response = await fetch(
-          "http:///143.198.160.127:5000/api/getUserProgress",
+          "http://143.198.160.127:5000/api/getUserProgress",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
