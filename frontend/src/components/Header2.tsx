@@ -4,10 +4,12 @@ import { useState, useRef, useEffect } from "react";
 
 // FaCheck
 
-function Header2({ profileImg, beltText }: { profileImg: string; beltText: string }){
+function Header2(){
   const [action, setAction] = useState("");
   const profileIconRef = useRef<HTMLImageElement>(null);
   const AccountDivRef = useRef<HTMLDivElement>(null);
+  const [beltName] = useState("White Belt");
+  const [profileImg] = useState("/assets/ProfileWhiteBelt.png");
   // const navigate = useNavigate();
 
   function doLogout(event: any): void {
@@ -65,7 +67,7 @@ function Header2({ profileImg, beltText }: { profileImg: string; beltText: strin
                   }
                 }}
           />
-          <p>{beltText}</p>
+          <p>{beltName}</p>
         </div>
       </header>
 
@@ -80,7 +82,7 @@ function Header2({ profileImg, beltText }: { profileImg: string; beltText: strin
               <p className="iconStyle absolute left-0" onClick={() => {setAction("DisplayProfile")}}> <FaUser /> Profile </p>
             </div>
             <div className="profileOptions">
-              <p className="iconStyle absolute left-0" onClick={() => {doLogout}}> <FaArrowRightFromBracket /> Log Out </p>
+              <p className="iconStyle absolute left-0" onClick={doLogout}> <FaArrowRightFromBracket /> Log Out </p>
             </div>
             <div className="profileOptions">
               <p className="iconStyle absolute left-0"> <FaXmark /> Delete Account </p>

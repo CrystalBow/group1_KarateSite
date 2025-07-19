@@ -5,7 +5,7 @@ const HistoryPage = () =>
     return (
         <div>
             <div>
-                <Header2 profileImg="/assets/ProfileWhiteBelt.png" beltText="White Belt" />
+                <Header2 />
             </div>
 
             <div>
