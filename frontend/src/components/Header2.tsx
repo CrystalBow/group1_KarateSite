@@ -1,7 +1,7 @@
 import { FaArrowRightFromBracket, FaUser, FaXmark, FaPen, FaCircleArrowLeft   } from "react-icons/fa6";
 import { useState, useRef, useEffect } from "react";
 // import { retrieveToken, storeToken } from '../tokenStorage.js';
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // FaCheck
 
@@ -12,6 +12,7 @@ function Header2(){
   const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
   const [beltName, setBeltName] = useState("");
   const [profileImg, setProfileImg] = useState("");
+  const navigate = useNavigate();
   // var storage = require('../tokenStorage.js);
   // var obj = (other data, jwtToken:storage.retrieveToken());
   // var js = JSON.stringify(obj);
@@ -58,13 +59,14 @@ function Header2(){
   async function confirmDelete(event: any): Promise<void>
   {
     event.preventDefault();
+    
     let okay = confirm("Are you sure you want to delete this Account? \nThis is a permanent action and once the account is deleted it can not be recovered.");
     
     if (okay)
     {
       let message = await deleteAccount();
       alert(message);
-      // window.location.href = "/";
+      setTimeout(() => navigate("/"), 1500);
     }
   }
 
