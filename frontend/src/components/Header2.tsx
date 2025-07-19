@@ -1,6 +1,6 @@
 import { FaArrowRightFromBracket, FaUser, FaXmark, FaPen, FaCircleArrowLeft   } from "react-icons/fa6";
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 // FaCheck
 
@@ -8,7 +8,7 @@ function Header2({ profileImg, beltText }: { profileImg: string; beltText: strin
   const [action, setAction] = useState("");
   const profileIconRef = useRef<HTMLImageElement>(null);
   const AccountDivRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   function doLogout(event: any): void {
     event.preventDefault();
