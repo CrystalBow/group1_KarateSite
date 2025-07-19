@@ -146,10 +146,7 @@ const WhiteBeltLessons = () => {
 
   return (
     <div>
-      <Header2
-        profileImg="/assets/ProfileWhiteBelt.png"
-        beltText="White Belt"
-      />
+      <Header2 />
       <div className="page-container">
         <div className="custom-card whitebelt-container">
           {/* LEFT SIDEBAR */}
