@@ -70,6 +70,7 @@ function Login() {
       {
         const decoded: any = jwtDecode(accessToken);
         const { id, user, name, email, rank, streak, progressW, progressY, progressO } = decoded;
+        console.log(decoded);
         const account = 
         {
           id,
