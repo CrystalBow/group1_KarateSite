@@ -69,19 +69,21 @@ function Login() {
       try 
       {
         const decoded: any = jwtDecode(accessToken);
-        const { id, name, email, rank, progressW, progressY, progressO } = decoded;
-        const user = 
+        const { id, user, name, email, rank, streak, progressW, progressY, progressO } = decoded;
+        const account = 
         {
           id,
+          user,
           name, 
           email,
           rank,
+          streak,
           progressW,
           progressY,
           progressO
         };
         localStorage.setItem("token", accessToken);
-        localStorage.setItem("user_data", JSON.stringify(user))
+        localStorage.setItem("user_data", JSON.stringify(account))
         setMessage("");
         navigate("/curriculum");
       }

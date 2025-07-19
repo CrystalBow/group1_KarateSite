@@ -99,7 +99,7 @@ function Header2(){
       {action === "DisplayAccount" ? (
         <div className="AccountDiv" ref={AccountDivRef}> 
           <div id="UsernameDiv">
-            <p id="UsernameText"> MegavicX </p>
+            <p id="UsernameText"> {userData.name} </p>
           </div>
           
           <div id="ProfileOptionsDiv">
