@@ -38,7 +38,7 @@ module.exports = function (db) {
 
       await db
         .collection("Users")
-        .updateOne({ id: id }, { $set: { updateFields } });
+        .updateOne({ id: id }, { $set: updateFields } );
     } catch (err) {
       error = err.toString();
     }
