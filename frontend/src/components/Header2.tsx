@@ -62,7 +62,8 @@ function Header2(){
     
     if (okay)
     {
-      deleteAccount();
+      let message = deleteAccount();
+      alert(message)
       // window.location.href = "/";
     }
   }
@@ -101,9 +102,12 @@ function Header2(){
         return;
       }
 
+      console.log(data.message);
+
       //if (data.jwtToken && data.jwtToken.trim() !== "") {
         //localStorage.setItem("token", data.jwtToken);
       //}
+      return(data.message);
     } catch (err) {
       console.error("Failed to fetch progress:", err);
     }
