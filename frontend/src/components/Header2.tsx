@@ -73,9 +73,10 @@ function Header2(){
 
     const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
     const id = userData.id;
+    const user = userData.user;
 
     console.log(localStorage.getItem("token"));
-    console.log(id);
+    console.log(user);
 
     if (!jwtToken || !id) {
       console.warn("Missing token or user ID");
@@ -87,7 +88,7 @@ function Header2(){
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id, jwtToken }),
+          body: JSON.stringify({ user, jwtToken }),
         }
       );
 
