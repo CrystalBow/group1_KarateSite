@@ -69,19 +69,19 @@ function Login() {
       try 
       {
         const decoded: any = jwtDecode(accessToken);
-        const { id, user, name, email, rank, streak, progressW, progressY, progressO } = decoded;
+        // const { id, user, name, email, rank, streak, progressW, progressY, progressO } = decoded;
         console.log(decoded);
         const account = 
         {
-          id,
-          user,
-          name, 
-          email,
-          rank,
-          streak,
-          progressW,
-          progressY,
-          progressO
+          id: decoded.id,
+          user: decoded.user, // or whatever the correct field is
+          name: decoded.name,
+          email: decoded.email,
+          rank: decoded.rank,
+          streak: decoded.streak,
+          progressW: decoded.progressW,
+          progressY: decoded.progressY,
+          progressO: decoded.progressO
         };
         localStorage.setItem("token", accessToken);
         localStorage.setItem("user_data", JSON.stringify(account))
