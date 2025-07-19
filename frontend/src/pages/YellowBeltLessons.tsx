@@ -96,9 +96,7 @@ const YellowBeltLessons = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             id,
-            progressW: 0,
-            progressY: newProgressY,
-            progressO: 0,
+            progressY: newProgressY,           
             jwtToken,
           }),
         }
