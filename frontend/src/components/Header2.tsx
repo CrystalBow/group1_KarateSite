@@ -9,10 +9,26 @@ function Header2(){
   const profileIconRef = useRef<HTMLImageElement>(null);
   const AccountDivRef = useRef<HTMLDivElement>(null);
   const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
-  const [beltName] = useState(userData.name);
+  const [beltName, setBeltName] = useState("");
   const [profileImg] = useState("/assets/ProfileWhiteBelt.png");
   // const navigate = useNavigate();
-  // setBeltName(userData.name);
+
+  if (userData.rank == 0)
+  {
+    setBeltName("White Belt");
+  }
+  else if (userData.rank == 1)
+  {
+    setBeltName("Yellow Belt");
+  }
+  else if (userData.rank == 2)
+  {
+    setBeltName("Orange Belt");
+  }
+  else
+  {
+    setBeltName("ERROR");
+  }
   
 
   function doLogout(event: any): void {
