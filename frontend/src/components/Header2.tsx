@@ -13,22 +13,24 @@ function Header2(){
   const [profileImg] = useState("/assets/ProfileWhiteBelt.png");
   // const navigate = useNavigate();
 
-  if (userData.rank == 0)
-  {
-    setBeltName("White Belt");
-  }
-  else if (userData.rank == 1)
-  {
-    setBeltName("Yellow Belt");
-  }
-  else if (userData.rank == 2)
-  {
-    setBeltName("Orange Belt");
-  }
-  else
-  {
-    setBeltName("ERROR");
-  }
+  useEffect(() => {
+    if (userData.rank === 0) 
+    {
+      setBeltName("White Belt");
+    } 
+    else if (userData.rank === 1) 
+    {
+      setBeltName("Yellow Belt");
+    } 
+    else if (userData.rank === 2) 
+    {
+      setBeltName("Orange Belt");
+    } 
+    else 
+    {
+      setBeltName("ERROR");
+    }
+  }, [userData.rank]);
   
 
   function doLogout(event: any): void {
