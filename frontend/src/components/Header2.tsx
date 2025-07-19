@@ -10,21 +10,24 @@ function Header2(){
   const AccountDivRef = useRef<HTMLDivElement>(null);
   const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
   const [beltName, setBeltName] = useState("");
-  const [profileImg] = useState("/assets/ProfileWhiteBelt.png");
+  const [profileImg, setProfileImg] = useState("");
   // const navigate = useNavigate();
 
   useEffect(() => {
     if (userData.rank === 0) 
     {
       setBeltName("White Belt");
+      setProfileImg("/assets/ProfileWhiteBelt.png");
     } 
     else if (userData.rank === 1) 
     {
       setBeltName("Yellow Belt");
+      setProfileImg("/assets/ProfileYellowBelt.png");
     } 
     else if (userData.rank === 2) 
     {
       setBeltName("Orange Belt");
+      setProfileImg("/assets/ProfileOrangeBelt.png");
     } 
     else 
     {

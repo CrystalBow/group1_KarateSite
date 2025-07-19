@@ -52,7 +52,7 @@ const KataMenu = () => {
     };
 
     data.results.forEach((item: { Name: string; Belt: string }) => {
-      const belt = item.Belt?.toLowerCase();
+      const belt = item.Belt;
       if (formatted[belt]) {
         formatted[belt].push(item.Name);
       }
