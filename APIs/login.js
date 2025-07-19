@@ -36,10 +36,12 @@ module.exports = function(db) {
 
       // Passwords match and email verified - return user data
       const id = userRecord.id;
+      const user = userRecord.user;
       const name = userRecord.name;
       const email = userRecord.email;
       const previousLogin = userRecord.lastlogin || 0;
       const rank = userRecord.rank || 0;
+      const streak = userRecord.streak || 0;
       const progressW = userRecord.progressW || 0;
       const progressY = userRecord.progressY || 0;
       const progressO = userRecord.progressO || 0;
@@ -66,14 +68,14 @@ module.exports = function(db) {
       // Generate token
       try 
       {
-        const result = token.createToken(id, name, email, rank, progressW, progressY, progressO);
+        const result = token.createToken(id, user, name, email, rank, streak, progressW, progressY, progressO);
 
         if (result.error) 
           {
           return res.status(500).json({ error: 'Failed to generate token: ' + result.error });
         }
 
-        return res.status(200).json({accessToken: result.accessToken, id, name, email, rank, progressW, progressY, progressO});
+        return res.status(200).json({accessToken: result.accessToken, id, user, name, email, rank, streak, progressW, progressY, progressO});
       } 
       catch (tokenErr) 
       {
