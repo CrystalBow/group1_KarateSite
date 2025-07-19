@@ -73,7 +73,7 @@ module.exports = function(db) {
           return res.status(500).json({ error: 'Failed to generate token: ' + result.error });
         }
 
-        return res.status(200).json(result);
+        return res.status(200).json({accessToken: result.accessToken, id, name, email, rank, progressW, progressY, progressO});
       } 
       catch (tokenErr) 
       {
