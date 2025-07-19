@@ -63,7 +63,7 @@ function Header2(){
     if (okay)
     {
       deleteAccount();
-      window.location.href = "/";
+      // window.location.href = "/";
     }
   }
 
