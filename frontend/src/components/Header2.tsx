@@ -9,7 +9,7 @@ function Header2(){
   const profileIconRef = useRef<HTMLImageElement>(null);
   const AccountDivRef = useRef<HTMLDivElement>(null);
   const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
-  const [beltName, setBeltName] = useState(userData.name);
+  const [beltName] = useState(userData.name);
   const [profileImg] = useState("/assets/ProfileWhiteBelt.png");
   // const navigate = useNavigate();
   // setBeltName(userData.name);
