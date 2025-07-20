@@ -23,6 +23,7 @@ function Header2(){
     // If no user_data, i.e no one is logged in
     if (Object.keys(userData).length === 0)
     {
+      window.location.reload();
       window.location.href = "/"; // return to home page
       return;
     }
