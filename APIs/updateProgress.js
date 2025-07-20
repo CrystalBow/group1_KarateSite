@@ -3,21 +3,18 @@ const router = express.Router();
 const token = require("../createJWT.js");
 
 module.exports = function (db) {
-  router.post("/", async (req, res) => {
+  // Update progress endpoint at /api/updateProgress
+  router.post("/updateProgress", async (req, res) => {
     const { id, progressW, progressY, progressO, jwtToken } = req.body;
 
-    // Test validity of token
+    // Validate JWT token
     try {
       if (token.isExpired(jwtToken)) {
-        var r = { error: "The JWT is no longer valid", jwtToken: "" };
-        res.status(200).json(r);
-        return;
+        return res.status(200).json({ error: "The JWT is no longer valid", jwtToken: "" });
       }
     } catch (e) {
       console.log(e.message);
-      var r = { error: e.message, jwtToken: "" };
-      res.status(200).json(r);
-      return;
+      return res.status(200).json({ error: e.message, jwtToken: "" });
     }
 
     let rank = 0;
@@ -28,48 +25,56 @@ module.exports = function (db) {
       }
     }
 
-    let error = "";
     try {
-      let updateFields = { rank: rank };
+      let updateFields = { rank };
 
       if (progressW !== undefined) updateFields.progressW = progressW;
       if (progressY !== undefined) updateFields.progressY = progressY;
       if (progressO !== undefined) updateFields.progressO = progressO;
 
-      await db
-        .collection("Users")
-        .updateOne({ id: id }, { $set: updateFields } );
+      await db.collection("Users").updateOne({ id }, { $set: updateFields });
     } catch (err) {
-      error = err.toString();
+      console.error("DB update error:", err);
+      return res.status(500).json({ error: "DB update error: " + err.toString(), jwtToken: "" });
     }
-    // Refresh and return the token
-    var refreshedToken = null;
+
+    // Refresh token
+    let refreshedToken = null;
     try {
       refreshedToken = token.refresh(jwtToken);
     } catch (e) {
-      console.log(e.message);
+      console.log("JWT refresh crash");
+      return res.status(500).json({ error: "JWT refresh failed", jwtToken: "" });
     }
-    const user = await db.collection("Users").findOne({ id });
 
-    const ret = {
+    let user;
+    try {
+      user = await db.collection("Users").findOne({ id });
+      if (!user) {
+        return res.status(404).json({ error: "User not found", jwtToken: "" });
+      }
+    } catch (err) {
+      console.error("DB find error:", err);
+      return res.status(500).json({ error: "DB find error: " + err.toString(), jwtToken: "" });
+    }
+
+    return res.status(200).json({
       rank,
       progressW: user.progressW,
       progressY: user.progressY,
       progressO: user.progressO,
       jwtToken: refreshedToken,
-      error,
-    };
-    res.status(200).json(ret);
+      error: "",
+    });
   });
 
+  // Get user progress endpoint at /api/getUserProgress
   router.post("/getUserProgress", async (req, res) => {
     const { id, jwtToken } = req.body;
 
     try {
       if (token.isExpired(jwtToken)) {
-        return res
-          .status(200)
-          .json({ error: "The JWT is no longer valid", jwtToken: "" });
+        return res.status(200).json({ error: "The JWT is no longer valid", jwtToken: "" });
       }
     } catch (e) {
       return res.status(200).json({ error: e.message, jwtToken: "" });
@@ -77,7 +82,6 @@ module.exports = function (db) {
 
     try {
       const user = await db.collection("Users").findOne({ id });
-
       if (!user) {
         return res.status(404).json({ error: "User not found", jwtToken: "" });
       }
@@ -86,7 +90,8 @@ module.exports = function (db) {
       try {
         refreshedToken = token.refresh(jwtToken);
       } catch (e) {
-        console.log(e.message);
+        console.log("JWT refresh crash");
+        return res.status(500).json({ error: "JWT refresh crash", jwtToken: "" });
       }
 
       return res.status(200).json({
@@ -97,10 +102,8 @@ module.exports = function (db) {
         error: "",
       });
     } catch (err) {
-      console.error(err);
-      return res
-        .status(500)
-        .json({ error: "Internal server error", jwtToken: "" });
+      console.error("DB find error:", err);
+      return res.status(500).json({ error: "Internal server error", jwtToken: "" });
     }
   });
 

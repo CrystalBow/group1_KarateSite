@@ -9,6 +9,23 @@ module.exports = function(db) {
   router.post('/', async (req, res) => {
     const { user, password, name, email, rank } = req.body;
 
+    // Basic input validation:
+    if (
+      !user || typeof user !== 'string' || user.trim() === '' ||
+      !password || typeof password !== 'string' || password.trim() === '' ||
+      !name || typeof name !== 'string' || name.trim() === '' ||
+      !email || typeof email !== 'string' || email.trim() === '' ||
+      typeof rank !== 'number' || rank < 0
+    ) {
+      return res.status(400).json({ error: 'Invalid or missing fields. Please provide valid user, password, name, email, and rank.' });
+    }
+
+    // Optional: Simple email format check (regex)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ error: 'Invalid email format.' });
+    }
+
     try {
       // Check if user already exists
       const existingUsers = await db.collection('Users').find({ user }).toArray();
@@ -44,7 +61,12 @@ module.exports = function(db) {
       newUser.verificationToken = verificationToken;
 
       // Insert new user
-      await db.collection('Users').insertOne(newUser);
+      try {
+        await db.collection('Users').insertOne(newUser);
+      } catch (insertError) {
+        console.error('DB insert error:', insertError);
+        return res.status(500).json({ error: insertError.toString() });
+      }
 
       // Send verification email
       const verifyEmailLink = `http://143.198.160.127:5000/api/verifyEmail?token=${verificationToken}`;

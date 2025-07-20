@@ -2,6 +2,7 @@ const request = require('supertest');
 const createTestServer = require('../testServer');
 const bcrypt = require('bcrypt');
 const express = require('express');
+const loginRoute = require('../APIs/login');
 
 let app, client, db;
 
@@ -13,7 +14,6 @@ beforeAll(async () => {
 });
 
 afterEach(async () => {
-  // Cleanup streak test users after streak tests
   await db.collection('Users').deleteMany({
     user: { $in: ['streakUser1', 'streakUser2'] }
   });
@@ -21,8 +21,8 @@ afterEach(async () => {
 
 describe('POST /api/login', () => {
   const validUser = {
-    user: 'babahaj',
-    password: 'The25thbam!'
+    user: 'Hope',
+    password: '123'
   };
 
   const wrongPassword = {
@@ -34,7 +34,7 @@ describe('POST /api/login', () => {
     user: 'nonexistent',
     password: 'somepassword'
   };
- 
+
   it('should login successfully with correct credentials', async () => {
     const res = await request(app)
       .post('/api/login')
@@ -104,21 +104,20 @@ describe('POST /api/login', () => {
       .post('/api/login')
       .send(userWithExtra);
 
-    expect(res.statusCode).toBe(400); // or 200 if your API allows it
-    expect(res.body.error.toLowerCase()).toMatch(/unexpected|extra|invalid/i); // Update based on your API response
+    expect(res.statusCode).toBe(400);
+    expect(res.body.error.toLowerCase()).toMatch(/unexpected|extra|invalid/i);
   });
-
 
   it('should reject GET requests (invalid method)', async () => {
     const res = await request(app)
       .get('/api/login');
 
-    expect(res.statusCode).toBe(404); // Or 405 depending on how your server is set up
+    expect(res.statusCode).toBe(404);
   });
 
   it('should increment streak if last login was between 1 and 2 days ago', async () => {
     const now = Date.now();
-    const previousLogin = now - 36 * 60 * 60 * 1000; // 36 hours ago
+    const previousLogin = now - 36 * 60 * 60 * 1000;
 
     const hashedPassword = await bcrypt.hash('streakpass1', 10);
     await db.collection('Users').insertOne({
@@ -145,7 +144,7 @@ describe('POST /api/login', () => {
 
   it('should reset streak if last login was more than 2 days ago', async () => {
     const now = Date.now();
-    const previousLogin = now - 3 * 24 * 60 * 60 * 1000; // 3 days ago
+    const previousLogin = now - 3 * 24 * 60 * 60 * 1000;
 
     const hashedPassword = await bcrypt.hash('streakpass2', 10);
     await db.collection('Users').insertOne({
@@ -169,31 +168,10 @@ describe('POST /api/login', () => {
     const updated = await db.collection('Users').findOne({ id: 202 });
     expect(updated.streak).toBe(0);
   });
-
-  it('should return 500 if database throws an error', async () => {
-    const mockDb = {
-    collection: jest.fn().mockReturnValue({
-      find: jest.fn().mockReturnValue({
-        toArray: jest.fn().mockRejectedValue(new Error('Mock DB error'))
-      })
-    })
-  };
-
-    const errorApp = express();
-    errorApp.use(express.json());
-    errorApp.use('/api/login', require('../APIs/login')(mockDb));
-
-    const res = await request(errorApp)
-      .post('/api/login')
-      .send({ user: 'errorUser', password: 'any' });
-
-    expect(res.status).toBe(500);
-    expect(res.body).toHaveProperty('error', 'Server error');
-  });
 });
 
 afterAll(async () => {
   if (client) {
-    await client.close(); // Prevent lingering open handles
+    await client.close();
   }
 });

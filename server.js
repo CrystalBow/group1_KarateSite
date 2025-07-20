@@ -42,7 +42,15 @@ async function connectToMongo() {
     fs.readdirSync(routesDir).forEach(file => {
       if (file.endsWith('.js')) {
         const route = require(path.join(routesDir, file));
-        app.use('/api/' + file.replace('.js', ''), route(db));
+        const routeName = path.parse(file).name;
+
+        // If the file is updateProgress.js (has multiple routes), mount at /api
+        if (routeName === 'updateProgress') {
+          app.use('/api', route(db));
+        } else {
+          // For others like login.js → /api/login, register.js → /api/register
+          app.use(`/api/${routeName}`, route(db));
+        }
       }
     });
 

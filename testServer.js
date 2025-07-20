@@ -16,19 +16,12 @@ async function createTestServer() {
   app.locals.db = db;
   app.locals.client = client;
 
-  // Mount each API with the shared `db`
+  // Mount API route handlers for testing
   app.use('/api/login', require('./APIs/login')(db));
   app.use('/api/register', require('./APIs/register')(db));
-  app.use('/api/resetPassword', require('./APIs/resetPassword')(db));
-  app.use('/api/verifyEmail', require('./APIs/verifyEmail')(db));
-  app.use('/api/requestPasswordReset', require('./APIs/requestPasswordReset')(db));
-  app.use('/api/updateProgress', require('./APIs/updateProgress')(db));
-  app.use('/api/deleteUser', require('./APIs/deleteUser')(db));
-  app.use('/api/editUserInfo', require('./APIs/editUserInfo')(db));
-  app.use('/api/searchKata', require('./APIs/searchKata')(db));
-  app.use('/api/getPasswordInfo', require('./APIs/getPasswordInfo')(db));
+  app.use('/api', require('./APIs/updateProgress')(db));
 
-  // Return both app and client so tests can shut down the DB connection
+  // Return app, client, and db so tests can control lifecycle and access DB
   return { app, client, db };
 }
 
