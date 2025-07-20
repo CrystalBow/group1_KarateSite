@@ -112,6 +112,8 @@ const WhiteBeltLessons = () => {
         body: JSON.stringify({
           id,
           progressW: newProgressW,
+          progressY: userData.progressY,
+          progress0: userData.progressO,
           jwtToken,
         }),
       });

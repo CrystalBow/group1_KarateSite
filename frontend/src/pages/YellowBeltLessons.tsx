@@ -83,6 +83,7 @@ const YellowBeltLessons = () => {
     const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
     const id = userData.id;
 
+    //debuggin
     console.log("Before update:", userData)
     console.log("Before update newProgressY: " + newProgressY);
 
@@ -110,7 +111,7 @@ const YellowBeltLessons = () => {
 
       const data = await response.json();
 
-      console.log("Data after Update:", data)
+      console.log("Data after Update:", data) // debuggin
 
       if (data.error) {
         console.error("Error updating progress:", data.error);
