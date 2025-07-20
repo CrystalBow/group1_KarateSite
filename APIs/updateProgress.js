@@ -18,10 +18,10 @@ module.exports = function (db) {
     }
 
     let rank = 0;
-    if (progressW >= 6)
+    if (progressW >= 6) // 0-6
     {
       rank = 1;
-      if (progressY >= 4)
+      if (progressY >= 3) // 0-3
       {
         rank = 2;
       }
