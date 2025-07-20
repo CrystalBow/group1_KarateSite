@@ -42,7 +42,7 @@ async function connectToMongo() {
     fs.readdirSync(routesDir).forEach(file => {
       if (file.endsWith('.js')) {
         const route = require(path.join(routesDir, file));
-        app.use('/api', route(db)); // Pass db to each route module
+        app.use('/api/' + file.replace('.js', ''), route(db));
       }
     });
 
