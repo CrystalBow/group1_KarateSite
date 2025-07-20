@@ -37,6 +37,7 @@ const YellowBeltLessons = () => {
 
       console.log(localStorage.getItem("token"));
       console.log(id);
+      console.log("fetch:", userData);
 
       if (!jwtToken || !id) {
         console.warn("Missing token or user ID");
@@ -82,6 +83,9 @@ const YellowBeltLessons = () => {
     const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
     const id = userData.id;
 
+    console.log("Before update:", userData)
+    console.log("Before update newProgressY: " + newProgressY);
+
     if (!jwtToken || !id) {
       console.warn("Missing token or user ID");
       return;
@@ -103,6 +107,8 @@ const YellowBeltLessons = () => {
       );
 
       const data = await response.json();
+
+      console.log("Data after Update:", data)
 
       if (data.error) {
         console.error("Error updating progress:", data.error);
