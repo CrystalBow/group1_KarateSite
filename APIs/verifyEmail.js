@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = function(db) {
-  router.get('/verifyEmail', async (req, res) => {
+  router.get('/', async (req, res) => {
     const token = req.query.token;
 
     try {

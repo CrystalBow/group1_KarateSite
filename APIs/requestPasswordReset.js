@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const mail = require('@sendgrid/mail');
 
 module.exports = function(db) {
-  router.post('/requestPasswordReset', async (req, res) => {
+  router.post('/', async (req, res) => {
     const { email } = req.body;
 
     try {

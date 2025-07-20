@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 
 module.exports = function(db) {
-  router.post('/resetPassword', async (req, res) => {
+  router.post('/', async (req, res) => {
     const { token, newPassword } = req.body;
 
     try {

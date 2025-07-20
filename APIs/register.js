@@ -6,7 +6,7 @@ const mail = require('@sendgrid/mail');
 mail.setApiKey(process.env.SENDGRID_API_KEY);
 
 module.exports = function(db) {
-  router.post('/register', async (req, res) => {
+  router.post('/', async (req, res) => {
     const { user, password, name, email, rank } = req.body;
 
     try {

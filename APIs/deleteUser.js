@@ -3,7 +3,7 @@ const router = express.Router();
 const token = require('../createJWT.js');
 
 module.exports = function(db) {
-  router.post('/deleteUser', async (req, res) => {
+  router.post('/', async (req, res) => {
     const { user, jwtToken } = req.body;
     // Test validity of token
     try

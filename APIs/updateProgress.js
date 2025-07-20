@@ -3,7 +3,7 @@ const router = express.Router();
 const token = require("../createJWT.js");
 
 module.exports = function (db) {
-  router.post("/updateProgress", async (req, res) => {
+  router.post("/", async (req, res) => {
     const { id, progressW, progressY, progressO, jwtToken } = req.body;
 
     // Test validity of token
