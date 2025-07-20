@@ -80,7 +80,7 @@ const WhiteBeltLessons = () => {
         }
 
         if (data.progressW !== undefined) {
-          setUnlockedCount(data.progressW);
+          setUnlockedCount(data.progressW + 1);
         }
 
         // if (data.jwtToken && data.jwtToken.trim() !== "") {
@@ -125,7 +125,7 @@ const WhiteBeltLessons = () => {
         //   localStorage.setItem("token", data.jwtToken);
         // }
         if (data.progressW !== undefined) {
-          setUnlockedCount(data.progressW);
+          setUnlockedCount(data.progressW + 1);
         }
       }
     } catch (err) {

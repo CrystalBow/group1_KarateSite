@@ -53,7 +53,7 @@ module.exports = function(db) {
         progressO: 0,
       };
 
-      if (rank >= 1) newUser.progressW = 5;
+      if (rank >= 1) newUser.progressW = 6;
       if (rank >= 2) newUser.progressY = 3;
 
       // Create email verification token

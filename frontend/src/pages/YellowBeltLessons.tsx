@@ -63,7 +63,7 @@ const YellowBeltLessons = () => {
         }
 
         if (data.progressY !== undefined) {
-          setUnlockedCount(data.progressY);
+          setUnlockedCount(data.progressY + 1);
         }
         
         // if (data.jwtToken && data.jwtToken.trim() !== "") {
@@ -111,7 +111,7 @@ const YellowBeltLessons = () => {
         //   localStorage.setItem("token", data.jwtToken);
         // }
         if (data.progressY !== undefined) {
-          setUnlockedCount(data.progressY);
+          setUnlockedCount(data.progressY + 1);
         }
       }
     } catch (err) {

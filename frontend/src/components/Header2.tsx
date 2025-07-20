@@ -21,10 +21,11 @@ function Header2(){
 
   useEffect(() => {
     // If no user_data, i.e no one is logged in
+    
     if (Object.keys(userData).length === 0)
     {
       window.location.reload();
-      window.location.href = "/"; // return to home page
+      //window.location.href = "/"; // return to home page
       return;
     }
 
@@ -62,6 +63,7 @@ function Header2(){
   {
     event.preventDefault();
     localStorage.removeItem("user_data");
+    localStorage.removeItem
     window.location.href = "/";
   }
 
