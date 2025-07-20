@@ -1,9 +1,27 @@
 const express = require('express');
 const router = express.Router();
+const token = require('../createJWT.js');
 
 module.exports = function(db) {
   router.post('/deleteUser', async (req, res) => {
-    const { user } = req.body;
+    const { user, jwtToken } = req.body;
+    // Test validity of token
+    try
+    {
+      if (token.isExpired(jwtToken))
+      {
+        var r = {error:'The JWT is no longer valid', jwtToken:''}
+        res.status(200).json(r);
+        return;
+      }
+    }
+    catch(e)
+    {
+      console.log(e.message);
+      var r = {error:e.message,jwtToken:''};
+      res.status(200).json(r);
+      return;
+    }
 
     try {
       const deleteResult = await db.collection('Users').deleteOne({ user });
@@ -11,8 +29,21 @@ module.exports = function(db) {
       if (deleteResult.deletedCount === 0) {
         return res.status(200).json({ message: "User not found." });
       }
-      
-      res.status(200).json({ message: "User has been successfully deleted." });
+      // Refresh and return the token
+      var refreshedToken = null;
+      try
+      {
+        refreshedToken = token.refresh(jwtToken);
+      }
+      catch(e)
+      {
+        console.log(e.message);
+      }
+      return res.status(200).json({
+        message: "User has been deleted.",
+        jwtToken: refreshedToken || '',
+        error: ''
+      });
     } catch (error) {
       res.status(500).json({ error: "Could not delete user" });
     }

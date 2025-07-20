@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header1 from "./Header1";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 function Login() {
   const [message, setMessage] = useState("");
@@ -55,20 +56,43 @@ function Login() {
       });
 
       var res = JSON.parse(await response.text());
-      console.log("Login Response:", res); //debuggin 
+      console.log("Login Response:", res); //debuggin
 
-      if (res.id <= 0) {
-        setMessage("User/Password combination incorrect");
-      } else {
-        var user = {
-          firstName: res.firstName,
-          lastName: res.lastName,
-          id: res.id,
+      // JWT stuff
+      const { accessToken, error, id } = res;
+      console.log("AccessToken:", accessToken); //debuggin
+
+      // Login failure
+      if (id === -1 || !accessToken || typeof accessToken !== "string") {
+        setMessage(error || "Login failed. No access token received.");
+        return;
+      }
+      try 
+      {
+        const decoded: any = jwtDecode(accessToken);
+        const { id, user, name, email, rank, streak, progressW, progressY, progressO } = decoded;
+        console.log(decoded);
+        const account = 
+        {
+          id,
+          user,
+          name, 
+          email,
+          rank,
+          streak,
+          progressW,
+          progressY,
+          progressO
         };
-        localStorage.setItem("user_data", JSON.stringify(user));
+        localStorage.setItem("token", accessToken);
+        localStorage.setItem("user_data", JSON.stringify(account))
         setMessage("");
         navigate("/curriculum");
       }
+      catch
+      {
+        setMessage("Failed to decode access token.");
+      }  
     } catch (error: any) {
       alert(error.toString());
       return;

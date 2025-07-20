@@ -11,7 +11,7 @@ const CurriculumPage = () => {
   }, []);
   return (
     <div>
-      <Header2 profileImg="/assets/ProfileWhiteBelt.png" beltText="White Belt"/>
+      <Header2 />
       <div className="page-container">
         <div className="custom-card custom-card-items-centered">
           <div id="redDivCurr" className="redDivLogin">

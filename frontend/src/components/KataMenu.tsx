@@ -15,34 +15,54 @@ const KataMenu = () => {
 
   // Fetch data from server
   const handleSearch = async () => {
-    try {
-      const res = await fetch("/api/searchKata", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ search: searchTerm }),
-      });
-      const data = await res.json();
+  const token = localStorage.getItem("token"); 
+  
 
-      // Transform data into expected structure
-      const formatted: Record<string, string[]> = {
-        white: [],
-        yellow: [],
-        orange: [],
-      };
-
-      // Assume the DB returns an array of { Name: "...", Belt: "yellow" }
-      data.forEach((item: { Name: string; Belt: string }) => {
-        const belt = item.Belt?.toLowerCase();
-        if (formatted[belt]) {
-          formatted[belt].push(item.Name);
-        }
-      });
-
-      setKataData(formatted);
-    } catch (error) {
-      console.error("Search failed:", error);
+  const app_name = "karatemanager.xyz";
+  function buildPath(route: string): string {
+    if (process.env.NODE_ENV != "development") {
+      return "http://" + app_name + ":5000/" + route;
+    } else {
+      return "http://localhost:5000/" + route;
     }
-  };
+  }
+
+  try {
+    const res = await fetch(buildPath("api/searchKata"), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        search: searchTerm,
+        jwtToken: token, 
+      }),
+    });
+
+    const data = await res.json();
+
+    // check for token expiration / errors
+    if (data.error) {
+      console.error("Error from server:", data.error);
+      return;
+    }
+
+    const formatted: Record<string, string[]> = {
+      white: [],
+      yellow: [],
+      orange: [],
+    };
+
+    data.results.forEach((item: { Name: string; Belt: string }) => {
+      const belt = item.Belt;
+      if (formatted[belt]) {
+        formatted[belt].push(item.Name);
+      }
+    });
+
+    setKataData(formatted);
+  } catch (error) {
+    console.error("Search failed:", error);
+  }
+};
 
   // Optionally fetch all kata on first load
   useEffect(() => {

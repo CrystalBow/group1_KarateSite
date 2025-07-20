@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const token = require('../createJWT.js');
 
 module.exports = function(db) {
   router.post('/login', async (req, res) => {
@@ -35,10 +36,12 @@ module.exports = function(db) {
 
       // Passwords match and email verified - return user data
       const id = userRecord.id;
+      // const user = userRecord.user;
       const name = userRecord.name;
       const email = userRecord.email;
       const previousLogin = userRecord.lastlogin || 0;
       const rank = userRecord.rank || 0;
+      const streak = userRecord.streak || 0;
       const progressW = userRecord.progressW || 0;
       const progressY = userRecord.progressY || 0;
       const progressO = userRecord.progressO || 0;
@@ -46,7 +49,7 @@ module.exports = function(db) {
 
       try {
         // Update last login timestamp
-        await db.collection('Users').updateOne({ id: id }, { $set: { lastlogin: Date.now() } });
+        await db.collection('Users').updateOne({ id: id }, { $set: { lastlogin: Date.now() } });  
 
         // Update streak logic
         if (previousLogin > 0) {
@@ -62,19 +65,24 @@ module.exports = function(db) {
       } catch (updateError) {
         error = updateError.toString();
       }
+      // Generate token
+      try 
+      {
+        const result = token.createToken(id, user, name, email, rank, streak, progressW, progressY, progressO);
 
-      return res.status(200).json({
-        id,
-        name,
-        email,
-        rank,
-        progressW,
-        progressY,
-        progressO,
-        error
-      });
+        if (result.error) 
+          {
+          return res.status(500).json({ error: 'Failed to generate token: ' + result.error });
+        }
 
+        return res.status(200).json({accessToken: result.accessToken, id, user, name, email, rank, streak, progressW, progressY, progressO});
+      } 
+      catch (tokenErr) 
+      {
+        return res.status(500).json({ error: 'Failed to generate token: ' + tokenErr.message });
+      }
     } catch (err) {
+      console.error("Login error:", err);
       return res.status(500).json({ error: 'Server error' });
     }
   });
