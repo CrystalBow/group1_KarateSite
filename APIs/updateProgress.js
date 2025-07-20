@@ -20,12 +20,18 @@ module.exports = function (db) {
     let rank = 0;
     if (progressW >= 6) // 0-6
     {
+      console.log("ProgressW >= 6");
       rank = 1;
+      console.log(rank);
       if (progressY >= 3) // 0-3
       {
+        console.log("ProgressY >= 3");
         rank = 2;
+        console.log(rank);
       }
     }
+
+    console.log("Outside If statments rank is " + rank);
 
     try {
       let updateFields = { rank };
