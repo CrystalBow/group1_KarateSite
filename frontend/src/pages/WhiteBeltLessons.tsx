@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Header2 from "../components/Header2.tsx";
+import { storeToken } from '../tokenStorage';
 
 const lessons = [
   {
@@ -98,6 +99,7 @@ const WhiteBeltLessons = () => {
     const jwtToken = localStorage.getItem("token");
     const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
     const id = userData.id;
+    
 
     if (!jwtToken || !id) {
       console.warn("Missing token or user ID");
@@ -129,6 +131,8 @@ const WhiteBeltLessons = () => {
         if (data.progressW !== undefined) {
           setUnlockedCount(data.progressW + 1);
         }
+
+        storeToken(data.jwtToken);
       }
     } catch (err) {
       console.error("Progress update failed:", err);

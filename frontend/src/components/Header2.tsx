@@ -13,15 +13,10 @@ function Header2(){
   const [beltName, setBeltName] = useState("");
   const [profileImg, setProfileImg] = useState("");
   const navigate = useNavigate();
-  
-  // var storage = require('../tokenStorage.js);
-  // var obj = (other data, jwtToken:storage.retrieveToken());
-  // var js = JSON.stringify(obj);
-  // const navigate = useNavigate();
 
   useEffect(() => {
+
     // If no user_data, i.e no one is logged in
-    
     if (Object.keys(userData).length === 0)
     {
       window.location.reload();
