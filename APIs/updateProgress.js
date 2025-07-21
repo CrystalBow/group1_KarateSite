@@ -98,7 +98,7 @@ module.exports = function (db) {
 
       return res.status(200).json({
         progressW: user.progressW || 1,
-        progressY: user.progressY || 1,
+        progressY: user.progressY || 0,
         progressO: user.progressO || 1,
         jwtToken: refreshedToken,
         error: "",
