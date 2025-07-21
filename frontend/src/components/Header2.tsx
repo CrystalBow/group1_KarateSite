@@ -9,8 +9,8 @@ function Header2(){
   const [beltName, setBeltName] = useState("");
   const [profileImg, setProfileImg] = useState("");
   const [isEditing, setIsEditing] = useState(false);
-  const [testEdit, setTestEdit] = useState("Changes");
-  const [copy, setCopy] = useState(testEdit);
+  // const [testEdit, setTestEdit] = useState("Changes");
+  const [copy, setCopy] = useState("");
   const [message, setMessage] = useState("");
   const profileIconRef = useRef<HTMLImageElement>(null);
   const AccountDivRef = useRef<HTMLDivElement>(null);
@@ -301,13 +301,13 @@ function Header2(){
                       id="checkIcon"
                       onClick={() => {
                         setIsEditing(!isEditing)
-                        setTestEdit(copy);
+                        updateProfile;
                       }}
                     /> 
                   </p>
                   </div>) : (
                   <p className="iconStyle"> 
-                    {testEdit}
+                    {userData.name}
                     <FaPen 
                       className="IconPosition" 
                       onClick={() => {setIsEditing(!isEditing)}}
