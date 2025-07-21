@@ -134,15 +134,15 @@ const WhiteBeltLessons = () => {
         }
 
         storeToken(data.jwtToken);
-        if (data.jwtToken)
-        {
-          const decodedToken: any = jwtDecode(data.jwtToken);
-          console.log("Decoded Token:", decodedToken);
-        } 
-        else 
-        {
-          console.warn("No token found in localStorage.");
-        }  
+        // if (data.jwtToken)
+        // {
+        //   const decodedToken: any = jwtDecode(data.jwtToken);
+        //   console.log("Decoded Token:", decodedToken);
+        // } 
+        // else 
+        // {
+        //   console.warn("No token found in localStorage.");
+        // }  
 
       }
     } catch (err) {
