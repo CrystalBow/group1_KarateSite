@@ -134,7 +134,7 @@ const YellowBeltLessons = () => {
   const handleNext = async () => {
     if (currentLessonIndex < lessons.length - 1) {
       const newLessonIndex = currentLessonIndex + 1;
-      const newUnlockedCount = Math.max(unlockedCount, newLessonIndex + 1);
+      const newUnlockedCount = Math.max(unlockedCount, newLessonIndex);
 
       setCurrentLessonIndex(newLessonIndex);
       setUnlockedCount(newUnlockedCount);
