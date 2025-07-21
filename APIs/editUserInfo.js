@@ -77,7 +77,7 @@ module.exports = function(db) {
           editInfo.progressY = 0;
         }
 
-        if (rank >= 1) editInfo.progressW = 5;
+        if (rank >= 1) editInfo.progressW = 6;
         if (rank >= 2) editInfo.progressY = 3;
       }
 
