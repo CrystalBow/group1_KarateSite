@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Header2 from "../components/Header2.tsx";
 import { storeToken } from '../tokenStorage';
+import { jwtDecode } from "jwt-decode";
 
 const lessons = [
   {
@@ -133,6 +134,16 @@ const WhiteBeltLessons = () => {
         }
 
         storeToken(data.jwtToken);
+        if (data.jwtToken)
+        {
+          const decodedToken: any = jwtDecode(data.jwtToken);
+          console.log("Decoded Token:", decodedToken);
+        } 
+        else 
+        {
+          console.warn("No token found in localStorage.");
+        }  
+
       }
     } catch (err) {
       console.error("Progress update failed:", err);
