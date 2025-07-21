@@ -66,15 +66,20 @@ module.exports = function(db) {
         }
       }
 
-      // Update Rank and progress
-      if (rank == 0)
+      // Edit and Update Rank and progress
+      if(rank)
       {
-        editInfo.progressW = 0;
-        editInfo.progressY = 0;
+        editInfo.rank = rank;
+
+        if (rank == 0)
+        {
+          editInfo.progressW = 0;
+          editInfo.progressY = 0;
+        }
+
+        if (rank >= 1) editInfo.progressW = 5;
+        if (rank >= 2) editInfo.progressY = 3;
       }
-      
-      if (rank >= 1) editInfo.progressW = 5;
-      if (rank >= 2) editInfo.progressY = 3;
 
       await db.collection('Users').updateOne({ user }, { $set: editInfo });
 
