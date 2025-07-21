@@ -1,5 +1,6 @@
 import { FaArrowRightFromBracket, FaUser, FaXmark, FaPen, FaCircleArrowLeft   } from "react-icons/fa6";
 import { useState, useRef, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 // import { retrieveToken, storeToken } from '../tokenStorage.js';
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +16,19 @@ function Header2(){
   const navigate = useNavigate();
 
   useEffect(() => {
+    const jwtToken = localStorage.getItem("token");
+
+    console.log("Token:", jwtToken);
+
+    if (jwtToken)
+    {
+      const decodedToken: any = jwtDecode(jwtToken);
+      console.log("Decoded Token:", decodedToken);
+    } 
+    else 
+    {
+      console.warn("No token found in localStorage.");
+    }  
 
     // If no user_data, i.e no one is logged in
     if (Object.keys(userData).length === 0)
