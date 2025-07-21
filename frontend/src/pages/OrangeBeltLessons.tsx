@@ -143,15 +143,15 @@ const OrangeBeltLessons = () => {
               <button
                 key={lesson.name}
                 className={`lesson-section ${
-                  index < unlockedCount ? "unlocked" : "locked"
+                  index <= unlockedCount ? "unlocked" : "locked"
                 }`}
                 onClick={() => {
-                  if (index < unlockedCount) {
+                  if (index <= unlockedCount) {
                     setCurrentLessonIndex(index);
                   }
                 }}
               >
-                {index < unlockedCount ? lesson.name : `🔒 ${lesson.name}`}
+                {index <= unlockedCount ? lesson.name : `🔒 ${lesson.name}`}
               </button>
             ))}
           </div>
