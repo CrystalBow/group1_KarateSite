@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Header2 from "../components/Header2.tsx";
-import { storeToken } from '../tokenStorage';
+// import { storeToken } from '../tokenStorage';
 // import { jwtDecode } from "jwt-decode";
 
 const lessons = [
@@ -136,7 +136,7 @@ const WhiteBeltLessons = () => {
           setUnlockedCount(data.progressW);
         }
 
-        storeToken(data.jwtToken); //test
+        //storeToken(data.jwtToken); //test
       }
     } catch (err) {
       console.error("Progress update failed:", err);
