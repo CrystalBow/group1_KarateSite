@@ -167,7 +167,7 @@ const WhiteBeltLessons = () => {
               <button
                 key={lesson.name}
                 className={`lesson-section ${
-                  index < unlockedCount ? "unlocked" : "locked"
+                  index <= unlockedCount ? "unlocked" : "locked"
                 }`}
                 onClick={() => {
                   console.log("index = " + index);
@@ -176,7 +176,7 @@ const WhiteBeltLessons = () => {
                   }
                 }}
               >
-                {index < unlockedCount ? lesson.name : `🔒 ${lesson.name}`}
+                {index <= unlockedCount ? lesson.name : `🔒 ${lesson.name}`}
               </button>
             ))}
           </div>
