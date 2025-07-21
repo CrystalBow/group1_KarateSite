@@ -85,8 +85,8 @@ const WhiteBeltLessons = () => {
           setUnlockedCount(data.progressW);
         }
 
-        // console.log("Data fetch:", data);
-        // console.log("Unlocked Content = " + unlockedCount)
+        console.log("Data fetch:", data);
+        console.log("Unlocked Content = " + unlockedCount)
 
         // if (data.jwtToken && data.jwtToken.trim() !== "") {
         //   localStorage.setItem("token", data.jwtToken);
@@ -167,15 +167,16 @@ const WhiteBeltLessons = () => {
               <button
                 key={lesson.name}
                 className={`lesson-section ${
-                  index <= unlockedCount ? "unlocked" : "locked"
+                  index < unlockedCount ? "unlocked" : "locked"
                 }`}
                 onClick={() => {
+                  console.log("index = " + index);
                   if (index <= unlockedCount) {
                     setCurrentLessonIndex(index);
                   }
                 }}
               >
-                {index <= unlockedCount ? lesson.name : `🔒 ${lesson.name}`}
+                {index < unlockedCount ? lesson.name : `🔒 ${lesson.name}`}
               </button>
             ))}
           </div>
