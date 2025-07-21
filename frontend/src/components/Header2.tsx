@@ -14,34 +14,14 @@ function Header2(){
   const [beltName, setBeltName] = useState("");
   const [profileImg, setProfileImg] = useState("");
   const navigate = useNavigate();
-  const token = require('../createJWT.js');
 
   useEffect(() => {
     const jwtToken = localStorage.getItem("token");
-    var refreshedToken = null;
-    try
-    {
-      refreshedToken = token.refresh(jwtToken);
-    } 
-    catch(e)
-    {
-      console.log("failed to refresh token");
-    }
-
-    if (refreshedToken)
-    {
-      const decodedToken: any = jwtDecode(refreshedToken);
-      console.log("Decoded Token refreshed:", decodedToken);
-    } 
-    else 
-    {
-      console.warn("No token found in localStorage.");
-    }  
 
     if (jwtToken)
     {
       const decodedToken: any = jwtDecode(jwtToken);
-      console.log("Normal Token:", decodedToken);
+      console.log("Decoded Token:", decodedToken);
     } 
     else 
     {
