@@ -85,6 +85,9 @@ const WhiteBeltLessons = () => {
           setUnlockedCount(data.progressW);
         }
 
+        console.log("Data fetch:", data);
+        console.log("Unlocked Content = " + unlockedCount)
+
         // if (data.jwtToken && data.jwtToken.trim() !== "") {
         //   localStorage.setItem("token", data.jwtToken);
         // }
@@ -167,6 +170,8 @@ const WhiteBeltLessons = () => {
                   index <= unlockedCount ? "unlocked" : "locked"
                 }`}
                 onClick={() => {
+                  console.log("index = " + index);
+                  
                   if (index <= unlockedCount) {
                     setCurrentLessonIndex(index);
                   }
