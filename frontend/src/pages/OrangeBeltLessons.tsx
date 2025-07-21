@@ -64,6 +64,15 @@ const OrangeBeltLessons = () => {
 
         if (data.progressO !== undefined) {
           setUnlockedCount(data.progressO);
+
+          const updatedUser = {
+            ...userData,
+            progressW: data.progressW,
+            progressY: data.progressY,
+            progressO: data.progressO,
+            rank: data.rank,
+          };
+          localStorage.setItem("user_data", JSON.stringify(updatedUser));
         }
 
         // if (data.jwtToken && data.jwtToken.trim() !== "") {
@@ -112,6 +121,15 @@ const OrangeBeltLessons = () => {
         // }
         if (data.progressO !== undefined) {
           setUnlockedCount(data.progressO);
+
+          const updatedUser = {
+            ...userData,
+            progressW: data.progressW,
+            progressY: data.progressY,
+            progressO: data.progressO,
+            rank: data.rank,
+          };
+          localStorage.setItem("user_data", JSON.stringify(updatedUser));
         }
       }
     } catch (err) {
