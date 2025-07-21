@@ -64,7 +64,7 @@ const YellowBeltLessons = () => {
         }
 
         if (data.progressY !== undefined) {
-          setUnlockedCount(data.progressY + 1);
+          setUnlockedCount(data.progressY);
         }
         
         // if (data.jwtToken && data.jwtToken.trim() !== "") {
@@ -120,7 +120,7 @@ const YellowBeltLessons = () => {
         //   localStorage.setItem("token", data.jwtToken);
         // }
         if (data.progressY !== undefined) {
-          setUnlockedCount(data.progressY + 1);
+          setUnlockedCount(data.progressY);
         }
       }
     } catch (err) {
@@ -147,7 +147,7 @@ const YellowBeltLessons = () => {
         <div className="custom-card whitebelt-container">
           {/* LEFT SIDEBAR */}
           <div className="whitebelt-sidebar">
-            <h2 className="belt-title">WHITE BELT</h2>
+            <h2 className="belt-title">YELLOW BELT</h2>
             {lessons.map((lesson, index) => (
               <button
                 key={lesson.name}

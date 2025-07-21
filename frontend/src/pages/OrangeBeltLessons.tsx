@@ -138,7 +138,7 @@ const OrangeBeltLessons = () => {
         <div className="custom-card whitebelt-container">
           {/* LEFT SIDEBAR */}
           <div className="whitebelt-sidebar">
-            <h2 className="belt-title">WHITE BELT</h2>
+            <h2 className="belt-title">ORANGE BELT</h2>
             {lessons.map((lesson, index) => (
               <button
                 key={lesson.name}

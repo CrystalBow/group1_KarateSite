@@ -82,7 +82,7 @@ const WhiteBeltLessons = () => {
         }
 
         if (data.progressW !== undefined) {
-          setUnlockedCount(data.progressW + 1);
+          setUnlockedCount(data.progressW);
         }
 
         // if (data.jwtToken && data.jwtToken.trim() !== "") {
@@ -130,20 +130,10 @@ const WhiteBeltLessons = () => {
         //   localStorage.setItem("token", data.jwtToken);
         // }
         if (data.progressW !== undefined) {
-          setUnlockedCount(data.progressW + 1);
+          setUnlockedCount(data.progressW);
         }
 
-        storeToken(data.jwtToken);
-        // if (data.jwtToken)
-        // {
-        //   const decodedToken: any = jwtDecode(data.jwtToken);
-        //   console.log("Decoded Token:", decodedToken);
-        // } 
-        // else 
-        // {
-        //   console.warn("No token found in localStorage.");
-        // }  
-
+        storeToken(data.jwtToken); //test
       }
     } catch (err) {
       console.error("Progress update failed:", err);
@@ -174,15 +164,15 @@ const WhiteBeltLessons = () => {
               <button
                 key={lesson.name}
                 className={`lesson-section ${
-                  index < unlockedCount ? "unlocked" : "locked"
+                  index <= unlockedCount ? "unlocked" : "locked"
                 }`}
                 onClick={() => {
-                  if (index < unlockedCount) {
+                  if (index <= unlockedCount) {
                     setCurrentLessonIndex(index);
                   }
                 }}
               >
-                {index < unlockedCount ? lesson.name : `🔒 ${lesson.name}`}
+                {index <= unlockedCount ? lesson.name : `🔒 ${lesson.name}`}
               </button>
             ))}
           </div>
