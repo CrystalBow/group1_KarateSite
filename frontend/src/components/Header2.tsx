@@ -16,9 +16,9 @@ function Header2(){
   const navigate = useNavigate();
 
   useEffect(() => {
-    const jwtToken = localStorage.getItem("token");
+    const jwtToken = localStorage.getItem("token_data");
 
-    console.log("Token:", jwtToken);
+    console.log("Token_data:", jwtToken);
 
     if (jwtToken)
     {
