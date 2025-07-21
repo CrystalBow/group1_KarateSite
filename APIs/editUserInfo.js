@@ -75,6 +75,7 @@ module.exports = function(db) {
         {
           editInfo.progressW = 0;
           editInfo.progressY = 0;
+          editInfo.progressO = 0;
         }
 
         if (rank >= 1) editInfo.progressW = 6;
