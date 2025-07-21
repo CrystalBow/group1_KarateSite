@@ -67,7 +67,7 @@ module.exports = function(db) {
       }
 
       // Edit and Update Rank and progress
-      if(rank)
+      if(rank || (rank == 0))
       {
         editInfo.rank = rank;
 
