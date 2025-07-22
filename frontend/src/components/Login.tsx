@@ -56,8 +56,7 @@ function Login() {
       });
 
       var res = JSON.parse(await response.text());
-      console.log("Login Response:", res); //debuggin
-
+      console.log("Login Response:", res); //debugging
       // JWT stuff
       const { accessToken, error, id } = res;
       console.log("AccessToken:", accessToken); //debuggin
