@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Header2 from "../components/Header2.tsx";
+
 
 const lessons = [
   {
@@ -27,6 +29,10 @@ const lessons = [
 const OrangeBeltLessons = () => {
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
   const [unlockedCount, setUnlockedCount] = useState(0);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const lessonQuery = queryParams.get("lesson");
+
 
   useEffect(() => {
     const fetchUserProgress = async () => {
@@ -34,6 +40,15 @@ const OrangeBeltLessons = () => {
 
       const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
       const id = userData.id;
+
+      const indexFromQuery = lessons.findIndex(
+        (l) =>
+          l.name.toLowerCase().trim() ===
+          (lessonQuery ?? "").toLowerCase().trim()
+      );
+      if (indexFromQuery !== -1) {
+        setCurrentLessonIndex(indexFromQuery);
+      }
 
       console.log(localStorage.getItem("token"));
       console.log(id);
@@ -161,7 +176,7 @@ const OrangeBeltLessons = () => {
       <div className="page-container">
         <div className="custom-card whitebelt-container">
           {/* LEFT SIDEBAR */}
-          <div className="whitebelt-sidebar">
+          <div className="whitebelt-sidebar overflow-y-auto max-h-[75vh] p-2">
             <h2 className="belt-title">ORANGE BELT</h2>
             {lessons.map((lesson, index) => {
               const unlocked = index < unlockedCount + 1;
@@ -179,10 +194,7 @@ const OrangeBeltLessons = () => {
                 </button>
               );
             })}
-          </div>
 
-          {/* RIGHT PANEL */}
-          <div className="whitebelt-lesson-area">
             {/* Progress Bar */}
             <div className="w-full mb-4">
               <div className="w-full h-3 bg-gray-300 rounded-full overflow-hidden">
@@ -191,10 +203,14 @@ const OrangeBeltLessons = () => {
                   style={{ width: `${progressPercent}%` }}
                 ></div>
               </div>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-right text-white mt-1">
                 {progressPercent}% Complete
               </p>
             </div>
+          </div>
+
+          {/* RIGHT PANEL */}
+          <div className="whitebelt-lesson-area">
 
             <h3 className="lesson-title">
               CURRENT LESSON:{" "}

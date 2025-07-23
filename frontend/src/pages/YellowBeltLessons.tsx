@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Header2 from "../components/Header2.tsx";
 
 const lessons = [
@@ -27,12 +28,24 @@ const lessons = [
 const YellowBeltLessons = () => {
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
   const [unlockedCount, setUnlockedCount] = useState(0);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const lessonQuery = queryParams.get("lesson");
 
   useEffect(() => {
     const fetchUserProgress = async () => {
       const jwtToken = localStorage.getItem("token");
       const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
       const id = userData.id;
+      
+      const indexFromQuery = lessons.findIndex(
+        (l) =>
+          l.name.toLowerCase().trim() ===
+          (lessonQuery ?? "").toLowerCase().trim()
+      );
+      if (indexFromQuery !== -1) {
+        setCurrentLessonIndex(indexFromQuery);
+      }
 
       if (!jwtToken || !id) {
         console.warn("Missing token or user ID");
@@ -73,7 +86,7 @@ const YellowBeltLessons = () => {
     };
 
     fetchUserProgress();
-  }, []);
+  }, [lessonQuery]);
 
   const updateUserProgress = async (newProgressY: number) => {
     const jwtToken = localStorage.getItem("token");
@@ -133,7 +146,9 @@ const YellowBeltLessons = () => {
     }
   };
 
-  const progressPercentage = Math.round(((unlockedCount + 1) / lessons.length) * 100);
+  const progressPercentage = Math.round(
+    ((unlockedCount + 1) / lessons.length) * 100
+  );
 
   return (
     <div>
@@ -141,7 +156,7 @@ const YellowBeltLessons = () => {
       <div className="page-container">
         <div className="custom-card whitebelt-container">
           {/* LEFT SIDEBAR */}
-          <div className="whitebelt-sidebar">
+          <div className="whitebelt-sidebar overflow-y-auto max-h-[75vh] p-2">
             <h2 className="belt-title">YELLOW BELT</h2>
             {lessons.map((lesson, index) => {
               const unlocked = index < unlockedCount + 1;
@@ -159,10 +174,7 @@ const YellowBeltLessons = () => {
                 </button>
               );
             })}
-          </div>
-
-          {/* RIGHT PANEL */}
-          <div className="whitebelt-lesson-area">
+            
             {/* PROGRESS BAR */}
             <div className="w-full mb-4">
               <div className="w-full h-3 bg-gray-300 rounded-full overflow-hidden">
@@ -171,8 +183,15 @@ const YellowBeltLessons = () => {
                   style={{ width: `${progressPercentage}%` }}
                 ></div>
               </div>
-              <p className="text-sm text-gray-600 mt-1">{progressPercentage}% Complete</p>
+              <p className="text-sm text-right text-white mt-1">
+                {progressPercentage}% Complete
+              </p>
             </div>
+          </div>
+
+          {/* RIGHT PANEL */}
+          <div className="whitebelt-lesson-area">
+            
 
             <h3 className="lesson-title">
               CURRENT LESSON:{" "}

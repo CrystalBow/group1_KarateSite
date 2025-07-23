@@ -72,10 +72,10 @@ module.exports = function(db) {
         await db.collection('Users').updateOne({ id }, { $set: { lastlogin: now } });
 
         if (previousLogin > 0) {
-          const diff = now - previousLogin;
-
-          if (diff > 86400000) {
-            if (diff < 2 * 86400000) {
+          const CurrentDay = Math.floor(now/86400000);
+          const LastDay = Math.floor(previousLogin/86400000);
+          if (CurrentDay > LastDay) {
+            if (CurrentDay - 1 === LastDay ) {
               // Increment streak by 1
               await db.collection('Users').updateOne({ id }, { $set: { streak: (userRecord.streak || 0) + 1 } });
             } else {

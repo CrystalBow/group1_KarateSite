@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 
 const KataMenu = () => {
-  const [expandedBelt, setExpandedBelt] = useState<string | null>("white");
+  const [expandedBelts, setExpandedBelts] = useState<Record<string, boolean>>({
+    white: true,
+    yellow: true,
+    orange: true,
+  });
   const [searchTerm, setSearchTerm] = useState("");
   const [kataData, setKataData] = useState<Record<string, string[]>>({
     white: [],
@@ -10,16 +14,18 @@ const KataMenu = () => {
   });
 
   const toggleBelt = (belt: string) => {
-    setExpandedBelt(expandedBelt === belt ? null : belt);
+    setExpandedBelts((prev) => ({
+      ...prev,
+      [belt]: !prev[belt],
+    }));
   };
 
-  // Fetch data from server
   const handleSearch = async () => {
     const token = localStorage.getItem("token");
 
     const app_name = "karatemanager.xyz";
     function buildPath(route: string): string {
-      if (process.env.NODE_ENV != "development") {
+      if (process.env.NODE_ENV !== "development") {
         return "http://" + app_name + ":5000/" + route;
       } else {
         return "http://localhost:5000/" + route;
@@ -38,7 +44,6 @@ const KataMenu = () => {
 
       const data = await res.json();
 
-      // check for token expiration / errors
       if (data.error) {
         console.error("Error from server:", data.error);
         return;
@@ -63,9 +68,8 @@ const KataMenu = () => {
     }
   };
 
-  // Optionally fetch all kata on first load
   useEffect(() => {
-    handleSearch(); // initial load
+    handleSearch();
   }, []);
 
   return (
@@ -106,7 +110,7 @@ const KataMenu = () => {
         {Object.entries(kataData).map(([belt, katas]) => (
           <div key={belt} className="mb-2">
             <button
-              className={`w-full text-left px-4 py-2 font-bold text-white flex justify-between items-center bg-[#1f2a38] rounded`}
+              className="w-full text-left px-4 py-2 font-bold text-white flex justify-between items-center bg-[#1f2a38] rounded"
               onClick={() => toggleBelt(belt)}
             >
               <div className="flex items-center gap-2">
@@ -119,10 +123,10 @@ const KataMenu = () => {
                 />
                 <span className="bebasFont text-xl uppercase">{belt} belt</span>
               </div>
-              <span>{expandedBelt === belt ? "▲" : "▼"}</span>
+              <span>{expandedBelts[belt] ? "▲" : "▼"}</span>
             </button>
 
-            {expandedBelt === belt && (
+            {expandedBelts[belt] && (
               <div className="bg-gray-300 text-black">
                 {katas.length === 0 ? (
                   <div className="px-6 py-2 border-t border-black italic">
@@ -134,7 +138,12 @@ const KataMenu = () => {
                       key={idx}
                       className="px-6 py-2 border-t border-black font-bold"
                     >
-                      {kata}
+                      <a
+                        href={`/${belt}beltlesson?lesson=${encodeURIComponent(kata)}`}
+                        className="text-blue-500 hover:underline"
+                      >
+                        {kata}
+                      </a>
                     </div>
                   ))
                 )}

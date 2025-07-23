@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Header2 from "../components/Header2.tsx";
+
 // import { storeToken } from "../tokenStorage";
 // import { jwtDecode } from "jwt-decode";
 
@@ -46,6 +48,9 @@ const lessons = [
 const WhiteBeltLessons = () => {
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
   const [unlockedCount, setUnlockedCount] = useState(0);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const lessonQuery = queryParams.get("lesson");
 
   useEffect(() => {
     const fetchUserProgress = async () => {
@@ -53,9 +58,21 @@ const WhiteBeltLessons = () => {
       const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
       const id = userData.id;
 
-      if (!jwtToken || !id) {
-        console.warn("Missing token or user ID");
+      const indexFromQuery = lessons.findIndex(
+        (l) =>
+          l.name.toLowerCase().trim() ===
+          (lessonQuery ?? "").toLowerCase().trim()
+      );
+      if (indexFromQuery !== -1) {
+        setCurrentLessonIndex(indexFromQuery);
+      }
+
+      if (!id) {
+        console.warn("Missing user ID");
         return;
+      }
+      if (!jwtToken) {
+        console.warn("Missing token");
       }
 
       try {
@@ -84,7 +101,6 @@ const WhiteBeltLessons = () => {
             progressW: data.progressW,
             progressY: data.progressY,
             progressO: data.progressO,
-            rank: data.rank,
           };
           localStorage.setItem("user_data", JSON.stringify(updatedUser));
         }
@@ -94,7 +110,7 @@ const WhiteBeltLessons = () => {
     };
 
     fetchUserProgress();
-  }, []);
+  }, [lessonQuery]);
 
   const updateUserProgress = async (newProgressW: number) => {
     const jwtToken = localStorage.getItem("token");
@@ -167,7 +183,7 @@ const WhiteBeltLessons = () => {
       <div className="page-container">
         <div className="custom-card whitebelt-container">
           {/* LEFT SIDEBAR */}
-          <div className="whitebelt-sidebar">
+          <div className="whitebelt-sidebar overflow-y-auto max-h-[75vh] p-2">
             <h2 className="belt-title">WHITE BELT</h2>
             {lessons.map((lesson, index) => {
               const unlocked = index < unlockedCount + 1;
@@ -185,22 +201,23 @@ const WhiteBeltLessons = () => {
                 </button>
               );
             })}
+
+             {/* Progress Bar */}
+            <div className="w-full mb-4">
+              <div className="w-full h-3 bg-gray-300 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-orange-500 transition-all duration-300"
+                  style={{ width: `${progressPercent}%` }}
+                ></div>
+              </div>
+              <p className="text-sm text-right text-white mt-1">
+                {progressPercent}% Complete
+              </p>
+            </div>
           </div>
 
           {/* RIGHT PANEL */}
           <div className="whitebelt-lesson-area">
-            {/* Progress Bar */}
-            <div className="w-full mb-4">
-              <div className="bg-gray-200 rounded-full h-4">
-                <div
-                  className="bg-green-500 h-4 rounded-full transition-all duration-500"
-                  style={{ width: `${progressPercent}%` }}
-                ></div>
-              </div>
-              <p className="text-sm text-right text-gray-600 mt-1">
-                {progressPercent}% Complete
-              </p>
-            </div>
 
             <h3 className="lesson-title">
               CURRENT LESSON:{" "}
