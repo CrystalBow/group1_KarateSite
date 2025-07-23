@@ -207,7 +207,7 @@ const WhiteBeltLessons = () => {
             <div className="w-full mb-4">
               <div className="w-full h-3 bg-gray-300 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-orange-500 transition-all duration-300"
+                  className="h-full bg-blue-400 transition-all duration-300"
                   style={{ width: `${progressPercent}%` }}
                 ></div>
               </div>
