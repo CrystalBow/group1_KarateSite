@@ -334,8 +334,7 @@ function Header2(){
             </div>
             <FaCircleArrowLeft className="text-[4vh] hover:text-red-500 cursor-pointer" onClick={() => {setAction("DisplayAccount")}}/>
             <br/>
-            <br/>
-            <span className="text-center text-[1vh]"> {message} </span>
+            <p className="text-center text-[2vh]"> {message} </p>
           </div>): null}
     </div>
   );
