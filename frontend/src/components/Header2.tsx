@@ -157,7 +157,7 @@ function Header2(){
     {
       name = copy;
     }
-    else if (email === "email")
+    else if (field === "email")
     {
       email = copy;
     }
@@ -196,7 +196,7 @@ function Header2(){
       {
         userData.name = name;
       }
-      else if (email === "email")
+      else if (field === "email")
       {
         userData.email = email;
       }
