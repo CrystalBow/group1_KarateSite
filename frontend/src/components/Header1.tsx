@@ -14,7 +14,7 @@ function Header1(props: { onAction: () => void; action: string | number | bigint
         </a>
         <nav>
           <ul className="header-nav">
-            <li className = "navbar" id="AboutUsButton"><a href="/#About">ABOUT US</a></li>
+            <li className = "navbar" id="AboutUsButton"><a href="/About">ABOUT US</a></li>
             <li className = "navbar" id= "WhatIsKarateTrainerButton"><a href="/#about">WHAT IS KARATE TRAINER?</a></li>
             <li className = "navbar" id="FeaturesButton"><a href="/#features">FEATURES</a></li>
             <li className = "navbar" id="LoginSignInButton">
