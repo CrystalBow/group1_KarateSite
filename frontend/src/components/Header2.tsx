@@ -34,11 +34,12 @@ function Header2(){
     // If no user_data, i.e no one is logged in
     if (Object.keys(userData).length === 0)
     {
+      console.warn("Could not load UserData")
       window.location.reload();
       window.location.href = "/"; // return to home page
       return;
     }
-    console.log(userData.rank)
+    console.log(userData)
     if (userData.rank === 0) 
     {
       setBeltName("White Belt");
