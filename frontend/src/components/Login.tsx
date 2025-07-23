@@ -165,6 +165,9 @@ function Login() {
                       Show Password
                     </label>
                   </div>
+                  <a href="" className="text-black" onClick={handleForgotPassword}>
+                    Forgot Password?
+                  </a>
                 </div>
               </form>
             </div>
@@ -172,9 +175,6 @@ function Login() {
             <br />
             <button type="submit" className="btn btn-primary" onClick={doLogin}>
               Login
-            </button>
-            <button type="button" className="btn btn-link" onClick={handleForgotPassword}>
-              Forgot Password?
             </button>
           </div>
         </div>

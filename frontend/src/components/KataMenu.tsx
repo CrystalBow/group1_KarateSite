@@ -37,7 +37,7 @@ const KataMenu = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          search: searchTerm,
+          search: searchTerm.trim(), // trim spaces just in case
           jwtToken: token,
         }),
       });
@@ -55,19 +55,28 @@ const KataMenu = () => {
         orange: [],
       };
 
-      data.results.forEach((item: { Name: string; Belt: string }) => {
-        const belt = item.Belt.toLowerCase();
-        if (formatted[belt]) {
-          formatted[belt].push(item.Name);
-        }
-      });
+      // if search term is empty, include everything
+      if (searchTerm.trim() === "") {
+        data.allKata.forEach((item: { Name: string; Belt: string }) => {
+          const belt = item.Belt.toLowerCase();
+          if (formatted[belt]) {
+            formatted[belt].push(item.Name);
+          }
+        });
+      } else {
+        data.results.forEach((item: { Name: string; Belt: string }) => {
+          const belt = item.Belt.toLowerCase();
+          if (formatted[belt]) {
+            formatted[belt].push(item.Name);
+          }
+        });
+      }
 
       setKataData(formatted);
     } catch (error) {
       console.error("Search failed:", error);
     }
   };
-
   useEffect(() => {
     handleSearch();
   }, []);
@@ -139,7 +148,9 @@ const KataMenu = () => {
                       className="px-6 py-2 border-t border-black font-bold"
                     >
                       <a
-                        href={`/${belt}beltlesson?lesson=${encodeURIComponent(kata)}`}
+                        href={`/${belt}beltlesson?lesson=${encodeURIComponent(
+                          kata
+                        )}`}
                         className="text-blue-500 hover:underline"
                       >
                         {kata}
