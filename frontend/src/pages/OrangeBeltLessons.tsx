@@ -169,7 +169,7 @@ const OrangeBeltLessons = () => {
                   }
                 }}
               >
-                {index <= unlockedCount ? lesson.name : `🔒 ${lesson.name}`}
+                {index < unlockedCount ? lesson.name : `🔒 ${lesson.name}`}
               </button>
             ))}
           </div>
