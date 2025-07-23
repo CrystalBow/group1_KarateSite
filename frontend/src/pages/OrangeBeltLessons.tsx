@@ -107,7 +107,7 @@ const OrangeBeltLessons = () => {
             id,
             progressW: userData.progressW,
             progressY: userData.progressY,
-            progress0: newProgressO,
+            progressO: newProgressO,
             jwtToken,
           }),
         }
