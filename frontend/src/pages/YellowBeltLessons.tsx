@@ -65,11 +65,20 @@ const YellowBeltLessons = () => {
 
         if (data.progressY !== undefined) {
           setUnlockedCount(data.progressY);
+
+          const updatedUser = {
+            ...userData,
+            progressW: data.progressW,
+            progressY: data.progressY,
+            progressO: data.progressO,
+            // rank: data.rank,
+          };
+          localStorage.setItem("user_data", JSON.stringify(updatedUser));
         }
 
         console.log("Data fetch:", data);
-        console.log("Unlocked Content = " + unlockedCount)
-        
+        console.log("Unlocked Content = " + unlockedCount);
+
         // if (data.jwtToken && data.jwtToken.trim() !== "") {
         //   localStorage.setItem("token", data.jwtToken);
         // }
@@ -87,7 +96,7 @@ const YellowBeltLessons = () => {
     const id = userData.id;
 
     //debuggin
-    console.log("Before update:", userData)
+    console.log("Before update:", userData);
     console.log("Before update newProgressY: " + newProgressY);
 
     if (!jwtToken || !id) {
@@ -105,7 +114,7 @@ const YellowBeltLessons = () => {
           body: JSON.stringify({
             id,
             progressW: userData.progressW,
-            progressY: newProgressY,           
+            progressY: newProgressY,
             progress0: userData.progressO,
             jwtToken,
           }),
@@ -114,7 +123,7 @@ const YellowBeltLessons = () => {
 
       const data = await response.json();
 
-      console.log("Data after Update:", data) // debuggin
+      console.log("Data after Update:", data); // debuggin
 
       if (data.error) {
         console.error("Error updating progress:", data.error);
@@ -124,6 +133,15 @@ const YellowBeltLessons = () => {
         // }
         if (data.progressY !== undefined) {
           setUnlockedCount(data.progressY);
+
+          const updatedUser = {
+            ...userData,
+            progressW: data.progressW,
+            progressY: data.progressY,
+            progressO: data.progressO,
+            rank: data.rank,
+          };
+          localStorage.setItem("user_data", JSON.stringify(updatedUser));
         }
       }
     } catch (err) {

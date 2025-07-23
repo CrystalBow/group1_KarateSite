@@ -124,7 +124,7 @@ body {
 
 
 
-/* header2 stuff*/
+/*------------ header2 stuff-----------------------*/
 
 .header2-nav{
   font-family: 'Bebas Neue', sans-serif;
@@ -276,6 +276,38 @@ body {
 .headerFont
 {
   font-size: 2.3vh;
+}
+
+#editInput
+{
+  text-align: left;
+  width: 90%;
+}
+
+.IconPosition
+{
+  position: absolute;
+  right: 0;
+}
+.IconPosition:hover
+{
+  cursor: pointer;
+  color: red;
+}
+
+#checkIcon
+{
+  font-size: 2.3vh;
+}
+#checkIcon:hover
+{
+  color:#0cc0df;
+}
+
+#xMarkIcon
+{
+  font-size: 2.3vh;
+  right: 15%
 }
 
 /*____________________________________________________________*/

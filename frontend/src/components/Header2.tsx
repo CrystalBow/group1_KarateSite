@@ -1,18 +1,21 @@
-import { FaArrowRightFromBracket, FaUser, FaXmark, FaPen, FaCircleArrowLeft   } from "react-icons/fa6";
+import { FaArrowRightFromBracket, FaUser, FaXmark, FaPen, FaCircleArrowLeft,FaCheck } from "react-icons/fa6";
 import { useState, useRef, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 // import { retrieveToken, storeToken } from '../tokenStorage.js';
 import { useNavigate } from "react-router-dom";
 
-// FaCheck
-
 function Header2(){
   const [action, setAction] = useState("");
-  const profileIconRef = useRef<HTMLImageElement>(null);
-  const AccountDivRef = useRef<HTMLDivElement>(null);
-  const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
   const [beltName, setBeltName] = useState("");
   const [profileImg, setProfileImg] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  // const [testEdit, setTestEdit] = useState("Changes");
+  const [copy, setCopy] = useState("");
+  const [message, setMessage] = useState("");
+  const profileIconRef = useRef<HTMLImageElement>(null);
+  const AccountDivRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +35,7 @@ function Header2(){
     if (Object.keys(userData).length === 0)
     {
       window.location.reload();
-      //window.location.href = "/"; // return to home page
+      window.location.href = "/"; // return to home page
       return;
     }
 
@@ -56,6 +59,13 @@ function Header2(){
        setBeltName("ERROR"); // debuggin
     }
   }, [userData.rank]);
+
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus();
+      setCopy(userData.name);
+    }
+  }, [isEditing]); // Focus when isEditing becomes true
 
   const app_name = "karatemanager.xyz";
   function buildPath(route: string): string {
@@ -128,6 +138,56 @@ function Header2(){
         //localStorage.setItem("token", data.jwtToken);
       //}
       return(data.message);
+    } catch (err) {
+      console.error("Failed to fetch progress:", err);
+    }
+  }
+
+  const updateProfile = async (e: any) =>
+  {
+    e.preventDefault();
+    const jwtToken = localStorage.getItem("token");
+
+    const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
+    const id = userData.id;
+    const user = userData.user;
+    const name = copy; // stores updated name
+    const email = "";
+    const rank = "";
+
+    console.log(localStorage.getItem("token"));
+    console.log(user);
+
+    if (!jwtToken || !id) {
+      console.warn("Missing token or user ID");
+      return;
+    }
+
+    try {
+      const response = await fetch(buildPath("api/deleteUser"),
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ user, name, email, rank, jwtToken }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.error === "The JWT is no longer valid") {
+        localStorage.removeItem("token");
+
+        console.warn("Session expired. Please log in again.");
+        return;
+      }
+
+      console.log(data.message);
+
+      //if (data.jwtToken && data.jwtToken.trim() !== "") {
+        //localStorage.setItem("token", data.jwtToken);
+      //}
+      // return(data.message);
+      setMessage(data.message);
     } catch (err) {
       console.error("Failed to fetch progress:", err);
     }
@@ -218,17 +278,51 @@ function Header2(){
             <div id="ProfileEditDiv" className="">
               <h6 className="headerFont"><u>Name</u></h6>
               <div>
-                <p className="iconStyle"> {userData.name} <FaPen className="absolute right-0"/></p>
+                {isEditing ? (
+                  <div className="inline-flex pb-3">
+                  <input 
+                    ref={inputRef}
+                    type="text" 
+                    id="editInput" 
+                    className=""
+                    value={copy}
+                    onChange={(e) => {setCopy(e.target.value)}}
+                  /> 
+                  <p> 
+                    <FaXmark 
+                      className="IconPosition"
+                      id="xMarkIcon"
+                      onClick={() => {
+                        setIsEditing(!isEditing)
+                      }}
+                    />
+                    <FaCheck 
+                      className="IconPosition"
+                      id="checkIcon"
+                      onClick={() => {
+                        setIsEditing(!isEditing)
+                        updateProfile;
+                      }}
+                    /> 
+                  </p>
+                  </div>) : (
+                  <p className="iconStyle"> 
+                    {userData.name}
+                    <FaPen 
+                      className="IconPosition" 
+                      onClick={() => {setIsEditing(!isEditing)}}
+                    />
+                  </p>)}
               </div>
 
               <h6 className="headerFont"><u>Email</u></h6>
               <div>
-                <p className="iconStyle"> {userData.email} <FaPen className="absolute right-0"/></p>
+                <p className="iconStyle"> {userData.email} <FaPen className="IconPosition"/></p>
               </div>
 
               <h6 className="headerFont"><u>Belt Rank</u></h6>
               <div>
-                <p className="iconStyle"> {beltName} <FaPen className="absolute right-0"/></p>
+                <p className="iconStyle"> {beltName} <FaPen className="IconPosition"/></p>
               </div>
 
               <h6 className="headerFont"><u>Streak</u></h6>
@@ -236,7 +330,9 @@ function Header2(){
                 <p> {userData.streak} </p>
               </div>
             </div>
-            <FaCircleArrowLeft className="text-[4vh] hover:text-red-500" onClick={() => {setAction("DisplayAccount")}}/>
+            <FaCircleArrowLeft className="text-[4vh] hover:text-red-500 cursor-pointer" onClick={() => {setAction("DisplayAccount")}}/>
+            <br/>
+            <span> {message} </span>
           </div>): null}
     </div>
   );
