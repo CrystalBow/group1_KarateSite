@@ -38,7 +38,7 @@ function Header2(){
       window.location.href = "/"; // return to home page
       return;
     }
-
+    console.log(userData.rank)
     if (userData.rank === 0) 
     {
       setBeltName("White Belt");
