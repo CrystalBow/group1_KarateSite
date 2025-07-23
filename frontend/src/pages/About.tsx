@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Header1 from "../components/Header1.tsx";
+import Header1 from "../components/AboutHeader.tsx";
 
 interface TeamMember {
   name: string;
