@@ -150,7 +150,7 @@ const YellowBeltLessons = () => {
                   key={lesson.name}
                   className={`lesson-section ${
                     unlocked ? "unlocked" : "locked"
-                  }`}
+                  } ${currentLessonIndex === index ? "selected" : ""}`}
                   onClick={() => {
                     if (unlocked) setCurrentLessonIndex(index);
                   }}

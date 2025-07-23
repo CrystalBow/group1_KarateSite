@@ -773,6 +773,13 @@ textarea::placeholder {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lesson-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
 }
 
 .lesson-section.locked {
@@ -865,6 +872,11 @@ textarea::placeholder {
   color: white;
 }
 
+.selected {
+  border: 4px solid #00ccff; 
+  border-radius: 8px;
+  background-color: #f9f9f9; 
+}
 
 /*-------For History Page ----*/
 .redBrushBackground

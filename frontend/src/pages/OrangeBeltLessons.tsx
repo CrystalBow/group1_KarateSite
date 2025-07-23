@@ -170,7 +170,7 @@ const OrangeBeltLessons = () => {
                   key={lesson.name}
                   className={`lesson-section ${
                     unlocked ? "unlocked" : "locked"
-                  }`}
+                  } ${currentLessonIndex === index ? "selected" : ""}`}
                   onClick={() => {
                     if (unlocked) setCurrentLessonIndex(index);
                   }}
