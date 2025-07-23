@@ -6,9 +6,12 @@ const CurriculumPage = () => {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    const storedName = localStorage.getItem("userName");
-    if (storedName) setUserName(storedName);
-  }, []);
+  const storedData = localStorage.getItem("user_data");
+  if (storedData) {
+    const parsed = JSON.parse(storedData);
+    setUserName(parsed.user);  
+  }
+}, []);
   return (
     <div>
       <Header2 />
@@ -16,11 +19,8 @@ const CurriculumPage = () => {
         <div className="custom-card custom-card-items-centered">
           <div id="redDivCurr" className="redDivLogin">
             <img src="/assets/RearRedPaint.png" id="rearImgCurr"></img>
-            <h1 className="bebasFont" id="welcomeText">
-              WELCOME{userName ? `, ${userName.toUpperCase()}` : ""}
-            </h1>
             <h1 className="bebasFont" id="lessonText">
-              SELECT A LESSON
+              WELCOME{userName ? `, ${userName.toUpperCase()}` : ""} SELECT A LESSON
             </h1>
             
             <nav className="lesson-nav" >
