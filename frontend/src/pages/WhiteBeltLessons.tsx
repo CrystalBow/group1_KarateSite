@@ -53,9 +53,12 @@ const WhiteBeltLessons = () => {
       const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
       const id = userData.id;
 
-      if (!jwtToken || !id) {
-        console.warn("Missing token or user ID");
+      if (!id) {
+        console.warn("Missing user ID");
         return;
+      }
+      if (!jwtToken) {
+        console.warn("Missing token");
       }
 
       try {
