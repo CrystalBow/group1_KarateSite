@@ -977,19 +977,20 @@ textarea::placeholder {
   top: 0;
   z-index: 20;
 
-  /* span the full viewport */
-  width: 100vw;
-  left: 50%;
-  transform: translateX(-50%);
+  /* span the width of its parent*/
+  width: 100%;    
+  left: 0;        
+  transform: none;
 
   background: #ff2a2a;
   color: #000;
   text-align: center;
 
-  margin: 0 0 2.5rem;       /* vertical margin */
+  margin: 0 0 2.5rem;
   padding: .75rem 0;
   border-radius: 0 0 .25rem .25rem;
 }
+
 
 .AboutHeader-label {
   margin: 0;
@@ -1153,8 +1154,3 @@ textarea::placeholder {
   .about-scroll { padding-bottom: 6rem !important; }
 }
 
-/*
-@media (min-width: 1600px){
-  .team-belt-wrapper { bottom: -40px; } /* move up slightly 
-}
-*/
