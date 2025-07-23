@@ -26,7 +26,7 @@ const lessons = [
 
 const OrangeBeltLessons = () => {
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
-  const [unlockedCount, setUnlockedCount] = useState(1);
+  const [unlockedCount, setUnlockedCount] = useState(0);
 
   useEffect(() => {
     const fetchUserProgress = async () => {
@@ -151,6 +151,10 @@ const OrangeBeltLessons = () => {
     }
   };
 
+  const progressPercent = Math.round(
+    ((unlockedCount + 1) / lessons.length) * 100
+  );
+
   return (
     <div>
       <Header2 />
@@ -159,31 +163,47 @@ const OrangeBeltLessons = () => {
           {/* LEFT SIDEBAR */}
           <div className="whitebelt-sidebar">
             <h2 className="belt-title">ORANGE BELT</h2>
-            {lessons.map((lesson, index) => (
-              <button
-                key={lesson.name}
-                className={`lesson-section ${
-                  index <= unlockedCount ? "unlocked" : "locked"
-                }`}
-                onClick={() => {
-                  if (index <= unlockedCount) {
-                    setCurrentLessonIndex(index);
-                  }
-                }}
-              >
-                {index < unlockedCount ? lesson.name : `🔒 ${lesson.name}`}
-              </button>
-            ))}
+            {lessons.map((lesson, index) => {
+              const unlocked = index < unlockedCount + 1;
+              return (
+                <button
+                  key={lesson.name}
+                  className={`lesson-section ${
+                    unlocked ? "unlocked" : "locked"
+                  }`}
+                  onClick={() => {
+                    if (unlocked) setCurrentLessonIndex(index);
+                  }}
+                >
+                  {unlocked ? lesson.name : `🔒 ${lesson.name}`}
+                </button>
+              );
+            })}
           </div>
 
           {/* RIGHT PANEL */}
           <div className="whitebelt-lesson-area">
+            {/* Progress Bar */}
+            <div className="w-full mb-4">
+              <div className="w-full h-3 bg-gray-300 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-orange-500 transition-all duration-300"
+                  style={{ width: `${progressPercent}%` }}
+                ></div>
+              </div>
+              <p className="text-sm text-gray-600 mt-1">
+                {progressPercent}% Complete
+              </p>
+            </div>
+
             <h3 className="lesson-title">
               CURRENT LESSON:{" "}
               <span className="highlight">
                 {lessons[currentLessonIndex].name}
               </span>
             </h3>
+
+            {/* Video */}
             <div className="video-container">
               <iframe
                 width="100%"
@@ -194,6 +214,8 @@ const OrangeBeltLessons = () => {
                 allowFullScreen
               />
             </div>
+
+            {/* Description & Button */}
             <div className="lesson-description-box">
               <div className="scrollable-text">
                 {Array(4)

@@ -26,18 +26,13 @@ const lessons = [
 
 const YellowBeltLessons = () => {
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
-  const [unlockedCount, setUnlockedCount] = useState(1);
+  const [unlockedCount, setUnlockedCount] = useState(0);
 
   useEffect(() => {
     const fetchUserProgress = async () => {
       const jwtToken = localStorage.getItem("token");
-
       const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
       const id = userData.id;
-
-      console.log(localStorage.getItem("token"));
-      console.log(id);
-      console.log("fetch:", userData);
 
       if (!jwtToken || !id) {
         console.warn("Missing token or user ID");
@@ -58,30 +53,20 @@ const YellowBeltLessons = () => {
 
         if (data.error === "The JWT is no longer valid") {
           localStorage.removeItem("token");
-
           console.warn("Session expired. Please log in again.");
           return;
         }
 
         if (data.progressY !== undefined) {
           setUnlockedCount(data.progressY);
-
           const updatedUser = {
             ...userData,
             progressW: data.progressW,
             progressY: data.progressY,
             progressO: data.progressO,
-            // rank: data.rank,
           };
           localStorage.setItem("user_data", JSON.stringify(updatedUser));
         }
-
-        console.log("Data fetch:", data);
-        console.log("Unlocked Content = " + unlockedCount);
-
-        // if (data.jwtToken && data.jwtToken.trim() !== "") {
-        //   localStorage.setItem("token", data.jwtToken);
-        // }
       } catch (err) {
         console.error("Failed to fetch progress:", err);
       }
@@ -95,10 +80,6 @@ const YellowBeltLessons = () => {
     const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
     const id = userData.id;
 
-    //debuggin
-    console.log("Before update:", userData);
-    console.log("Before update newProgressY: " + newProgressY);
-
     if (!jwtToken || !id) {
       console.warn("Missing token or user ID");
       return;
@@ -108,7 +89,6 @@ const YellowBeltLessons = () => {
       const response = await fetch(
         "http:///143.198.160.127:5000/api/updateProgress",
         {
-          //i decided to just  hardcode path instead of using buildpath lol
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -123,17 +103,11 @@ const YellowBeltLessons = () => {
 
       const data = await response.json();
 
-      console.log("Data after Update:", data); // debuggin
-
       if (data.error) {
         console.error("Error updating progress:", data.error);
       } else {
-        // if (data.jwtToken && data.jwtToken.trim() !== "") {
-        //   localStorage.setItem("token", data.jwtToken);
-        // }
         if (data.progressY !== undefined) {
           setUnlockedCount(data.progressY);
-
           const updatedUser = {
             ...userData,
             progressW: data.progressW,
@@ -153,13 +127,13 @@ const YellowBeltLessons = () => {
     if (currentLessonIndex < lessons.length - 1) {
       const newLessonIndex = currentLessonIndex + 1;
       const newUnlockedCount = Math.max(unlockedCount, newLessonIndex);
-
       setCurrentLessonIndex(newLessonIndex);
       setUnlockedCount(newUnlockedCount);
-
       await updateUserProgress(newUnlockedCount);
     }
   };
+
+  const progressPercentage = Math.round(((unlockedCount + 1) / lessons.length) * 100);
 
   return (
     <div>
@@ -169,32 +143,44 @@ const YellowBeltLessons = () => {
           {/* LEFT SIDEBAR */}
           <div className="whitebelt-sidebar">
             <h2 className="belt-title">YELLOW BELT</h2>
-            {lessons.map((lesson, index) => (
-              <button
-                key={lesson.name}
-                className={`lesson-section ${
-                  index <= unlockedCount ? "unlocked" : "locked"
-                }`}
-                onClick={() => {
-                  console.log("index = " + index);
-                  if (index <= unlockedCount) {
-                    setCurrentLessonIndex(index);
-                  }
-                }}
-              >
-                {index < unlockedCount ? lesson.name : `🔒 ${lesson.name}`}
-              </button>
-            ))}
+            {lessons.map((lesson, index) => {
+              const unlocked = index < unlockedCount + 1;
+              return (
+                <button
+                  key={lesson.name}
+                  className={`lesson-section ${
+                    unlocked ? "unlocked" : "locked"
+                  }`}
+                  onClick={() => {
+                    if (unlocked) setCurrentLessonIndex(index);
+                  }}
+                >
+                  {unlocked ? lesson.name : `🔒 ${lesson.name}`}
+                </button>
+              );
+            })}
           </div>
 
           {/* RIGHT PANEL */}
           <div className="whitebelt-lesson-area">
+            {/* PROGRESS BAR */}
+            <div className="w-full mb-4">
+              <div className="w-full h-3 bg-gray-300 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-yellow-500 transition-all duration-300"
+                  style={{ width: `${progressPercentage}%` }}
+                ></div>
+              </div>
+              <p className="text-sm text-gray-600 mt-1">{progressPercentage}% Complete</p>
+            </div>
+
             <h3 className="lesson-title">
               CURRENT LESSON:{" "}
               <span className="highlight">
                 {lessons[currentLessonIndex].name}
               </span>
             </h3>
+
             <div className="video-container">
               <iframe
                 width="100%"
@@ -205,6 +191,7 @@ const YellowBeltLessons = () => {
                 allowFullScreen
               />
             </div>
+
             <div className="lesson-description-box">
               <div className="scrollable-text">
                 {Array(4)
@@ -213,6 +200,7 @@ const YellowBeltLessons = () => {
                     <p key={idx}>{line}</p>
                   ))}
               </div>
+
               {currentLessonIndex < lessons.length - 1 ? (
                 <button className="next-btn" onClick={handleNext}>
                   Next
