@@ -11,7 +11,7 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
   { name: "Victor", role: "Front End (Web)",    img: "/assets/Victor.jpg" },
   { name: "Taha",   role: "Front End (Web)",    img: "/assets/taha.jpg" },
-  { name: "Chris",  role: "Front End (Mobile)", img: "/assets/chris.jpg" },
+  { name: "Chris",  role: "Front End (Mobile)", img: "/assets/Chris.jpg" },
   { name: "Davage", role: "Database",           img: "/assets/davage.jpg" },
   { name: "Yimer",  role: "API",                img: "/assets/yimer.jpg" },
   { name: "Elijah", role: "API",                img: "/assets/elijah.jpg" },
