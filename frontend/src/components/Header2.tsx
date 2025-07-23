@@ -181,7 +181,10 @@ function Header2(){
       }
 
       console.log("data t:", data);
+      console.log("data name = " + data.name);
       userData.name = data.name;
+
+      console.log("userData:", userData);
 
       localStorage.setItem("user_data", JSON.stringify(userData));
 
