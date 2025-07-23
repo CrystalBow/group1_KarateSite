@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Header2 from "../components/Header2.tsx";
-import { storeToken } from "../tokenStorage";
+// import { storeToken } from "../tokenStorage";
 // import { jwtDecode } from "jwt-decode";
 
 const lessons = [
