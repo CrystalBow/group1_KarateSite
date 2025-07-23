@@ -52,9 +52,9 @@ module.exports = function (db) {
     let user;
     try {
       user = await db.collection("Users").findOne({ id:id });
-      if (!user) {
-        return res.status(404).json({ error: "User not found", jwtToken: "" });
-      }
+      //if (!user) {
+        //return res.status(404).json({ error: "User not found", jwtToken: "" });
+      //}
     } catch (err) {
       console.error("DB find error:", err);
       return res.status(500).json({ error: "DB find error: " + err.toString(), jwtToken: "" });
