@@ -46,7 +46,7 @@ const CurriculumPage = () => {
                       className="h-full bg-blue-400 rounded-full"
                       style={{ width: `${progress.white}%` }}
                     ></div>
-                    <p className="text-xs text-white text-right mt-1">{progress.white}% Complete</p>
+                    <p className="text-lg text-white text-right mt-1">{progress.white}% Complete</p>
                   </div>
                 </a>
               </button>
@@ -60,7 +60,7 @@ const CurriculumPage = () => {
                       className="h-full bg-yellow-400 rounded-full"
                       style={{ width: `${progress.yellow}%` }}
                     ></div>
-                    <p className="text-xs text-white text-right mt-1">{progress.yellow}% Complete</p>
+                    <p className="text-lg text-white text-right mt-1">{progress.yellow}% Complete</p>
                   </div>
                 </a>
               </button>
@@ -74,7 +74,7 @@ const CurriculumPage = () => {
                       className="h-full bg-orange-400 rounded-full"
                       style={{ width: `${progress.orange}%` }}
                     ></div>
-                    <p className="text-xs text-white text-right mt-1">{progress.orange}% Complete</p>
+                    <p className="text-lg text-white text-right mt-1">{progress.orange}% Complete</p>
                   </div>
                 </a>
               </button>
