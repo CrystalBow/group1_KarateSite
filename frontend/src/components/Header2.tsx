@@ -80,7 +80,7 @@ function Header2(){
   {
     event.preventDefault();
     localStorage.removeItem("user_data");
-    localStorage.removeItem
+    localStorage.removeItem("token");
     window.location.href = "/";
   }
 
@@ -166,7 +166,7 @@ function Header2(){
     }
 
     try {
-      const response = await fetch(buildPath("api/deleteUser"),
+      const response = await fetch(buildPath("api/editUserInfo"),
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
