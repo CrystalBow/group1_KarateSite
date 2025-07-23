@@ -61,7 +61,7 @@ async function connectToMongo() {
   }
 }
 
-// Starts server if run directly (not during testing)
+// Starts server if run directly (not during testing) yo
 if (require.main === module) {
   connectToMongo().then(app => {
     const PORT = process.env.PORT || 5000;
