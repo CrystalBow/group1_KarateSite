@@ -301,12 +301,10 @@ function Header2(){
                     <FaCheck 
                       className="IconPosition"
                       id="checkIcon"
-                      onClick={
-                        //() => {
-                        //setIsEditing(!isEditing);
+                      onClick={() => {
+                        setIsEditing(!isEditing);
                         updateProfile
-                        //}
-                      }
+                      }}
                     /> 
                   </p>
                   </div>) : (
@@ -336,7 +334,8 @@ function Header2(){
             </div>
             <FaCircleArrowLeft className="text-[4vh] hover:text-red-500 cursor-pointer" onClick={() => {setAction("DisplayAccount")}}/>
             <br/>
-            <span> {message} </span>
+            <br/>
+            <span className="text-center text-[1vh]"> {message} </span>
           </div>): null}
     </div>
   );
