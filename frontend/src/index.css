@@ -1147,7 +1147,7 @@ textarea::placeholder {
   .about-scroll { padding-bottom: 6rem !important; }
 }
 
-/*@media (min-width: 1600px){
-  .team-belt-wrapper { bottom: -40px; } /* nudge upward slightly 
-}*/
+@media (min-width: 1600px){
+  .team-belt-wrapper { bottom: -40px; } /* move up slightly */
+}
 
