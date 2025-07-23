@@ -8,7 +8,8 @@ function Header2(){
   const [action, setAction] = useState("");
   const [beltName, setBeltName] = useState("");
   const [profileImg, setProfileImg] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [isEditingEmail, setIsEditingEmail] = useState(false);
   // const [testEdit, setTestEdit] = useState("Changes");
   const [copy, setCopy] = useState("");
   const [message, setMessage] = useState("");
@@ -62,11 +63,10 @@ function Header2(){
   }, [userData.rank]);
 
   useEffect(() => {
-    if (isEditing && inputRef.current) {
+    if ((isEditingName || isEditingEmail) && inputRef.current) {
       inputRef.current.focus();
-      setCopy(userData.name);
     }
-  }, [isEditing]); // Focus when isEditing becomes true
+  }, [isEditingName, isEditingEmail]); // Focus when isEditing becomes true
 
   const app_name = "karatemanager.xyz";
   function buildPath(route: string): string {
@@ -143,16 +143,25 @@ function Header2(){
     }
   }
 
-  const updateProfile = async () =>
+  const updateProfile = async (field : string) =>
   {
     const jwtToken = localStorage.getItem("token");
     const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
     const id = userData.id;
     const user = userData.user;
-    const name = copy; // stores updated name
-    const email = "";
-    const rank = userData.rank; 
+    let name = ""; // stores updated name
+    let email = "";
+    let rank = userData.rank; 
 
+    if (field === "name")
+    {
+      name = copy;
+    }
+    else if (email === "email")
+    {
+      email = copy;
+    }
+    
 
     console.log(localStorage.getItem("token"));
     console.log(user);
@@ -286,7 +295,7 @@ function Header2(){
             <div id="ProfileEditDiv" className="">
               <h6 className="headerFont"><u>Name</u></h6>
               <div>
-                {isEditing ? (
+                {isEditingName ? (
                   <div className="inline-flex pb-3">
                   <input 
                     ref={inputRef}
@@ -301,15 +310,15 @@ function Header2(){
                       className="IconPosition"
                       id="xMarkIcon"
                       onClick={() => {
-                        setIsEditing(!isEditing);
+                        setIsEditingName(!isEditingName);
                       }}
                     />
                     <FaCheck 
                       className="IconPosition"
                       id="checkIcon"
                       onClick={() => {
-                        setIsEditing(!isEditing);
-                        updateProfile();
+                        setIsEditingName(!isEditingName);
+                        updateProfile("name");
                       }}
                     /> 
                   </p>
@@ -318,14 +327,56 @@ function Header2(){
                     {userData.name}
                     <FaPen 
                       className="IconPosition" 
-                      onClick={() => {setIsEditing(!isEditing)}}
+                      onClick={() => {
+                        setIsEditingName(!isEditingName)
+                        setIsEditingEmail(false);
+                        setCopy(userData.name);
+                      }}
                     />
                   </p>)}
               </div>
 
               <h6 className="headerFont"><u>Email</u></h6>
               <div>
-                <p className="iconStyle"> {userData.email} <FaPen className="IconPosition"/></p>
+                {isEditingEmail ? (
+                  <div className="inline-flex pb-3">
+                  <input 
+                    ref={inputRef}
+                    type="text" 
+                    id="editInput" 
+                    className=""
+                    value={copy}
+                    onChange={(e) => {setCopy(e.target.value)}}
+                  /> 
+                  <p> 
+                    <FaXmark 
+                      className="IconPosition"
+                      id="xMarkIcon"
+                      onClick={() => {
+                        setIsEditingEmail(!isEditingEmail);
+                      }}
+                    />
+                    <FaCheck 
+                      className="IconPosition"
+                      id="checkIcon"
+                      onClick={() => {
+                        setIsEditingEmail(!isEditingEmail);
+                        updateProfile("email");
+                      }}
+                    /> 
+                  </p>
+                  </div>) : (
+                  <p className="iconStyle"> 
+                  {userData.email} 
+                  <FaPen 
+                    className="IconPosition"
+                    onClick={() => {
+                      setIsEditingName(false);
+                      setIsEditingEmail(!isEditingEmail);
+                      setCopy(userData.email);
+                    }}
+                  />
+                </p>)}
               </div>
 
               <h6 className="headerFont"><u>Belt Rank</u></h6>
