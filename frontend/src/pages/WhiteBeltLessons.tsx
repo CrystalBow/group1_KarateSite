@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Header2 from "../components/Header2.tsx";
+
 // import { storeToken } from "../tokenStorage";
 // import { jwtDecode } from "jwt-decode";
 
@@ -46,12 +48,25 @@ const lessons = [
 const WhiteBeltLessons = () => {
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
   const [unlockedCount, setUnlockedCount] = useState(0);
-
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const lessonQuery = queryParams.get("lesson");
+  
   useEffect(() => {
     const fetchUserProgress = async () => {
       const jwtToken = localStorage.getItem("token");
       const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
       const id = userData.id;
+      
+
+      const indexFromQuery = lessons.findIndex(
+        (l) =>
+          l.name.toLowerCase().trim() ===
+          (lessonQuery ?? "").toLowerCase().trim()
+      );
+      if (indexFromQuery !== -1) {
+        setCurrentLessonIndex(indexFromQuery);
+      }
 
       if (!id) {
         console.warn("Missing user ID");
@@ -96,7 +111,7 @@ const WhiteBeltLessons = () => {
     };
 
     fetchUserProgress();
-  }, []);
+  }, [lessonQuery]);
 
   const updateUserProgress = async (newProgressW: number) => {
     const jwtToken = localStorage.getItem("token");

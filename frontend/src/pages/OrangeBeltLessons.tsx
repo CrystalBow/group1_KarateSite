@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Header2 from "../components/Header2.tsx";
+
 
 const lessons = [
   {
@@ -27,6 +29,10 @@ const lessons = [
 const OrangeBeltLessons = () => {
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
   const [unlockedCount, setUnlockedCount] = useState(0);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const lessonQuery = queryParams.get("lesson");
+
 
   useEffect(() => {
     const fetchUserProgress = async () => {
@@ -34,6 +40,15 @@ const OrangeBeltLessons = () => {
 
       const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
       const id = userData.id;
+      
+      const indexFromQuery = lessons.findIndex(
+        (l) =>
+          l.name.toLowerCase().trim() ===
+          (lessonQuery ?? "").toLowerCase().trim()
+      );
+      if (indexFromQuery !== -1) {
+        setCurrentLessonIndex(indexFromQuery);
+      }
 
       console.log(localStorage.getItem("token"));
       console.log(id);
