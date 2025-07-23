@@ -61,7 +61,7 @@ const KataMenu = () => {
           formatted[belt].push(item.Name);
         }
       });
-
+      
       setKataData(formatted);
     } catch (error) {
       console.error("Search failed:", error);

@@ -39,7 +39,8 @@ module.exports = function(db) {
       if (name) editInfo.name = name;
 
       // Edit email
-      if (email) {
+      if (email && email !== userBeingEdited.email)
+      {
         editInfo.email = email;
         editInfo.isVerified = false;
 
@@ -49,7 +50,8 @@ module.exports = function(db) {
         const verifyEmailLink = `http://143.198.160.127:5000/api/verifyEmail?token=${newToken}`;
 
         // Verification email
-        const msg = {
+        const msg = 
+        {
           to: email,
           from: {
             email: 'karatetracker@gmail.com',
@@ -57,8 +59,7 @@ module.exports = function(db) {
           },
           subject: 'Verify your Karate Trainer email',
           html: `Hello ${name}, click <a href="${verifyEmailLink}">here</a> to verify your email. Once verified, you will be redirected to the login page.`,
-        };
-
+        }
         try {
           await mail.send(msg);
         } catch (emailError) {

@@ -27,9 +27,9 @@ const lessons = [
     description: "Stances are the foundation of all techniques...",
   },
   {
-    name: "SHIFTING",
+    name: "GO HO NO UKEI",
     videoId: "8vfnP-52X5A",
-    description: "Shifting helps maintain balance during movement...",
+    description: "Go Ho No Ukei is a part of a set sequence of movements and techniques...",
   },
   {
     name: "EMPI ROPPO",
@@ -43,6 +43,7 @@ const lessons = [
     description:
       "Ten No Kata is a part of a set sequence of movements and techniques...",
   },
+  
 ];
 
 const WhiteBeltLessons = () => {
