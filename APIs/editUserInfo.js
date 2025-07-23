@@ -6,7 +6,7 @@ const token = require('../createJWT.js');
 const router = express.Router();
 
 module.exports = function(db) {
-  router.post('/editUserInfo', async (req, res) =>
+  router.post('/', async (req, res) =>
   {
       const { user, name, email, rank, jwtToken } = req.body;
     // Test validity of token
