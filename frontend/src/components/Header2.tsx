@@ -145,7 +145,9 @@ function Header2(){
 
   const updateProfile = async (e: any) =>
   {
+    console.log("in updateProfile before prevent Default");
     e.preventDefault();
+    console.log("in updateProfile after prevent Default");
     const jwtToken = localStorage.getItem("token");
 
     const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
@@ -293,14 +295,14 @@ function Header2(){
                       className="IconPosition"
                       id="xMarkIcon"
                       onClick={() => {
-                        setIsEditing(!isEditing)
+                        setIsEditing(!isEditing);
                       }}
                     />
                     <FaCheck 
                       className="IconPosition"
                       id="checkIcon"
                       onClick={() => {
-                        setIsEditing(!isEditing)
+                        setIsEditing(!isEditing);
                         updateProfile;
                       }}
                     /> 
