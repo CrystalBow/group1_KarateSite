@@ -137,7 +137,7 @@ const WhiteBeltLessons = () => {
           localStorage.setItem("user_data", JSON.stringify(updatedUser));
         }
 
-        storeToken(data.jwtToken); //test
+        //storeToken(data.jwtToken); //test
       }
     } catch (err) {
       console.error("Progress update failed:", err);

@@ -208,7 +208,7 @@ body {
 }
 #ProfileDiv
 {
-  height: 60vh;
+  height: fit-content;
   border-radius: 20px;
   display: flex;
   flex-direction: column;

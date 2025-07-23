@@ -148,6 +148,7 @@ function Header2(){
     console.log("in updateProfile before prevent Default");
     // e.preventDefault();
     console.log("in updateProfile after prevent Default");
+    setMessage("User information updated successfully");
     const jwtToken = localStorage.getItem("token");
 
     const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
@@ -183,7 +184,13 @@ function Header2(){
         return;
       }
 
-      console.log(data.message);
+      const updatedUser = {
+            ...userData,
+            name: userData.name           
+          };
+      localStorage.setItem("user_data", JSON.stringify(updatedUser));
+
+      console.log("data info:", data);
 
       //if (data.jwtToken && data.jwtToken.trim() !== "") {
         //localStorage.setItem("token", data.jwtToken);
