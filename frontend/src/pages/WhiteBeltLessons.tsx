@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Header2 from "../components/Header2.tsx";
+import { storeToken } from '../tokenStorage';
 // import { jwtDecode } from "jwt-decode";
 
 const lessons = [
@@ -44,17 +45,13 @@ const lessons = [
 
 const WhiteBeltLessons = () => {
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
-  const [unlockedCount, setUnlockedCount] = useState(1);
+  const [unlockedCount, setUnlockedCount] = useState(0);
 
   useEffect(() => {
     const fetchUserProgress = async () => {
       const jwtToken = localStorage.getItem("token");
-
       const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
       const id = userData.id;
-
-      console.log(localStorage.getItem("token"));
-      console.log(id);
 
       if (!jwtToken || !id) {
         console.warn("Missing token or user ID");
@@ -75,7 +72,6 @@ const WhiteBeltLessons = () => {
 
         if (data.error === "The JWT is no longer valid") {
           localStorage.removeItem("token");
-
           console.warn("Session expired. Please log in again.");
           return;
         }
@@ -88,17 +84,10 @@ const WhiteBeltLessons = () => {
             progressW: data.progressW,
             progressY: data.progressY,
             progressO: data.progressO,
-            // rank: data.rank,
+            rank: data.rank,
           };
           localStorage.setItem("user_data", JSON.stringify(updatedUser));
         }
-
-        console.log("Data fetch:", data);
-        console.log("Unlocked Content = " + unlockedCount)
-
-        // if (data.jwtToken && data.jwtToken.trim() !== "") {
-        //   localStorage.setItem("token", data.jwtToken);
-        // }
       } catch (err) {
         console.error("Failed to fetch progress:", err);
       }
@@ -111,7 +100,6 @@ const WhiteBeltLessons = () => {
     const jwtToken = localStorage.getItem("token");
     const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
     const id = userData.id;
-    
 
     if (!jwtToken || !id) {
       console.warn("Missing token or user ID");
@@ -120,7 +108,6 @@ const WhiteBeltLessons = () => {
 
     try {
       const response = await fetch("http:///143.198.160.127:5000/api/updateProgress", {
-        //i decided to just  hardcode path instead of using buildpath lol
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -137,9 +124,6 @@ const WhiteBeltLessons = () => {
       if (data.error) {
         console.error("Error updating progress:", data.error);
       } else {
-        // if (data.jwtToken && data.jwtToken.trim() !== "") {
-        //   localStorage.setItem("token", data.jwtToken);
-        // }
         if (data.progressW !== undefined) {
           setUnlockedCount(data.progressW);
 
@@ -152,6 +136,8 @@ const WhiteBeltLessons = () => {
           };
           localStorage.setItem("user_data", JSON.stringify(updatedUser));
         }
+
+        storeToken(data.jwtToken); //test
       }
     } catch (err) {
       console.error("Progress update failed:", err);
@@ -162,13 +148,13 @@ const WhiteBeltLessons = () => {
     if (currentLessonIndex < lessons.length - 1) {
       const newLessonIndex = currentLessonIndex + 1;
       const newUnlockedCount = Math.max(unlockedCount, newLessonIndex);
-
       setCurrentLessonIndex(newLessonIndex);
       setUnlockedCount(newUnlockedCount);
-
       await updateUserProgress(newUnlockedCount);
     }
   };
+
+  const progressPercent = Math.round(((unlockedCount + 1) / lessons.length) * 100);
 
   return (
     <div>
@@ -178,26 +164,39 @@ const WhiteBeltLessons = () => {
           {/* LEFT SIDEBAR */}
           <div className="whitebelt-sidebar">
             <h2 className="belt-title">WHITE BELT</h2>
-            {lessons.map((lesson, index) => (
-              <button
-                key={lesson.name}
-                className={`lesson-section ${
-                  index <= unlockedCount ? "unlocked" : "locked"
-                }`}
-                onClick={() => {
-                  console.log("index = " + index);
-                  if (index <= unlockedCount) {
-                    setCurrentLessonIndex(index);
-                  }
-                }}
-              >
-                {index < unlockedCount ? lesson.name : `🔒 ${lesson.name}`}
-              </button>
-            ))}
+            {lessons.map((lesson, index) => {
+              const unlocked = index < unlockedCount + 1;
+              return (
+                <button
+                  key={lesson.name}
+                  className={`lesson-section ${
+                    unlocked ? "unlocked" : "locked"
+                  }`}
+                  onClick={() => {
+                    if (unlocked) setCurrentLessonIndex(index);
+                  }}
+                >
+                  {unlocked ? lesson.name : `🔒 ${lesson.name}`}
+                </button>
+              );
+            })}
           </div>
 
           {/* RIGHT PANEL */}
           <div className="whitebelt-lesson-area">
+            {/* Progress Bar */}
+            <div className="w-full mb-4">
+              <div className="bg-gray-200 rounded-full h-4">
+                <div
+                  className="bg-green-500 h-4 rounded-full transition-all duration-500"
+                  style={{ width: `${progressPercent}%` }}
+                ></div>
+              </div>
+              <p className="text-sm text-right text-gray-600 mt-1">
+                {progressPercent}% Complete
+              </p>
+            </div>
+
             <h3 className="lesson-title">
               CURRENT LESSON:{" "}
               <span className="highlight">
