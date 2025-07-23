@@ -143,10 +143,10 @@ function Header2(){
     }
   }
 
-  const updateProfile = async (e: any) =>
+  const updateProfile = async () =>
   {
     console.log("in updateProfile before prevent Default");
-    e.preventDefault();
+    // e.preventDefault();
     console.log("in updateProfile after prevent Default");
     const jwtToken = localStorage.getItem("token");
 
