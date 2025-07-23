@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Header2 from "../components/Header2.tsx";
-import { storeToken } from '../tokenStorage';
+import { storeToken } from "../tokenStorage";
 // import { jwtDecode } from "jwt-decode";
 
 const lessons = [
@@ -107,17 +107,20 @@ const WhiteBeltLessons = () => {
     }
 
     try {
-      const response = await fetch("http:///143.198.160.127:5000/api/updateProgress", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id,
-          progressW: newProgressW,
-          progressY: userData.progressY,
-          progress0: userData.progressO,
-          jwtToken,
-        }),
-      });
+      const response = await fetch(
+        "http:///143.198.160.127:5000/api/updateProgress",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            id,
+            progressW: newProgressW,
+            progressY: userData.progressY,
+            progress0: userData.progressO,
+            jwtToken,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -154,7 +157,9 @@ const WhiteBeltLessons = () => {
     }
   };
 
-  const progressPercent = Math.round(((unlockedCount + 1) / lessons.length) * 100);
+  const progressPercent = Math.round(
+    ((unlockedCount + 1) / lessons.length) * 100
+  );
 
   return (
     <div>
@@ -171,7 +176,7 @@ const WhiteBeltLessons = () => {
                   key={lesson.name}
                   className={`lesson-section ${
                     unlocked ? "unlocked" : "locked"
-                  }`}
+                  } ${currentLessonIndex === index ? "selected" : ""}`}
                   onClick={() => {
                     if (unlocked) setCurrentLessonIndex(index);
                   }}
