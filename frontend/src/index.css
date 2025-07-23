@@ -959,3 +959,195 @@ textarea::placeholder {
   scrollbar-gutter: stable both-edges;
 }
 
+
+
+
+
+/* About Page */
+
+/* banner flush to top and extra space to scroll on bottom */
+.about-scroll {
+  padding-top: 0 !important;
+  padding-bottom: 10rem !important; /* adds meaningful scroll room */
+}
+
+/* sticky solid red banner */
+.AboutHeader {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  width: 100%;
+  background: #ff2a2a;
+  color: #000;
+  text-align: center;
+  margin: 0 0 2.5rem 0; /* space below banner */
+  padding: .75rem 0;   /* tall banner */
+  border-radius: 0 0 .25rem .25rem; /* round lower corners */
+  pointer-events: none;
+}
+.AboutHeader-label {
+  margin: 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;  /* bigger desktop size */
+  font-weight: 700;
+  line-height: 1.1;
+  pointer-events: auto;
+}
+
+/* spacing under banner */
+.about-section {
+  margin-top: 5rem;
+}
+
+/* picture layout */
+.team-grid-rows {
+  display: grid;
+  row-gap: 6rem;   /* vertical gap between top & bottom rows */
+  width: 100%;
+}
+
+/* top row with 4 columns centered */
+.team-grid-top {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: center;
+  column-gap: 3.5rem;
+}
+
+/* bottom row with 3 columns centered */
+.team-grid-bottom {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+  column-gap: 3.5rem;
+}
+
+/* team card */
+.team-member {
+  text-align: center;
+  color: #000;
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+/* headshots */
+.team-member-frame-with-belt {
+  position: relative;
+  width: 220px;
+  margin: 0 auto 2.5rem;
+}
+.team-member-frame {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: #ff2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.team-member-frame img {
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+}
+
+/* belt image sized to match circle*/
+.team-belt-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -44px;    /* ~20% of 220px */
+  width: 155px;
+  height: auto;
+  pointer-events: none;
+}
+
+
+.team-belt-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+/* labels */
+.team-member-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: .5px;
+  margin-top: .25rem;
+}
+
+.team-member-role {
+  font-size: 1.1rem;
+  line-height: 1.1;
+}
+
+/* Thanks Section */
+.thanks-section {
+  margin-top: 10rem;     /* gap for scroll */
+  text-align: center;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.thanks-heading {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  font-family: 'Bebas Neue', sans-serif;
+  color: #000;
+}
+
+.thanks-paint {
+  display: block;
+  margin: 1rem auto 0 auto;
+  width: 400px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* image below north wind martial arts logo*/
+.thanks-extra-img {
+  display: block;
+  margin: 1.5rem auto 0 auto;
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+}
+
+/* Shrink content for narrow screens) */
+@media (max-width: 700px){
+  .AboutHeader       { margin-bottom: 2rem; padding: .4rem 0; }
+  .AboutHeader-label { font-size: 1.8rem; }
+
+  .team-grid-top {
+    grid-template-columns: repeat(auto-fill, minmax(120px,1fr));
+    max-width: 480px;
+    margin-inline: auto;
+    column-gap: 2rem;
+  }
+  .team-grid-bottom {
+    grid-template-columns: repeat(auto-fill, minmax(120px,1fr));
+    max-width: 360px;
+    margin-inline: auto;
+    column-gap: 2rem;
+  }
+
+  .team-member-frame-with-belt { width: 140px; margin-bottom: 1.75rem; }
+  .team-member-frame           { width: 140px; height: 140px; }
+  .team-belt-wrapper           { width: 140px; bottom: -28px; }
+  .team-member-name            { font-size: 1.1rem; }
+  .team-member-role            { font-size: .85rem; }
+
+  .about-section { margin-top: 3rem; }
+  .thanks-section { margin-top: 6rem; }
+  .about-scroll { padding-bottom: 6rem !important; }
+}
+
+/*@media (min-width: 1600px){
+  .team-belt-wrapper { bottom: -40px; } /* nudge upward slightly 
+}*/
+
