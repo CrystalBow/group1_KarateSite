@@ -87,7 +87,6 @@ const WhiteBeltLessons = () => {
             progressW: data.progressW,
             progressY: data.progressY,
             progressO: data.progressO,
-            rank: data.rank,
           };
           localStorage.setItem("user_data", JSON.stringify(updatedUser));
         }
