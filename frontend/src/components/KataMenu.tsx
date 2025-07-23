@@ -37,7 +37,7 @@ const KataMenu = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          search: searchTerm.trim(), // trim spaces just in case
+          search: searchTerm,
           jwtToken: token,
         }),
       });
@@ -55,7 +55,13 @@ const KataMenu = () => {
         orange: [],
       };
 
-      // if search term is empty, include everything
+      data.results.forEach((item: { Name: string; Belt: string }) => {
+        const belt = item.Belt.toLowerCase();
+        if (formatted[belt]) {
+          formatted[belt].push(item.Name);
+        }
+      });
+
       if (searchTerm.trim() === "") {
         data.allKata.forEach((item: { Name: string; Belt: string }) => {
           const belt = item.Belt.toLowerCase();
@@ -77,6 +83,7 @@ const KataMenu = () => {
       console.error("Search failed:", error);
     }
   };
+
   useEffect(() => {
     handleSearch();
   }, []);
