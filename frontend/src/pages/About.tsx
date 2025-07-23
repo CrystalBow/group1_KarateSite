@@ -9,13 +9,13 @@ interface TeamMember {
 }
 
 const teamMembers: TeamMember[] = [
-  { name: "Victor", role: "Front End (Web)", alt="Photo of Victor",    img: "/assets/Victor.jpg" },
-  { name: "Taha",   role: "Front End (Web)", alt="Photo of Taha",    img: "/assets/taha.jpg" },
-  { name: "Chris",  role: "Front End (Mobile)", alt="Photo of Chris", img: "/assets/chris.jpg" },
-  { name: "Davage", role: "Database", alt="Photo of Davage",           img: "/assets/davage.jpg" },
-  { name: "Yimer",  role: "API", alt="Photo of Yimer",                img: "/assets/yimer.jpg" },
-  { name: "Elijah", role: "API", alt="Photo of Elijah",                img: "/assets/elijah.jpg" },
-  { name: "Jereme", role: "API", alt="Photo of Jereme",                img: "/assets/jereme.jpg" },
+  { name: "Victor", role: "Front End (Web)",    img: "/assets/Victor.jpg" },
+  { name: "Taha",   role: "Front End (Web)",    img: "/assets/taha.jpg" },
+  { name: "Chris",  role: "Front End (Mobile)", img: "/assets/chris.jpg" },
+  { name: "Davage", role: "Database",           img: "/assets/davage.jpg" },
+  { name: "Yimer",  role: "API",                img: "/assets/yimer.jpg" },
+  { name: "Elijah", role: "API",                img: "/assets/elijah.jpg" },
+  { name: "Jereme", role: "API",                img: "/assets/jereme.jpg" },
 ];
 
 
