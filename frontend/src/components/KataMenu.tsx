@@ -51,7 +51,7 @@ const KataMenu = () => {
       };
 
       data.results.forEach((item: { Name: string; Belt: string }) => {
-        const belt = item.Belt;
+        const belt = item.Belt.toLowerCase();
         if (formatted[belt]) {
           formatted[belt].push(item.Name);
         }
