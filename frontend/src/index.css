@@ -383,7 +383,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 90vw;
+  width: 91vw;
   height: 70vh;
   padding: 1rem; 
   margin: 0 0;
@@ -435,7 +435,7 @@ body {
 
 .lesson-nav {
   position: absolute;
-  top: 24%; /* adjust to control vertical position */
+  top: 20%; 
   left: 50%;
   transform: translateX(-50%);
   display: flex;
