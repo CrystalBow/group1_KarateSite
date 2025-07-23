@@ -9,7 +9,7 @@ const CurriculumPage = () => {
   const storedData = localStorage.getItem("user_data");
   if (storedData) {
     const parsed = JSON.parse(storedData);
-    setUserName(parsed.user);  
+    setUserName(parsed.name);  
   }
 }, []);
   return (
