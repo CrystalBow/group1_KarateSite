@@ -301,10 +301,12 @@ function Header2(){
                     <FaCheck 
                       className="IconPosition"
                       id="checkIcon"
-                      onClick={() => {
-                        setIsEditing(!isEditing);
-                        updateProfile;
-                      }}
+                      onClick={
+                        //() => {
+                        //setIsEditing(!isEditing);
+                        updateProfile
+                        //}
+                      }
                     /> 
                   </p>
                   </div>) : (
