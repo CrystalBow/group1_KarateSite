@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Header1 from "../components/Header1";
-
+import Header1 from "../components/Header1.tsx";
 
 interface TeamMember {
   name: string;
@@ -10,13 +9,13 @@ interface TeamMember {
 }
 
 const teamMembers: TeamMember[] = [
-  { name: "Victor", role: "Front End (Web)",    img: "/assets/team/victor.jpg" },
-  { name: "Taha",   role: "Front End (Web)",    img: "/assets/team/taha.jpg" },
-  { name: "Chris",  role: "Front End (Mobile)", img: "/assets/team/chris.jpg" },
-  { name: "Davage", role: "Database",           img: "/assets/team/davage.jpg" },
-  { name: "Yimer",  role: "API",                img: "/assets/team/yimer.jpg" },
-  { name: "Elijah", role: "API",                img: "/assets/team/elijah.jpg" },
-  { name: "Jereme", role: "API",                img: "/assets/team/jereme.jpg" },
+  { name: "Victor", role: "Front End (Web)",    img: "/assets/Victor.jpg" },
+  { name: "Taha",   role: "Front End (Web)",    img: "/assets/taha.jpg" },
+  { name: "Chris",  role: "Front End (Mobile)", img: "/assets/chris.jpg" },
+  { name: "Davage", role: "Database",           img: "/assets/davage.jpg" },
+  { name: "Yimer",  role: "API",                img: "/assets/yimer.jpg" },
+  { name: "Elijah", role: "API",                img: "/assets/elijah.jpg" },
+  { name: "Jereme", role: "API",                img: "/assets/jereme.jpg" },
 ];
 
 
