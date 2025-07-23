@@ -105,7 +105,9 @@ const OrangeBeltLessons = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             id,
-            progressO: newProgressO,
+            progressW: userData.progressW,
+            progressY: userData.progressY,
+            progress0: newProgressO,
             jwtToken,
           }),
         }
