@@ -51,13 +51,12 @@ const WhiteBeltLessons = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const lessonQuery = queryParams.get("lesson");
-  
+
   useEffect(() => {
     const fetchUserProgress = async () => {
       const jwtToken = localStorage.getItem("token");
       const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
       const id = userData.id;
-      
 
       const indexFromQuery = lessons.findIndex(
         (l) =>
@@ -184,7 +183,7 @@ const WhiteBeltLessons = () => {
       <div className="page-container">
         <div className="custom-card whitebelt-container">
           {/* LEFT SIDEBAR */}
-          <div className="whitebelt-sidebar">
+          <div className="whitebelt-sidebar overflow-y-auto max-h-[75vh] p-2">
             <h2 className="belt-title">WHITE BELT</h2>
             {lessons.map((lesson, index) => {
               const unlocked = index < unlockedCount + 1;
@@ -214,7 +213,7 @@ const WhiteBeltLessons = () => {
                   style={{ width: `${progressPercent}%` }}
                 ></div>
               </div>
-              <p className="text-sm text-right text-gray-600 mt-1">
+              <p className="text-sm text-right text-white mt-1">
                 {progressPercent}% Complete
               </p>
             </div>

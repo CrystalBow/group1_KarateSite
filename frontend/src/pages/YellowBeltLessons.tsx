@@ -156,8 +156,8 @@ const YellowBeltLessons = () => {
       <div className="page-container">
         <div className="custom-card whitebelt-container">
           {/* LEFT SIDEBAR */}
-          <div className="whitebelt-sidebar">
-            <h2 className="belt-title">YELLOW BELT</h2>
+          <div className="whitebelt-sidebar overflow-y-auto max-h-[75vh] p-2">
+            <h2 className="belt-title">WHITE BELT</h2>
             {lessons.map((lesson, index) => {
               const unlocked = index < unlockedCount + 1;
               return (
@@ -186,7 +186,7 @@ const YellowBeltLessons = () => {
                   style={{ width: `${progressPercentage}%` }}
                 ></div>
               </div>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-right text-white mt-1">
                 {progressPercentage}% Complete
               </p>
             </div>
