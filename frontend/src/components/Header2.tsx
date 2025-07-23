@@ -101,7 +101,6 @@ function Header2(){
   const deleteAccount = async () =>
   {
     const jwtToken = localStorage.getItem("token");
-
     const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
     const id = userData.id;
     const user = userData.user;
@@ -145,18 +144,13 @@ function Header2(){
 
   const updateProfile = async () =>
   {
-    console.log("in updateProfile before prevent Default");
-    // e.preventDefault();
-    console.log("in updateProfile after prevent Default");
-    setMessage("User information updated successfully");
     const jwtToken = localStorage.getItem("token");
-
     const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
     const id = userData.id;
     const user = userData.user;
     const name = copy; // stores updated name
     const email = "";
-    const rank = "";
+    const rank = userData.rank; 
 
     console.log(localStorage.getItem("token"));
     console.log(user);
@@ -184,11 +178,10 @@ function Header2(){
         return;
       }
 
-      const updatedUser = {
-            ...userData,
-            name: userData.name           
-          };
-      localStorage.setItem("user_data", JSON.stringify(updatedUser));
+      console.log("data t:", data);
+      userData.name = data.name;
+
+      localStorage.setItem("user_data", JSON.stringify(userData));
 
       console.log("data info:", data);
 
@@ -197,6 +190,7 @@ function Header2(){
       //}
       // return(data.message);
       setMessage(data.message);
+      setTimeout(() => setMessage(""), 1500);
     } catch (err) {
       console.error("Failed to fetch progress:", err);
     }
