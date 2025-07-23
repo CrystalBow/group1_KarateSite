@@ -191,7 +191,15 @@ function Header2(){
 
       console.log("data t:", data);
       console.log("data name = " + data.name);
-      userData.name = copy;
+
+      if (field === "name")
+      {
+        userData.name = name;
+      }
+      else if (email === "email")
+      {
+        userData.email = email;
+      }
 
       console.log("userData:", userData);
 
