@@ -5,7 +5,6 @@ const token = require('../createJWT.js');
 module.exports = function(db) {
   router.post('/', async (req, res) => {
     const { search, jwtToken } = req.body;
-    // Test validity of token
     try
     {
       if (token.isExpired(jwtToken))
@@ -28,7 +27,6 @@ module.exports = function(db) {
         Name: { $regex: search, $options: "i" }
       }).toArray();
 
-      // Refresh and return token with results
       try
       {
         refreshedToken = token.refresh(jwtToken);
