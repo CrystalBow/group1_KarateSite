@@ -17,13 +17,13 @@ const CurriculumPage = () => {
       setUserName(parsed.name);
 
       setProgress({
-        white: Math.round(((parsed.progressW + 1) / 7) * 100), // 7 white belt lessons
-        yellow: Math.round(((parsed.progressY + 1) / 7) * 100), // adjust if needed
-        orange: Math.round(((parsed.progressO + 1) / 7) * 100), // adjust if needed
+        white: Math.round(((parsed.progressW + 1) / 7) * 100), 
+        yellow: Math.round(((parsed.progressY + 1) / 4) * 100), 
+        orange: Math.round(((parsed.progressO + 1) / 4) * 100), 
       });
     }
   }, []);
-  
+
   return (
     <div>
       <Header2 />
@@ -46,6 +46,7 @@ const CurriculumPage = () => {
                       className="h-full bg-blue-400 rounded-full"
                       style={{ width: `${progress.white}%` }}
                     ></div>
+                    <p className="text-xs text-white text-right mt-1">{progress.white}% Complete</p>
                   </div>
                 </a>
               </button>
@@ -59,6 +60,7 @@ const CurriculumPage = () => {
                       className="h-full bg-yellow-400 rounded-full"
                       style={{ width: `${progress.yellow}%` }}
                     ></div>
+                    <p className="text-xs text-white text-right mt-1">{progress.yellow}% Complete</p>
                   </div>
                 </a>
               </button>
@@ -72,6 +74,7 @@ const CurriculumPage = () => {
                       className="h-full bg-orange-400 rounded-full"
                       style={{ width: `${progress.orange}%` }}
                     ></div>
+                    <p className="text-xs text-white text-right mt-1">{progress.orange}% Complete</p>
                   </div>
                 </a>
               </button>
