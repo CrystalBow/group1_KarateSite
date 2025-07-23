@@ -303,7 +303,7 @@ function Header2(){
                       id="checkIcon"
                       onClick={() => {
                         setIsEditing(!isEditing);
-                        updateProfile
+                        updateProfile();
                       }}
                     /> 
                   </p>
