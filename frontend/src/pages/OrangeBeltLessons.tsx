@@ -194,10 +194,7 @@ const OrangeBeltLessons = () => {
                 </button>
               );
             })}
-          </div>
 
-          {/* RIGHT PANEL */}
-          <div className="whitebelt-lesson-area">
             {/* Progress Bar */}
             <div className="w-full mb-4">
               <div className="w-full h-3 bg-gray-300 rounded-full overflow-hidden">
@@ -210,6 +207,10 @@ const OrangeBeltLessons = () => {
                 {progressPercent}% Complete
               </p>
             </div>
+          </div>
+
+          {/* RIGHT PANEL */}
+          <div className="whitebelt-lesson-area">
 
             <h3 className="lesson-title">
               CURRENT LESSON:{" "}

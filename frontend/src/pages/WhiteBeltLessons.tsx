@@ -201,15 +201,12 @@ const WhiteBeltLessons = () => {
                 </button>
               );
             })}
-          </div>
 
-          {/* RIGHT PANEL */}
-          <div className="whitebelt-lesson-area">
-            {/* Progress Bar */}
+             {/* Progress Bar */}
             <div className="w-full mb-4">
-              <div className="bg-gray-200 rounded-full h-4">
+              <div className="w-full h-3 bg-gray-300 rounded-full overflow-hidden">
                 <div
-                  className="bg-green-500 h-4 rounded-full transition-all duration-500"
+                  className="h-full bg-orange-500 transition-all duration-300"
                   style={{ width: `${progressPercent}%` }}
                 ></div>
               </div>
@@ -217,6 +214,10 @@ const WhiteBeltLessons = () => {
                 {progressPercent}% Complete
               </p>
             </div>
+          </div>
+
+          {/* RIGHT PANEL */}
+          <div className="whitebelt-lesson-area">
 
             <h3 className="lesson-title">
               CURRENT LESSON:{" "}
