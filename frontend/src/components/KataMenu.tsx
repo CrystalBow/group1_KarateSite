@@ -134,7 +134,9 @@ const KataMenu = () => {
                       key={idx}
                       className="px-6 py-2 border-t border-black font-bold"
                     >
-                      {kata}
+                      <a href={`/${belt}beltlesson?lesson=${encodeURIComponent(kata)}`} className="text-blue-500 hover:underline">
+                        {kata}
+                      </a>
                     </div>
                   ))
                 )}
