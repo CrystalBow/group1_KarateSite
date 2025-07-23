@@ -182,7 +182,7 @@ function Header2(){
 
       console.log("data t:", data);
       console.log("data name = " + data.name);
-      userData.name = data.name;
+      userData.name = copy;
 
       console.log("userData:", userData);
 
