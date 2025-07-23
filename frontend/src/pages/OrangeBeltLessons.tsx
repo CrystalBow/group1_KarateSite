@@ -70,7 +70,7 @@ const OrangeBeltLessons = () => {
             progressW: data.progressW,
             progressY: data.progressY,
             progressO: data.progressO,
-            rank: data.rank,
+            // rank: data.rank,
           };
           localStorage.setItem("user_data", JSON.stringify(updatedUser));
         }
@@ -105,6 +105,8 @@ const OrangeBeltLessons = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             id,
+            progressW: userData.progressW,
+            progressY: userData.progressY,
             progressO: newProgressO,
             jwtToken,
           }),
