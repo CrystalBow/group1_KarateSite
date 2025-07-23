@@ -80,7 +80,7 @@ function Header2(){
   {
     event.preventDefault();
     localStorage.removeItem("user_data");
-    localStorage.removeItem
+    localStorage.removeItem("token");
     window.location.href = "/";
   }
 
@@ -143,9 +143,11 @@ function Header2(){
     }
   }
 
-  const updateProfile = async (e: any) =>
+  const updateProfile = async () =>
   {
-    e.preventDefault();
+    console.log("in updateProfile before prevent Default");
+    // e.preventDefault();
+    console.log("in updateProfile after prevent Default");
     const jwtToken = localStorage.getItem("token");
 
     const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
@@ -164,7 +166,7 @@ function Header2(){
     }
 
     try {
-      const response = await fetch(buildPath("api/deleteUser"),
+      const response = await fetch(buildPath("api/editUserInfo"),
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -293,16 +295,18 @@ function Header2(){
                       className="IconPosition"
                       id="xMarkIcon"
                       onClick={() => {
-                        setIsEditing(!isEditing)
+                        setIsEditing(!isEditing);
                       }}
                     />
                     <FaCheck 
                       className="IconPosition"
                       id="checkIcon"
-                      onClick={() => {
-                        setIsEditing(!isEditing)
-                        updateProfile;
-                      }}
+                      onClick={
+                        //() => {
+                        //setIsEditing(!isEditing);
+                        updateProfile
+                        //}
+                      }
                     /> 
                   </p>
                   </div>) : (
