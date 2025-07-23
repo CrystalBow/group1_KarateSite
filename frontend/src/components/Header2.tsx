@@ -157,7 +157,7 @@ function Header2(){
     const user = userData.user;
     const name = copy; // stores updated name
     const email = "";
-    const rank = "";
+    let rank = userData.rank;
 
     console.log(localStorage.getItem("token"));
     console.log(user);
