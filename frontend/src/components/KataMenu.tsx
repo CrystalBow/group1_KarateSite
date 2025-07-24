@@ -70,7 +70,7 @@ const KataMenu = () => {
 
   useEffect(() => {
     handleSearch();
-  }, []);
+  }, [searchTerm]);
 
   return (
     <div
@@ -102,7 +102,6 @@ const KataMenu = () => {
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);
-            handleSearch(); // Trigger search on change
           }}
           className="w-full mb-4 p-2 rounded-lg border border-gray-300 text-black"
         />
