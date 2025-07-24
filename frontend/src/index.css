@@ -219,26 +219,20 @@ body {
 
 #UsernameDiv
 {
-  /* position:absolute;
-  top: 8%; */
   margin-top: 10%;
   display: flex;
   justify-content: center;
-  justify-items: center;
-  text-align: center;
+  align-items: center;
   color: #e8e8e8;
   font-size: 2.5vh;
   background-color: #636363;
   border-radius: 25px;
-  /* height: 19%; */
   height: 50px;
   width: 70%;
 }
 #UsernameText
 {
-  /* position: absolute;
-  top: 10%; */
-  margin: 7%;
+  margin: 0;
 }
 
 .iconStyle
@@ -994,6 +988,7 @@ textarea::placeholder {
   margin: 0 0 2.5rem;
   padding: .75rem 0;
   border-radius: 0 0 .25rem .25rem;
+  clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%);
 }
 
 

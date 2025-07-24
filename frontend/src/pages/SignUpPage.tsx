@@ -258,7 +258,7 @@ const SignUpPage = () => {
                       onChange={() => setShowPassword((prev) => !prev)}
                     />
                     <label
-                      className="form-check-label"
+                      className="form-check-label mr-6 bebasFont"
                       htmlFor="showPasswordCheck"
                     >
                       Show Password

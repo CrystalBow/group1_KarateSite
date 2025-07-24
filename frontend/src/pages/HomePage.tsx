@@ -45,7 +45,7 @@ const HomePage = () => {
                 <h2>
                   <u>WHAT IS KARATE TRAINER?</u>
                 </h2>
-                <p>
+                <p className="text-[1.8vw]">
                   Karate Trainer has everything you need to learn traditional karate. 
                   Based on Shito-Ryu, one of the main karate styles from Okinawa, Japan, 
                   Karate Trainer will teach you all the basic blocks, forms (kata), 

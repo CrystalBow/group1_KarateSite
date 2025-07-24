@@ -159,7 +159,7 @@ function Login() {
                       onChange={() => setShowPassword((prev) => !prev)}
                     />
                     <label
-                      className="form-check-label bebasFont"
+                      className="form-check-label bebasFont mr-6"
                       htmlFor="showPasswordCheck"
                     >
                       Show Password
