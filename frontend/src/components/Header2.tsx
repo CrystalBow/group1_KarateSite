@@ -195,7 +195,8 @@ function Header2(){
       }
 
       console.log("data t:", data);
-      console.log("data name = " + data.name);
+      console.log("updated fields:", data.updatedFields)
+      console.log("data name = " + data.updatedFields.name);
 
       if (field === "name")
       {
