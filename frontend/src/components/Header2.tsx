@@ -209,6 +209,9 @@ function Header2(){
       else if (field === "rank")
       {
         userData.rank = rank;
+        userData.progressW = data.updatedFields.progressW;
+        userData.progressY = data.updatedFields.progressY;
+        userData.progressO = data.updatedFields.progressO;
       }
 
       console.log("userData:", userData);
