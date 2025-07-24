@@ -38,9 +38,9 @@ function Header2(){
     if (Object.keys(userData).length === 0)
     {
       console.warn("Could not load UserData")
-      window.location.reload();
+      //window.location.reload();
       //window.location.href = "/"; // return to home page
-      return;
+      //return;
     }
     console.log(userData)
     if (userData.rank === 0) 
