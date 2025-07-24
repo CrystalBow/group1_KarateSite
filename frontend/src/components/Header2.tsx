@@ -226,11 +226,6 @@ function Header2(){
       // return(data.message);
       setMessage(data.message);
       setTimeout(() => setMessage(""), 1500);
-
-      if (field === "rank")
-      {
-        window.location.reload();
-      }
     } catch (err) {
       console.error("Failed to fetch progress:", err);
     }
@@ -242,6 +237,7 @@ function Header2(){
       const divClicked = AccountDivRef.current && AccountDivRef.current.contains(event.target as Node);
       if (!iconClicked && !divClicked) {
         setAction("");
+        window.location.reload();
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
