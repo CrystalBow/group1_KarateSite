@@ -1003,9 +1003,9 @@ textarea::placeholder {
 }
 
 /* spacing under banner */
-.about-section {
-  margin-top: 3rem;
-}
+/*.about-section {
+  margin-top: 5rem;
+}*/
 
 /* picture layout */
 .team-grid-rows {
