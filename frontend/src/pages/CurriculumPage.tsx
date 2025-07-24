@@ -30,7 +30,7 @@ const CurriculumPage = () => {
       <div className="page-container">
         <div className="custom-card custom-card-items-centered">
           <div id="redDivCurr" className="redDivLogin">
-            <img src="/assets/RearRedPaint.png" id="rearImgCurr"></img>
+            <img src="/assets/RearRedPaint.png" id="rearImgCurr" alt="red Brush Background"></img>
             <h1 className="bebasFont" id="lessonText">
               WELCOME{userName ? `, ${userName.toUpperCase()}` : ""} SELECT A
               LESSON
