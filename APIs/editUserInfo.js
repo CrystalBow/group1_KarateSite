@@ -58,7 +58,7 @@ module.exports = function(db) {
             name: 'Karate Trainer'
           },
           subject: 'Verify your Karate Trainer email',
-          html: `Hello ${name}, click <a href="${verifyEmailLink}">here</a> to verify your email. Once verified, you will be redirected to the login page.`,
+          html: `Hello ${name || userBeingEdited.name}, click <a href="${verifyEmailLink}">here</a> to verify your email. Once verified, you will be redirected to the login page.`,
         }
         try {
           await mail.send(msg);
