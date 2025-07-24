@@ -5,24 +5,72 @@ import Header2 from "../components/Header2.tsx";
 
 const lessons = [
   {
-    name: "TENCHI HAPPO 7-8 TRADITIONAL",
+    name: "TENSHIN HAPPO 7-8 TRADITIONAL",
     videoId: "fTqnJaLS_RY?si=v5_OwAPvI-EwEmAd&t=399",
-    description: "Tenchi happos oat...",
+    description: "Tenshin Happo means 'Eight Directional Evasion' in Shito-Ryu Karate, \
+    It teaches strategic movement to avoid and counter attacks from all angles, \
+    Happo 7 uses circular stepping and body rotation to redirect momentum, \
+    It emphasizes spinning footwork and kuruma principles for fluid evasion, \
+    Happo 8 combines angled retreat with height shifts for layered defense, \
+    This drill teaches slipping under or around incoming strikes with precision, \
+    Traditional execution focuses on posture, timing, and reactive control, \
+    Movements reflect sabaki and tenshin—body shifting and subtle repositioning, \
+    These patterns expand spatial awareness and dynamic footwork skills, \
+    They prepare practitioners for unpredictable attacks and counters, \
+    Tenshin Happo 7–8 deepen understanding of circular motion and energy flow, \
+    Training these drills builds confidence in evasive movement and tactical response, \
+    They reinforce the principle of “no be there” through elegant redirection,"
   },
   {
     name: "CAT STANCE",
     videoId: "kHIUkFahyKA",
-    description: "cooler meow...",
+    description: "Cat stance, or Neko Ashi Dachi, is a foundational karate position, \
+    It places 90% of body weight on the back leg for balance and control, \
+    The front foot stays light, ready for quick kicks, sweeps, or movement, \
+    This stance mimics a cat poised to strike—alert, agile, and grounded, \
+    It enhances mobility, allowing fast transitions and evasive maneuvers, \
+    The back leg acts as an anchor while the front leg remains reactive, \
+    Proper form includes bent knees, upright posture, and aligned hips, \
+    The stance supports both defensive blocks and offensive counters, \
+    It trains timing, posture, and weight distribution under pressure, \
+    Practicing cat stance builds stability, awareness, and readiness, \
+    It appears in many katas and self-defense drills across karate styles, \
+    Mastering Neko Ashi Dachi improves footwork and short-range technique, \
+    Its subtle power makes it a strategic tool for both offense and defense,"
   },
   {
     name: "PINAN SHODAN",
     videoId: "qNP1pbzXXJs",
-    description: "Pinan Shodan cool...",
+    description: "Pinan Shodan means 'Peaceful Mind First Level' and was created by Anko Itosu, \
+    It introduces basic blocks, strikes, and stances in a symmetrical pattern, \
+    The kata begins in hachiji dachi and uses neko ashi dachi for angled defense, \
+    Techniques include soto uke, age uke, tettsui uke, and nukite strikes, \
+    It emphasizes reverse body motion to generate power and control, \
+    Movements train coordination, timing, and spatial awareness, \
+    The form includes front kicks, hammer fists, and knife-hand blocks, \
+    Transitions involve 45° and 90° turns to simulate multi-directional defense, \
+    Pinan Shodan teaches rhythm, posture, and reactive footwork, \
+    It builds foundational skills for the entire Pinan series and beyond, \
+    The kata reflects Shito-Ryu’s blend of hard strikes and soft redirections, \
+    Each move is deliberate, reinforcing balance and martial intent, \
+    Pinan Shodan is often taught early to instill discipline and core technique,"
   },
   {
     name: "ROPPO HO",
     videoId: "MiYJWNg6DSs",
-    description: "Roppo Ho...",
+    description: "Roppo Ho means 'Six Directional Kicks' in Shito-Ryu Karate, \
+    It teaches six fundamental kicking techniques for versatility and control, \
+    Kicks include mae geri, yoko geri, mawashi geri, ushiro geri, mikazuki geri, and kakato otoshi geri, \
+    Each kick targets different angles and ranges for offensive and defensive use, \
+    The kata emphasizes balance, chambering, and hip rotation for power, \
+    Movements are performed from stable stances like zenkutsu and kiba dachi, \
+    Roppo Ho builds coordination, flexibility, and directional awareness, \
+    It trains students to respond to attacks from multiple directions, \
+    The form is often taught at intermediate levels to refine kicking technique, \
+    Practicing Roppo Ho improves timing, posture, and reactive footwork, \
+    It reflects Shito-Ryu’s blend of linear and circular motion principles, \
+    Each kick is deliberate, reinforcing control and striking precision, \
+    Roppo Ho prepares practitioners for dynamic sparring and kata application,"
   },
 ];
 
@@ -234,7 +282,7 @@ const OrangeBeltLessons = () => {
             {/* Description & Button */}
             <div className="lesson-description-box">
               <div className="scrollable-text">
-                {Array(4)
+                {Array(1)
                   .fill(lessons[currentLessonIndex].description)
                   .map((line, idx) => (
                     <p key={idx}>{line}</p>

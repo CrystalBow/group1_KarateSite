@@ -4,24 +4,70 @@ import Header2 from "../components/Header2.tsx";
 
 const lessons = [
   {
-    name: "TENCHI HAPPO 1-6 TRADITIONAL:",
+    name: "TENSHIN HAPPO 1-6 TRADITIONAL:",
     videoId: "fTqnJaLS_RY?start=0&end=399",
-    description: "Tenchi Happo 1-6 traditional... yum",
+    description: "Tenshin Happo means 'Eight Directional Evasion' in Shito-Ryu Karate, \
+    It teaches movement in multiple directions to avoid and counter attacks, \
+    Happo 1 uses high block with grab and counter to redirect force, \
+    Happo 2 defends side punch with snap kick targeting the knee, \
+    Happo 3 applies middle block with pull and strike for control, \
+    Happo 4 responds to shoulder grabs with close-range counters, \
+    Happo 5 handles aggressive grabs using elbows and takedowns, \
+    Happo 6 escapes wrist grabs with blocks and follow-up strikes, \
+    Each drill builds awareness, balance, and reactive footwork, \
+    The form emphasizes practical self-defense in realistic scenarios, \
+    It develops timing, positioning, and fluid transitions under pressure, \
+    Tenshin Happo reinforces the principle of moving off the attack line, \
+    Training these drills improves confidence and defensive reflexes,"
   },
   {
     name: "BASIC COMBINATIONS",
     videoId: "gIcix72-XC0",
-    description: "Combinations of all time...",
+    description: "Basic karate combinations build fluidity, timing, and offensive strategy, \
+    Maegeri to Gyakuzuki teaches front kick followed by reverse punch, \
+    Oi-zuki to Mae Geri blends forward punch with a front kick counter, \
+    Soto Uke to Gyakuzuki trains block and punch from side defense, \
+    Uchi Uke to Kizami-zuki to Gyakuzuki layers inside block with double punches, \
+    Age Uke to Gyakuzuki to Gedan Barai covers high block, punch, and low sweep, \
+    Shuto Uke to Nukite sharpens knife-hand block into spear-hand strike, \
+    Sanbon Zuki drills triple punch with shifting stances and hip rotation, \
+    Combinations improve reaction speed and transition between techniques, \
+    They reinforce stances, breathing, and proper chambering mechanics, \
+    Practicing combos develops rhythm, control, and martial awareness,"
   },
   {
     name: "CAT STANCE",
     videoId: "kHIUkFahyKA",
-    description: "meow...",
+    description: "Cat stance, or Neko Ashi Dachi, is a foundational karate position, \
+    It places 90% of body weight on the back leg for balance and control, \
+    The front foot stays light, ready for quick kicks, sweeps, or movement, \
+    This stance mimics a cat poised to strike—alert, agile, and grounded, \
+    It enhances mobility, allowing fast transitions and evasive maneuvers, \
+    The back leg acts as an anchor while the front leg remains reactive, \
+    Proper form includes bent knees, upright posture, and aligned hips, \
+    The stance supports both defensive blocks and offensive counters, \
+    It trains timing, posture, and weight distribution under pressure, \
+    Practicing cat stance builds stability, awareness, and readiness, \
+    It appears in many katas and self-defense drills across karate styles, \
+    Mastering Neko Ashi Dachi improves footwork and short-range technique, \
+    Its subtle power makes it a strategic tool for both offense and defense,"
   },
   {
     name: "CHI NO KATA",
     videoId: "0R3zHQ59rd4",
-    description: "Cool kata...",
+    description: "Chi no Kata means 'Earth Form' and is practiced in Shito-Ryu Karate, \
+    It introduces basic stances, blocks, strikes, and directional movement, \
+    The kata begins in Musubi Dachi and transitions through Heiko and Zenkutsu Dachi, \
+    Techniques include Age Uke, Gedan Barai, Soto Uke, and Oi Zuki punches, \
+    It incorporates Mae Geri kicks and Tate Empi elbow strikes for variety, \
+    Movements follow angular steps with 45° and 90° turns for spatial awareness, \
+    Shiko Dachi is used for grounded defense and Gedan Barai countering, \
+    Morote Zuki appears with simultaneous high and low punches for impact, \
+    Yoko Shuto Uchi adds knife-hand strikes from Heiko Dachi stance, \
+    Kiai is used to emphasize key strikes and build spirit and focus, \
+    The kata teaches rhythm, balance, and coordination across directions, \
+    Chi no Kata builds foundational skills for more advanced Shito-Ryu forms, \
+    It reinforces posture, timing, and the principle of rooted technique,"
   },
 ];
 
@@ -213,7 +259,7 @@ const YellowBeltLessons = () => {
 
             <div className="lesson-description-box">
               <div className="scrollable-text">
-                {Array(4)
+                {Array(1)
                   .fill(lessons[currentLessonIndex].description)
                   .map((line, idx) => (
                     <p key={idx}>{line}</p>
