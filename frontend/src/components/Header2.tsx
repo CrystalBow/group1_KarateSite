@@ -19,6 +19,7 @@ function Header2(){
   const inputRef = useRef<HTMLInputElement>(null);
   const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
   const navigate = useNavigate();
+  const [reloadFlag, setReloadFlag] = useState(0);
 
   useEffect(() => {
     const jwtToken = localStorage.getItem("token");
@@ -235,16 +236,28 @@ function Header2(){
     function handleClickOutside(event: MouseEvent) {
       const iconClicked = profileIconRef.current && profileIconRef.current.contains(event.target as Node);
       const divClicked = AccountDivRef.current && AccountDivRef.current.contains(event.target as Node);
-      if (!iconClicked && !divClicked) {
+
+      console.log("reloadFlag = " + reloadFlag);
+
+      if (iconClicked)
+      {
+        setReloadFlag(1);
+        console.log("icon has been clicked");
+        console.log("In clicked if reloadFlag = " + reloadFlag);
+      }
+
+      if (!iconClicked && !divClicked && reloadFlag == 1) {
         setAction("");
         window.location.reload();
+        setReloadFlag(0)
+        console.log("In out if reloadFlag = " + reloadFlag);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [reloadFlag]);
 
 
   return (
