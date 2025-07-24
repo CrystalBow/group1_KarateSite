@@ -226,6 +226,7 @@ function Header2(){
       // return(data.message);
       setMessage(data.message);
       setTimeout(() => setMessage(""), 1500);
+      window.location.reload();
     } catch (err) {
       console.error("Failed to fetch progress:", err);
     }
