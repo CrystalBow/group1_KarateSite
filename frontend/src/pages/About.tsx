@@ -76,7 +76,7 @@ const TeamGrid: React.FC = () => {
 const ThanksSection: React.FC = () => (
   <div className="thanks-section">
     <p className="thanks-heading">{
-    "SPECIAL THANKS TO NORTHWIND MATERIAL ARTS ACADEMY AND SENSEI JAMES FOR PROVIDING THE CONTENT FOR THIS PROJECT"}</p>
+    "SPECIAL THANKS TO NORTHWIND MARTIAL ARTS ACADEMY AND SENSEI JAMES FOR PROVIDING THE CONTENT FOR THIS PROJECT"}</p>
     <img
       className="thanks-paint"
       src={"/assets/NorthWindLogo.png"}
