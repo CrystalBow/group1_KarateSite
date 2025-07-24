@@ -1002,10 +1002,6 @@ textarea::placeholder {
   pointer-events: auto;
 }
 
-/* spacing under banner */
-/*.about-section {
-  margin-top: 5rem;
-}*/
 
 /* picture layout */
 .team-grid-rows {
