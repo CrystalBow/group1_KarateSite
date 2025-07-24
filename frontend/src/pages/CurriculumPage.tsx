@@ -43,7 +43,7 @@ const CurriculumPage = () => {
                   <span style={{ color: "white" }}>ENTER WHITE BELT</span>
                   <div className="w-full h-2 bg-gray-300 rounded-full mt-1">
                     <div
-                      className="h-full bg-blue-400 rounded-full"
+                      className="h-full bg-white rounded-full"
                       style={{ width: `${progress.white}%` }}
                     ></div>
                     <p className="text-lg text-white text-right mt-1">{progress.white}% Complete</p>
