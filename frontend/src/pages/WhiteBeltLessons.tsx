@@ -27,7 +27,7 @@ const lessons = [
     description: "Stances are the foundation of all techniques...",
   },
   {
-    name: "GO HO NO UKEI",
+    name: "GO HO NO UKE",
     videoId: "8vfnP-52X5A",
     description: "Go Ho No Ukei is a part of a set sequence of movements and techniques...",
   },

@@ -7,10 +7,11 @@ import { useNavigate } from "react-router-dom";
 function Header2(){
   const [action, setAction] = useState("");
   const [beltName, setBeltName] = useState("");
+  const [rankChange, setRankChange] = useState(-1);
   const [profileImg, setProfileImg] = useState("");
   const [isEditingName, setIsEditingName] = useState(false);
   const [isEditingEmail, setIsEditingEmail] = useState(false);
-  // const [testEdit, setTestEdit] = useState("Changes");
+  const [isEditingRank, setIsEditingRank] = useState(false);
   const [copy, setCopy] = useState("");
   const [message, setMessage] = useState("");
   const profileIconRef = useRef<HTMLImageElement>(null);
@@ -94,7 +95,7 @@ function Header2(){
     if (okay)
     {
       let message = await deleteAccount();
-      alert(message);
+      setMessage(message);
       setTimeout(() => navigate("/"), 1500);
     }
   }
@@ -149,7 +150,7 @@ function Header2(){
     const userData = JSON.parse(localStorage.getItem("user_data") ?? "{}");
     const id = userData.id;
     const user = userData.user;
-    let name = ""; // stores updated name
+    let name = ""; 
     let email = "";
     let rank = userData.rank; 
 
@@ -160,6 +161,10 @@ function Header2(){
     else if (field === "email")
     {
       email = copy;
+    }
+    else if (field === "rank")
+    {
+      rank = rankChange;
     }
     
 
@@ -199,6 +204,10 @@ function Header2(){
       else if (field === "email")
       {
         userData.email = email;
+      }
+      else if (field === "rank")
+      {
+        userData.rank = rank;
       }
 
       console.log("userData:", userData);
@@ -338,6 +347,7 @@ function Header2(){
                       onClick={() => {
                         setIsEditingName(!isEditingName)
                         setIsEditingEmail(false);
+                        setIsEditingRank(false);
                         setCopy(userData.name);
                       }}
                     />
@@ -379,8 +389,9 @@ function Header2(){
                   <FaPen 
                     className="IconPosition"
                     onClick={() => {
-                      setIsEditingName(false);
                       setIsEditingEmail(!isEditingEmail);
+                      setIsEditingName(false);
+                      setIsEditingRank(false);
                       setCopy(userData.email);
                     }}
                   />
@@ -389,7 +400,50 @@ function Header2(){
 
               <h6 className="headerFont"><u>Belt Rank</u></h6>
               <div>
-                <p className="iconStyle"> {beltName} <FaPen className="IconPosition"/></p>
+                {isEditingRank ? (
+                  <div className="inline-flex pb-3">
+                    <select 
+                      name="belt rank" 
+                      id="rankDropDown" 
+                      value={rankChange} 
+                      onChange={(e) => {
+                      setRankChange(Number(e.target.value));
+                    }}
+                    >
+                        <option value="0"> White Belt </option>
+                        <option value="1"> Yellow Belt </option>
+                        <option value="2"> Orange Belt </option>
+                    </select>
+                    <p> 
+                      <FaXmark 
+                        className="IconPosition"
+                        id="xMarkIcon"
+                        onClick={() => {
+                          setIsEditingRank(!isEditingRank);
+                        }}
+                      />
+                      <FaCheck 
+                        className="IconPosition"
+                        id="checkIcon"
+                        onClick={() => {
+                          setIsEditingRank(!isEditingRank);
+                          updateProfile("rank");
+                        }}
+                      /> 
+                    </p>
+                  </div>) : (
+                    <p className="iconStyle"> 
+                      {beltName} 
+                      <FaPen 
+                        className="IconPosition"
+                        onClick={() => {
+                          setIsEditingName(false);
+                          setIsEditingEmail(false);
+                          setIsEditingRank(!isEditingRank);
+                          setRankChange(userData.rank);}}
+                        />
+                    </p>
+                  )}
               </div>
 
               <h6 className="headerFont"><u>Streak</u></h6>

@@ -311,6 +311,11 @@ body {
   right: 15%
 }
 
+#rankDropDown
+{
+  background-color: #0097b2;
+}
+
 /*____________________________________________________________*/
 
 .page-container {
@@ -963,7 +968,7 @@ textarea::placeholder {
 
 
 
-/* About Page */
+/*------- About Page -------------*/
 
 /* banner flush to top and extra space to scroll on bottom */
 .about-scroll {
