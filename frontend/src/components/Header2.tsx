@@ -316,6 +316,7 @@ function Header2(){
               <p className="iconStyle absolute left-0" onClick={confirmDelete}> <FaXmark /> Delete Account </p>
             </div>
           </div>
+          <p className="text-center text-[2vh]"> {message} </p>
         </div>): null
         }
 
