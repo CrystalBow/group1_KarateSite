@@ -39,7 +39,7 @@ function Header2(){
     {
       console.warn("Could not load UserData")
       window.location.reload();
-      window.location.href = "/"; // return to home page
+      //window.location.href = "/"; // return to home page
       return;
     }
     console.log(userData)
