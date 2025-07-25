@@ -1,0 +1,66 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+# ---------- Build ----------
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # Install backend dependencies (repo root)
+      - run: npm ci
+
+      # Install frontend dependencies and build bundle
+      - name: Build React app
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run build              # outputs to frontend/dist
+
+# ---------- Deploy ----------
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install sshpass
+        run: sudo apt-get update -y && sudo apt-get install -y sshpass
+
+      - name: Deploy to droplet
+        env:
+          SSH_HOST:      ${{ secrets.SSH_HOST }}
+          SSH_USERNAME:  ${{ secrets.SSH_USERNAME }}
+          SSH_KEY:       ${{ secrets.SSH_KEY }}
+        run: |
+          sshpass -p "$SSH_KEY" ssh -o StrictHostKeyChecking=no \
+            $SSH_USERNAME@$SSH_HOST << 'EOF'
+          set -e
+
+          # Update backend code
+          cd /var/karateServer
+          git pull origin main
+          npm ci
+
+          # Restart backend
+          pm2 restart express-server || pm2 start server.js --name express-server
+          pm2 save
+
+          # Build frontend on server
+          cd frontend
+          npm ci
+          npm run build
+
+          # Copy new static files (do not wipe existing uploads)
+          sudo cp -r dist/* /var/www/html
+          EOF
