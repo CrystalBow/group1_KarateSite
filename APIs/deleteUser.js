@@ -22,7 +22,7 @@ module.exports = function(db) {
       res.status(200).json(r);
       return;
     }
-
+    // Delete User from database
     try {
       const deleteResult = await db.collection('Users').deleteOne({ user });
       
